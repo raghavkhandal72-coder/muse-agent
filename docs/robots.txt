@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://raghavkhandal72-coder.github.io/muse-agent/sitemap.xml

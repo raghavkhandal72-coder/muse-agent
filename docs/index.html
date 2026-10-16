@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Primary Google SEO Meta Tags -->
+  <title>Muse Agent (muse-agent) | Autonomous Hybrid Desktop & Mobile AI Agent Runtime</title>
+  <meta name="title" content="Muse Agent (muse-agent) | Autonomous Hybrid Desktop & Mobile AI Agent Runtime">
+  <meta name="description" content="Official website of Muse Agent (muse-agent) by Raghav Khandal (@raghavkhandal72-coder). Features Computer-Use (CUA), REA reverse engineering, multi-agent swarm orchestrator, and native Android companion APK.">
+  <meta name="keywords" content="muse agent, muse agents, muse ai agent, meta muse, raghav khandal, autonomous agents, computer use agent, cua, mcp agent, reverse engineering anything, rea, android agent apk, termux bridge, local first ai">
+  <meta name="author" content="Raghav Khandal">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://raghavkhandal72-coder.github.io/muse-agent/">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://raghavkhandal72-coder.github.io/muse-agent/">
+  <meta property="og:title" content="Muse Agent - Autonomous Hybrid Desktop & Mobile Agent Runtime">
+  <meta property="og:description" content="See any desktop task or mobile routine. Automate, reverse-engineer, and master it down to the system level with Muse Agent by Raghav Khandal.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/assets/github_social_preview.png">
+  <meta property="og:site_name" content="Muse Agent">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://raghavkhandal72-coder.github.io/muse-agent/">
+  <meta property="twitter:title" content="Muse Agent - Autonomous Hybrid Desktop & Mobile Agent Runtime">
+  <meta property="twitter:description" content="Autonomous desktop Computer-Use (CUA), multi-agent swarm, REA reverse engineering, and native Android APK. Created by Raghav Khandal.">
+  <meta property="twitter:image" content="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/assets/github_social_preview.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/logo.png">
+
+  <!-- Google Structured Data (Schema.org JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Muse Agent",
+    "alternateName": ["Muse Agents", "Muse AI Agent", "Meta Muse Agent"],
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Windows, Android, Linux, macOS, iOS Web",
+    "url": "https://github.com/raghavkhandal72-coder/muse-agent",
+    "downloadUrl": "https://github.com/raghavkhandal72-coder/muse-agent/releases",
+    "softwareVersion": "1.0.0",
+    "author": {
+      "@type": "Person",
+      "name": "Raghav Khandal",
+      "url": "https://github.com/raghavkhandal72-coder",
+      "sameAs": [
+        "https://github.com/raghavkhandal72-coder",
+        "https://github.com/raghavkhandal72-coder/muse-agent"
+      ]
+    },
+    "description": "Muse Agent is an open-source, hybrid desktop-and-mobile autonomous AI agent runtime featuring Computer-Use Agent (CUA), REA reverse engineering, multi-agent swarm orchestrator, and Android companion APK.",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    }
+  }
+  </script>
+
+  <style>
+    :root {
+      --bg: #090d16;
+      --card-bg: rgba(17, 24, 39, 0.7);
+      --card-border: rgba(56, 189, 248, 0.2);
+      --accent: #38bdf8;
+      --accent-glow: rgba(56, 189, 248, 0.15);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+    .container {
+      max-width: 960px;
+      width: 100%;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .logo {
+      width: 110px;
+      height: 110px;
+      border-radius: 26px;
+      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
+      margin-bottom: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+    .logo:hover { transform: scale(1.05); }
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+      background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .subtitle {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      padding: 0.8rem 1.6rem;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s ease;
+    }
+    .btn-primary {
+      background: #0284c7;
+      color: white;
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+    }
+    .btn-primary:hover { background: #0369a1; transform: translateY(-2px); }
+    .btn-secondary {
+      background: rgba(30, 41, 59, 0.8);
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .btn-secondary:hover { background: rgba(51, 65, 85, 0.9); transform: translateY(-2px); }
+    .preview-card {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      margin-bottom: 3rem;
+    }
+    .preview-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    .feature {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+      backdrop-filter: blur(10px);
+    }
+    .feature h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: #38bdf8;
+    }
+    .feature p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      padding-top: 2rem;
+      width: 100%;
+    }
+    footer a { color: var(--accent); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/logo.png" alt="Muse Agent Logo" class="logo">
+      <h1>Muse Agent (muse-agent)</h1>
+      <p class="subtitle">The Autonomous Hybrid Desktop & Mobile AI Agent Runtime created by <strong>Raghav Khandal (@raghavkhandal72-coder)</strong>.</p>
+      
+      <div class="cta-buttons">
+        <a href="https://github.com/raghavkhandal72-coder/muse-agent" class="btn btn-primary">⭐ View on GitHub</a>
+        <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases" class="btn btn-secondary">📱 Download Android APK</a>
+        <a href="https://github.com/raghavkhandal72-coder/muse-agent#readme" class="btn btn-secondary">📖 Documentation</a>
+      </div>
+    </header>
+
+    <div class="preview-card">
+      <img src="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/assets/muse_interface.png" alt="Muse Agent Desktop UI Showcase">
+    </div>
+
+    <section class="grid">
+      <div class="feature">
+        <h3>🖥️ Desktop Computer-Use (CUA)</h3>
+        <p>Autonomous mouse clicking, text typing, multi-monitor screenshot capture, and desktop workflow automation via PyAutoGUI and vision models.</p>
+      </div>
+      <div class="feature">
+        <h3>🔍 REA Reverse Engineering</h3>
+        <p>Built-in integration with the 200,000-star REA toolchain for inspecting Electron/JavaScript apps, validating crypto protocols, and analyzing binaries.</p>
+      </div>
+      <div class="feature">
+        <h3>📱 Android Companion APK</h3>
+        <p>13.5 MB native Android app with Termux shell bridge, hands-free wake-word voice recognition, and wireless ADB control.</p>
+      </div>
+      <div class="feature">
+        <h3>🤖 Multi-Agent Swarm</h3>
+        <p>11 pre-configured swarm engines including CrewAI multi-role teams, LangGraph cyclic state machines, AutoGen debates, and Stanford STORM research.</p>
+      </div>
+      <div class="feature">
+        <h3>🔌 17+ Production Connectors</h3>
+        <p>Built-in OAuth and consent bridges for GitHub, Gmail, WhatsApp, Telegram, Slack, Discord, Google Drive, Spotify, Notion, and Jira.</p>
+      </div>
+      <div class="feature">
+        <h3>🔒 100% Local-First Security</h3>
+        <p>AES-256-GCM encrypted local vault, SQLite semantic memories, and offline Ollama fallback without cloud lock-in.</p>
+      </div>
+    </section>
+
+    <footer>
+      <p>Created with ❤️ by <a href="https://github.com/raghavkhandal72-coder">Raghav Khandal (@raghavkhandal72-coder)</a> • Released under the MIT License.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Keywords: Muse Agent, Muse Agents, Muse AI Agent, Meta Muse, Raghav Khandal, Computer-Use Agent.</p>
+    </footer>
+  </div>
+</body>
+</html>
