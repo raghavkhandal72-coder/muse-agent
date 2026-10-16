@@ -63,3 +63,6 @@ data/settings.json
 *.egg-info/
 build/
 dist/
+data/hardware_profile.json
+data/self_healing_audit.json
+renders/cua_hud_overlay.png
