@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "muse-agent": {
+      "command": "python",
+      "args": ["main.py", "--headless"],
+      "env": {
+        "MUSE_PORT": "8765",
+        "MUSE_OFFLINE_MODE": "0"
+      }
+    },
+    "rea-inspector": {
+      "command": "node",
+      "args": ["rea-inspector/lib/rea_runner.js"]
+    }
+  }
+}

@@ -22,6 +22,7 @@
 [![MCP Compatible](https://img.shields.io/badge/MCP-Standard%20Compatible-5c4ee5?style=flat-square)](https://modelcontextprotocol.io/)
 [![skills.sh](https://img.shields.io/badge/skills.sh-REA%20%26%20CUA-brightgreen?style=flat-square)](skills/reverse-engineer-anything/SKILL.md)
 [![Android APK](https://img.shields.io/badge/Android-APK%20Companion%20(13.5MB)-339933?style=flat-square&logo=android&logoColor=white)](https://github.com/raghavkhandal72-coder/muse-agent/releases)
+[![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-orange?style=flat-square&logo=anthropic)](CLAUDE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f4c430?style=flat-square)](LICENSE)
 
 <br />

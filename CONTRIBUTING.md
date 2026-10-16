@@ -99,3 +99,24 @@ Before submitting a Pull Request to [raghavkhandal72-coder/muse-agent](https://g
 2. Test both online cloud inference and offline fallback behavior (`http://127.0.0.1:11434`).
 3. Ensure no secrets or local paths appear in `git diff`.
 4. Open a Pull Request against `main` describing the problem solved, modules touched (`main.py`, `muse_master_brain.py`, `tools.py`, `settings_manager.py`, or Android wrapper), and verification steps.
+
+
+---
+
+## 🤖 Contributing with Claude Code (Anthropic)
+
+Muse Agent is fully optimized for **Claude Code** (`claude`), Anthropic's agentic coding assistant.
+
+### Quick Setup with Claude Code:
+1. Open your terminal in the repository root:
+   ```bash
+   cd muse-agent
+   claude
+   ```
+2. Claude Code will automatically detect and load [`CLAUDE.md`](CLAUDE.md).
+3. You can give Claude instructions such as:
+   - *"Add a new connector for Discord in tools.py"*
+   - *"Write a unit test for the REA Inspector suite"*
+   - *"Optimize the Computer-Use Agent screen capture pipeline"*
+
+Claude will follow the project architecture, run verification checks, and prepare production-ready commits.
