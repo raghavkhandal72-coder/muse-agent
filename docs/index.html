@@ -724,6 +724,29 @@
         height: 68px;
       }
     }
+  
+    .sim-tab-btn {
+      background: transparent;
+      border: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+      font-family: var(--font-display);
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 0.4rem 0.9rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .sim-tab-btn:hover {
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+    }
+    .sim-tab-btn.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: #ffffff;
+    }
+
   </style>
 </head>
 <body>
@@ -963,6 +986,111 @@
 
   </div>
 
+
+  <!-- Interactive Live CUA Simulator Section -->
+  <section class="simulator-section" id="simulator" style="max-width: 1400px; margin: 0 auto; padding: 2rem 2.5rem 4rem 2.5rem;">
+    <div style="border: 1px solid var(--border-highlight); background: var(--bg-surface); border-radius: 12px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.6);">
+      
+      <!-- Simulator Header -->
+      <div style="background: #12131a; border-bottom: 1px solid var(--border-subtle); padding: 1rem 1.5rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="width: 10px; height: 10px; border-radius: 50%; background: #10b981; box-shadow: 0 0 10px #10b981;"></span>
+          <span style="font-family: var(--font-display); font-weight: 800; font-size: 1rem; letter-spacing: 0.05em; text-transform: uppercase; color: #fff;">
+            LIVE CUA &amp; SWARM SIMULATOR
+          </span>
+        </div>
+        <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;" id="simTabs">
+          <button onclick="selectSimTask(0)" class="sim-tab-btn active" id="simTab0">📊 Excel Audit</button>
+          <button onclick="selectSimTask(1)" class="sim-tab-btn" id="simTab1">🔍 REA Protocol</button>
+          <button onclick="selectSimTask(2)" class="sim-tab-btn" id="simTab2">🤖 CrewAI Swarm</button>
+          <button onclick="selectSimTask(3)" class="sim-tab-btn" id="simTab3">📱 Android Bridge</button>
+        </div>
+      </div>
+
+      <!-- Simulator Body (2 Columns: Screen View + Realtime Telemetry) -->
+      <div style="display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 0; min-height: 380px;">
+        
+        <!-- Virtual Screen View -->
+        <div style="background: #08090d; padding: 2rem; position: relative; border-right: 1px solid var(--border-subtle); display: flex; flex-direction: column; justify-content: space-between;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #64748b;" id="simStatus">
+              TARGET APP: Microsoft Excel 365 (Process ID: 8944)
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.76rem; color: #10b981;" id="simFps">
+              60 FPS &bull; MULTI-MONITOR VISION
+            </div>
+          </div>
+
+          <!-- Virtual Desktop Workspace Canvas -->
+          <div style="background: #11131a; border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; height: 230px; position: relative; overflow: hidden; padding: 1.2rem;" id="simScreen">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.5rem; margin-bottom: 1rem;">
+              <span style="font-size: 0.78rem; font-weight: 600; color: #94a3b8;" id="simAppTitle">Spreadsheet_Q3_Financials.xlsx</span>
+              <span style="font-family: var(--font-mono); font-size: 0.7rem; color: #38bdf8; background: rgba(56,189,248,0.1); padding: 0.2rem 0.5rem; border-radius: 4px;" id="simModeBadge">CUA MOUSE: ACTIVE</span>
+            </div>
+
+            <!-- Virtual Target Elements -->
+            <div style="display: flex; gap: 0.8rem; margin-bottom: 1rem;">
+              <div id="targetBtnA" style="background: #1e293b; border: 1px solid #334155; padding: 0.5rem 0.8rem; border-radius: 4px; font-size: 0.78rem; color: #cbd5e1;">Revenue ($4.8M)</div>
+              <div id="targetBtnB" style="background: #1e293b; border: 1px solid #334155; padding: 0.5rem 0.8rem; border-radius: 4px; font-size: 0.78rem; color: #cbd5e1;">COGS ($1.2M)</div>
+              <div id="targetBtnC" style="background: #2563eb; padding: 0.5rem 0.8rem; border-radius: 4px; font-size: 0.78rem; color: #fff; font-weight: 600;">[Generate P&amp;L]</div>
+            </div>
+
+            <div style="font-family: var(--font-mono); font-size: 0.78rem; color: #64748b; line-height: 1.6;" id="simVirtualText">
+              &gt; Row 42: Formula audited &bull; Verified variance: 0.00% &bull; Signed by Agent
+            </div>
+
+            <!-- Animated Simulated Cursor -->
+            <div id="simCursor" style="position: absolute; top: 120px; left: 80px; width: 20px; height: 20px; pointer-events: none; transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="#38bdf8" stroke="#000" stroke-width="1.5"><polygon points="3 3 10 22 13 14 21 11 3 3"/></svg>
+            </div>
+
+          </div>
+
+          <!-- Play & Progress Bar -->
+          <div style="margin-top: 1.2rem; display: flex; align-items: center; gap: 1rem;">
+            <button onclick="runSimulation()" class="btn-primary" style="padding: 0.65rem 1.4rem; font-size: 0.84rem;" id="simPlayBtn">
+              ▶ EXECUTE AUTONOMOUS TASK
+            </button>
+            <div style="flex: 1; background: #15161e; height: 8px; border-radius: 4px; overflow: hidden;">
+              <div id="simProgressBar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #2563eb, #38bdf8); transition: width 0.3s ease;"></div>
+            </div>
+            <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #94a3b8;" id="simProgressPct">0%</span>
+          </div>
+
+        </div>
+
+        <!-- Real-time Agent Telemetry Log -->
+        <div style="background: #0b0c10; padding: 1.5rem; font-family: var(--font-mono); font-size: 0.8rem; color: #94a3b8; display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="color: #64748b; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.06); padding-bottom: 0.4rem;">
+              REAL-TIME RUNTIME TELEMETRY
+            </div>
+            <div id="simLogs" style="line-height: 1.8; color: #cbd5e1; max-height: 250px; overflow-y: auto;">
+              <div><span style="color: #38bdf8;">[INIT]</span> Muse Master Brain ready on port 8765.</div>
+              <div><span style="color: #10b981;">[CUA]</span> PyAutoGUI mouse/keyboard hooks initialized.</div>
+              <div><span style="color: #f59e0b;">[VAULT]</span> AES-256-GCM local encrypted master key loaded.</div>
+              <div style="color: #64748b;">Ready. Select a task and click Execute.</div>
+            </div>
+          </div>
+
+          <!-- Quick Copy 1-Liner -->
+          <div style="border-top: 1px solid rgba(255,255,255,0.06); padding-top: 1rem; margin-top: 1rem;">
+            <div style="font-size: 0.72rem; color: #64748b; margin-bottom: 0.4rem;">RUN NATIVELY IN YOUR TERMINAL:</div>
+            <div style="background: #14161f; border: 1px solid var(--border-subtle); border-radius: 4px; padding: 0.5rem 0.8rem; display: flex; align-items: center; justify-content: space-between;">
+              <code style="color: #38bdf8; font-size: 0.78rem;">pip install muse-agent &amp;&amp; muse run</code>
+              <button onclick="navigator.clipboard.writeText('pip install muse-agent && muse run'); alert('Copied to clipboard!');" style="background: rgba(255,255,255,0.08); border: none; color: #fff; padding: 0.2rem 0.5rem; border-radius: 3px; cursor: pointer; font-size: 0.72rem;">COPY</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
   <!-- Terminal Quickstart Section -->
   <section class="terminal-section" id="quickstart">
     <div class="terminal-inner">
@@ -1118,6 +1246,118 @@
         document.getElementById('previewTag').innerText = data.tag;
         document.getElementById('previewText').innerText = data.text;
       }
+    }
+  </script>
+
+
+  <script>
+    const simTasks = [
+      {
+        title: "Spreadsheet_Q3_Financials.xlsx",
+        status: "TARGET APP: Microsoft Excel 365 (Process ID: 8944)",
+        appBadge: "CUA MOUSE: ACTIVE",
+        virtualText: "> Row 42: Formula audited • Variance: 0.00% • Signed by Agent",
+        steps: [
+          { pct: 25, cursor: { top: "60px", left: "140px" }, log: "[CUA:Vision] Target identified at (140, 60): Button 'Revenue'" },
+          { pct: 50, cursor: { top: "60px", left: "260px" }, log: "[CUA:Click] Coordinate (260, 60) clicked. Audited COGS." },
+          { pct: 75, cursor: { top: "60px", left: "370px" }, log: "[CUA:Action] Generated P&L Summary with verified math." },
+          { pct: 100, cursor: { top: "120px", left: "200px" }, log: "[SUCCESS] Audit complete. PDF report encrypted & emailed to CFO." }
+        ]
+      },
+      {
+        title: "REA_Binary_Disassembler_v2.bin",
+        status: "TARGET APP: REA Reverse Engineering Engine (x86_64)",
+        appBadge: "REA ENGINE: ACTIVE",
+        virtualText: "> Function 0x00401020: AES-GCM encryption routine decompiled",
+        steps: [
+          { pct: 25, cursor: { top: "50px", left: "100px" }, log: "[REA:Decompile] Binary headers mapped. 4 exported symbols found." },
+          { pct: 50, cursor: { top: "90px", left: "180px" }, log: "[REA:Trace] Intercepted runtime crypto handshake token." },
+          { pct: 75, cursor: { top: "130px", left: "240px" }, log: "[REA:Patch] Generated validated zero-vulnerability bypass spec." },
+          { pct: 100, cursor: { top: "150px", left: "120px" }, log: "[SUCCESS] REA audit passed with 100% HEALTHY status." }
+        ]
+      },
+      {
+        title: "CrewAI_Swarm_Mesh.graph",
+        status: "TARGET APP: 3-Agent Collaborative Consensus Engine",
+        appBadge: "SWARM MESH: ACTIVE",
+        virtualText: "> Lead Researcher: Analyzed • Principal Dev: Coded • QA: Verified",
+        steps: [
+          { pct: 25, cursor: { top: "70px", left: "90px" }, log: "[SWARM:Agent1] Lead Researcher compiled technical spec." },
+          { pct: 50, cursor: { top: "70px", left: "220px" }, log: "[SWARM:Agent2] Principal Engineer implemented async workers." },
+          { pct: 75, cursor: { top: "70px", left: "340px" }, log: "[SWARM:Agent3] QA Lead ran unit test matrix: 4/4 PASS." },
+          { pct: 100, cursor: { top: "140px", left: "180px" }, log: "[SUCCESS] Swarm consensus reached with 0 hallucination." }
+        ]
+      },
+      {
+        title: "Android_Companion_com.muse.agent",
+        status: "TARGET APP: Wireless Android ADB + Termux Bridge",
+        appBadge: "ANDROID APK: CONNECTED",
+        virtualText: "> Termux Shell: Executed • Voice TTS: Delivered • SMS Sent",
+        steps: [
+          { pct: 25, cursor: { top: "60px", left: "120px" }, log: "[ANDROID:Link] Connected to Samsung Galaxy via Cloud Tunnel HTTPS." },
+          { pct: 50, cursor: { top: "90px", left: "200px" }, log: "[ANDROID:Voice] Wake-word detected: 'Hey Muse, send briefing'." },
+          { pct: 75, cursor: { top: "130px", left: "280px" }, log: "[ANDROID:Termux] Executed bash script via RUN_COMMAND intent." },
+          { pct: 100, cursor: { top: "160px", left: "150px" }, log: "[SUCCESS] WhatsApp audio memo and briefing sent to team." }
+        ]
+      }
+    ];
+
+    let currentSimTask = 0;
+    let simInterval = null;
+
+    function selectSimTask(idx) {
+      currentSimTask = idx;
+      for (let i = 0; i < 4; i++) {
+        document.getElementById('simTab' + i).classList.remove('active');
+      }
+      document.getElementById('simTab' + idx).classList.add('active');
+      
+      const t = simTasks[idx];
+      document.getElementById('simAppTitle').innerText = t.title;
+      document.getElementById('simStatus').innerText = t.status;
+      document.getElementById('simModeBadge').innerText = t.appBadge;
+      document.getElementById('simVirtualText').innerText = t.virtualText;
+      document.getElementById('simProgressBar').style.width = '0%';
+      document.getElementById('simProgressPct').innerText = '0%';
+      document.getElementById('simLogs').innerHTML = `
+        <div><span style="color: #38bdf8;">[INIT]</span> Selected task: ${t.title}</div>
+        <div style="color: #64748b;">Click Execute Autonomous Task to start simulation.</div>
+      `;
+    }
+
+    function runSimulation() {
+      if (simInterval) clearInterval(simInterval);
+      const t = simTasks[currentSimTask];
+      let stepIdx = 0;
+      
+      document.getElementById('simProgressBar').style.width = '0%';
+      document.getElementById('simProgressPct').innerText = '0%';
+      document.getElementById('simPlayBtn').innerText = '⚙ RUNNING...';
+
+      simInterval = setInterval(() => {
+        if (stepIdx < t.steps.length) {
+          const s = t.steps[stepIdx];
+          document.getElementById('simProgressBar').style.width = s.pct + '%';
+          document.getElementById('simProgressPct').innerText = s.pct + '%';
+          
+          const cursor = document.getElementById('simCursor');
+          cursor.style.top = s.cursor.top;
+          cursor.style.left = s.cursor.left;
+
+          const logDiv = document.createElement('div');
+          logDiv.innerHTML = s.log;
+          document.getElementById('simLogs').appendChild(logDiv);
+          document.getElementById('simLogs').scrollTop = document.getElementById('simLogs').scrollHeight;
+
+          stepIdx++;
+        } else {
+          clearInterval(simInterval);
+          document.getElementById('simPlayBtn').innerText = '✔ COMPLETE';
+          setTimeout(() => {
+            document.getElementById('simPlayBtn').innerText = '▶ RE-RUN TASK';
+          }, 2000);
+        }
+      }, 700);
     }
   </script>
 
