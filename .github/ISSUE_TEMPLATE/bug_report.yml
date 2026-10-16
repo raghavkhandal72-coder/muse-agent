@@ -1,0 +1,43 @@
+name: 🐛 Bug Report
+description: Create a report to help us improve Muse AI Agent
+labels: ["bug", "triage"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for taking the time to report an issue in Muse Agent!
+  - type: input
+    id: version
+    attributes:
+      label: Muse Version / Commit
+      placeholder: "e.g. v1.0.0 or commit 94eabfb"
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Operating System / Platform
+      options:
+        - Windows 11 / 10
+        - Android APK (companion)
+        - Termux (headless)
+        - Linux (Ubuntu/Debian)
+        - macOS
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      placeholder: Describe the bug clearly.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Run 'python main.py'
+        2. Execute tool '...'
+        3. See error
+    validations:
+      required: true

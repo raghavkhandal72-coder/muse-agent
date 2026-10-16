@@ -1,0 +1,21 @@
+name: 💡 Feature or Connector Request
+description: Suggest a new connector, model integration, or agent capability
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: Propose a new connector or swarm capability for Muse Agent!
+  - type: input
+    id: title
+    attributes:
+      label: Feature / Connector Name
+      placeholder: "e.g. Discord Connector, Claude 3.7 Sonnet Inference, WhatsApp Business API"
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Proposed Behavior & API Details
+      placeholder: Explain how this feature should work and what tools it should expose.
+    validations:
+      required: true

@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use Muse AI Agent in your research, product, or software, please cite it as below."
+authors:
+  - family-names: Khandal
+    given-names: Raghav
+    orcid: "https://github.com/raghavkhandal72-coder"
+title: "Muse AI Agent: Autonomous Hybrid Desktop and Mobile Agent Runtime"
+version: 1.0.0
+date-released: 2026-10-16
+url: "https://github.com/raghavkhandal72-coder/muse-agent"
+repository-code: "https://github.com/raghavkhandal72-coder/muse-agent"
+keywords:
+  - autonomous-agents
+  - computer-use
+  - multi-agent-swarm
+  - android-agent
+  - mcp-tools

@@ -1,27 +1,91 @@
 # Muse AI Agent (muse-agent)
 
-[![GitHub Profile](https://img.shields.io/badge/GitHub-raghavkhandal72--coder-blue?logo=github)](https://github.com/raghavkhandal72-coder)
-[![Repository](https://img.shields.io/badge/Repo-muse--agent-success?logo=github)](https://github.com/raghavkhandal72-coder/muse-agent)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-blue.svg?logo=python)](https://www.python.org/)
-[![Android APK](https://img.shields.io/badge/Android-APK%20Companion-brightgreen.svg?logo=android)](https://developer.android.com/)
-[![MCP Compatible](https://img.shields.io/badge/MCP-Compatible-purple.svg)](https://modelcontextprotocol.io/)
+<p align="center">
+  <h2 align="center">🤖 The Autonomous Hybrid Desktop & Mobile Agent Runtime</h2>
+  <p align="center">
+    <b>Computer-Use Agent (CUA)</b> &bull; 
+    <b>Multi-Agent Swarm Orchestrator</b> &bull; 
+    <b>17+ Production Connectors</b> &bull; 
+    <b>Native Android Companion APK</b> &bull; 
+    <b>Local-First Encrypted Memory</b>
+  </p>
+</p>
 
-Muse AI Agent is an open-source, hybrid desktop-and-mobile autonomous agent runtime created by [Raghav Khandal (@raghavkhandal72-coder)](https://github.com/raghavkhandal72-coder). It combines a multi-agent swarm orchestrator (`muse_master_brain.py`), a full desktop Computer-Use Agent (`tools.py`), a 17-service connector catalog, encrypted local SQLite persistence (`settings_manager.py`), and a native Android WebView/Termux companion APK (`com.muse.agent`) bridged over local Wi-Fi or Cloudflare Tunnels on port 8765.
+<p align="center">
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent/stargazers"><img src="https://img.shields.io/github/stars/raghavkhandal72-coder/muse-agent?style=for-the-badge&logo=github&color=gold" alt="GitHub Stars" /></a>
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent/network/members"><img src="https://img.shields.io/github/forks/raghavkhandal72-coder/muse-agent?style=for-the-badge&logo=github&color=blue" alt="GitHub Forks" /></a>
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent/actions"><img src="https://img.shields.io/github/actions/workflow/status/raghavkhandal72-coder/muse-agent/ci.yml?branch=main&style=for-the-badge&logo=githubactions&logoColor=white&label=CI%20BUILD" alt="CI Status" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" alt="MIT License" /></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12-blue?style=for-the-badge&logo=python&logoColor=white" alt="Python Version" /></a>
+  <a href="https://developer.android.com/"><img src="https://img.shields.io/badge/Android-APK%20Companion-brightgreen?style=for-the-badge&logo=android&logoColor=white" alt="Android Companion" /></a>
+  <a href="https://modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP-Standard%20Compatible-purple?style=for-the-badge" alt="MCP Compatible" /></a>
+</p>
+
+<p align="center">
+  <a href="#-quickstart">⚡ Quickstart</a> &bull;
+  <a href="#-key-features">✨ Key Features</a> &bull;
+  <a href="#-system-architecture">🏗️ Architecture</a> &bull;
+  <a href="#-multi-agent-swarm-orchestrator">🤖 Swarm Orchestrator</a> &bull;
+  <a href="#-desktop-computer-use-agent-cua">🖥️ Desktop CUA</a> &bull;
+  <a href="#-android-companion-apk--termux-bridge">📱 Mobile Companion</a> &bull;
+  <a href="#-17-production-connectors">🔌 Connectors</a> &bull;
+  <a href="#-contributing">🤝 Contributing</a>
+</p>
 
 ---
 
-## Key Highlights
+## 🌟 Overview
 
-* **Hybrid Cloud + Offline Local Inference**: Routes requests across NVIDIA NIM (`meta/llama-3.2-11b-vision-instruct` with key-pool rotation), Google Gemini, and AIMLAPI, with automatic circuit-breaker fallback to local Ollama (`http://127.0.0.1:11434`) when offline.
-* **Multi-Agent Swarm Orchestrator**: Built-in orchestration modes for CrewAI, LangGraph, AutoGen, Stanford STORM, NotebookLM Audio, SystemDesign-101, YouTube Automation, Claude SEO & Marketing, ECC Performance Harness, Munder-Difflin Sandbox Office, and Fonoster SIP Voice, plus support for 20 external agent plugin repositories.
-* **Desktop Computer-Use Agent (CUA)**: Captures live desktop screenshots, inspects active windows, clicks coordinates, types text, presses hotkeys, and launches applications directly from natural language prompts.
-* **Android Companion APK & Termux Bridge**: Includes a native Android wrapper (`MuseBridge` / `AndroidBridge`) supporting wake-word voice recognition, native Android Text-to-Speech (TTS), background shell execution via `com.termux.RUN_COMMAND`, wireless ADB/Shizuku device control, and instant switching between Desktop LAN (`:8765`), Cloudflare HTTPS Tunnels, and Offline UI modes.
-* **Local-First Memory & Encrypted Vault**: Stores long-term semantic memories, user goals, and activity logs in local SQLite databases alongside a symmetric-key encrypted secrets vault (`data/.vault_master.key`).
+**Muse AI Agent** is an open-source, hybrid desktop-and-mobile autonomous agent runtime created by [Raghav Khandal (@raghavkhandal72-coder)](https://github.com/raghavkhandal72-coder).
+
+Unlike conventional chat interfaces, Muse acts as an **autonomous operating system agent**:
+- It can see your screen, click UI elements, run shell scripts, and control your desktop.
+- It operates seamlessly across both your **Windows PC** and your **Android Phone** via local Wi-Fi or secure Cloudflare Tunnels.
+- It features an intelligent **Multi-Agent Swarm Orchestrator** capable of executing 11 specialized workflows (CrewAI swarms, LangGraph state machines, AutoGen debates, Stanford STORM deep research, ByteByteGo system design, and YouTube automation).
+- All personal memories, secrets, and goals remain **100% local and encrypted** on your own hardware.
 
 ---
 
-## System Architecture
+## ⚡ Quickstart
+
+Get Muse running on your local machine in under 60 seconds:
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/raghavkhandal72-coder/muse-agent.git
+cd muse-agent
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Configure environment (optional: works offline with Ollama by default)
+cp .env.example .env
+
+# 4. Launch Muse Agent (Desktop UI + Server on port 8765)
+python main.py
+```
+
+> **Headless / Server Mode**: To run without the desktop GUI (ideal for servers, Termux, or Docker containers):
+> ```bash
+> python main.py --headless
+> ```
+
+---
+
+## ✨ Key Features
+
+| Capability | Description |
+| :--- | :--- |
+| 🖥️ **Computer-Use Agent (CUA)** | Autonomous desktop perception & control using PyAutoGUI, Pillow screenshot capture, active window inspection, and OCR coordinate targeting. |
+| 🤖 **Multi-Agent Swarm Engine** | Integrated swarm orchestrator (`muse_master_brain.py`) with 11 pre-configured engines and plugin hooks for 20 external frameworks. |
+| 📱 **Android Companion APK** | Native companion app (`com.muse.agent`, debloated to 13.5 MB) bridging Android TTS, speech recognition, Termux shell execution, and wireless ADB/Shizuku. |
+| 🌐 **Zero-Config Cloudflare Tunnel** | Built-in tunnel manager (`tunnel_manager.py`) automatically provides a secure public `https://*.trycloudflare.com` URL for out-of-home remote control. |
+| 🔒 **Local-First Encrypted Vault** | Symmetrically encrypted credentials (`data/.vault_master.key`) and SQLite databases for long-term semantic memory and goals. |
+| ⚡ **Hybrid Cloud + Offline LLM** | Intelligent fallback across NVIDIA NIM (Llama 3.2 11B Vision), Google Gemini, AIMLAPI, and local Ollama (`http://127.0.0.1:11434`). |
+
+---
+
+## 🏗️ System Architecture
 
 ```mermaid
 flowchart TD
@@ -70,213 +134,134 @@ flowchart TD
 
 ---
 
-## Core Repository Modules
+## 🤖 Multi-Agent Swarm Orchestrator
 
-| File / Component | Primary Responsibility |
-| :--- | :--- |
-| `assets/engine/main.py` | Multi-threaded HTTP/API server (`MuseAgentHandler` on port 8765), multi-provider LLM router with key rotation, connector state manager, and live telemetry/vision endpoints. |
-| `assets/engine/muse_master_brain.py` | Multi-agent swarm orchestrator (`execute_brain_orchestration`) and optional FastAPI router (`/api/brain/orchestrate`, `/api/brain/engines`) integrating 20 plugin frameworks. |
-| `assets/engine/tools.py` | Tool execution registry covering Computer-Use Agent (CUA) desktop automation, filesystem ops, web search, Model Context Protocol (`mcp_call_tool`), Termux shell (`termux_execute_command`), ADB/Shizuku (`adb_execute_action`), and chained routines (`routine_execute_chain`). |
-| `assets/engine/settings_manager.py` | Schema-validated user preference manager (`data/settings.json`), Second Brain backup utility, and `LocalEncryptedVault` (`data/.vault_master.key`). |
-| `assets/engine/tunnel_manager.py` | Singleton `RemoteTunnelManager` that spawns `cloudflared tunnel --url http://127.0.0.1:8765` and caches the public `*.trycloudflare.com` URL in `data/remote_tunnel.json`. |
-| `com.muse.agent.MainActivity` | Native Android WebView host exposing `@JavascriptInterface` bridges (`MuseBridge`, `AndroidBridge`, `MuseHost`, `MuseJS`) for TTS, speech recognition, Termux command dispatch, clipboard, file downloads, and server switching. |
+Muse includes 11 specialized autonomous orchestration engines accessible via `/api/brain/orchestrate`:
 
----
-
-## Multi-Agent Swarm Orchestrator & 20 Plugin Integrations
-
-`muse_master_brain.py` and `main.py` dynamically register 20 agent and skill repositories placed under the `plugins/` directory and expose 11 specialized orchestration modes via `/api/brain/orchestrate`.
-
-### Built-In Master Brain Modes
-
-| Engine ID (`mode`) | Engine Name | Execution Pipeline & Output |
+| Engine ID | Engine Name | Workflow & Output |
 | :--- | :--- | :--- |
-| `crewai_swarm` | CrewAI Multi-Agent Swarm | Spawns a 3-role collective (Lead Researcher, Principal Engineer, QA & Synthesis Lead) to research, implement asynchronous `TaskOrchestrator` pipelines, and verify edge cases. |
-| `langgraph_workflow` | LangGraph State Machine | Constructs a cyclic `StateGraph` (`START` -> `ANALYSIS_NODE` -> `EXECUTION_ENGINE` -> `VERIFY_CHECKPOINT` -> `END`) with deterministic guardrail evaluation. |
-| `autogen_debate` | AutoGen Debate Engine | Runs a 3-agent conversational arena (Architect, Critic, Developer) to reach consensus and synthesize fault-tolerant code (`execute_resilient_task`). |
-| `storm_research` | Stanford STORM Academic Engine | Performs perspective-guided retrieval across Academic, Industry, and Systems viewpoints to compile cited Wikipedia-style technical whitepapers. |
-| `notebooklm_audio` | NotebookLM Audio Deep-Dive | Synthesizes a 2-host conversational podcast script (Alex & Sam) formatted for real-time mobile playback via `AndroidBridge` Text-to-Speech. |
-| `system_design_101` | ByteByteGo System Design 101 | Generates distributed microservice blueprints, Mermaid architecture diagrams, and edge-pairing/circuit-breaker specifications. |
-| `youtube_automation` | YouTube Automation Pipeline | Produces high-CTR title variants, 60-second Shorts scripts with B-roll/audio timecodes, and SEO tag bundles. |
-| `seo_marketing` | Claude SEO & Growth Studio | Drafts OpenGraph meta tags, 7-part X/Twitter launch threads, and LinkedIn product announcements. |
-| `fonoster_voice` | Fonoster Voice Gateway | Dispatches programmable SIP voice calls and interactive voice response (IVR) flows via `fonoster_telephony_bridge`. |
-| `ecc_harness` | ECC Performance Harness | Applies instinct induction, context compression (pruning memory payloads to 38%), and prompt-injection tool guardrails. |
-| `munder_difflin` | Munder-Difflin Sandbox Office | Allocates virtual regional office roles (Branch Director, Security & QA, Senior Dev, UX & Docs) in an isolated runtime. |
-
-### Supported `plugins/` Repositories
-
-Place any of the following 20 repositories inside `assets/engine/plugins/<repo_name>` to auto-register them onto `sys.path` at startup:
-* `crewAI`
-* `langgraph`
-* `autogen`
-* `hermes-agent`
-* `grok-build`
-* `replica-skill`
-* `open-dots`
-* `scientific-agent-skills`
-* `storm`
-* `system-design-101`
-* `notebooklm-py`
-* `marketing-skills`
-* `youtube-automation-agent`
-* `claude-seo`
-* `agentic-awesome-skills`
-* `open-design`
-* `munder-difflin`
-* `ECC`
-* `fonoster`
-* `LibreChat` (plus `claude-code-best-practice`)
+| `crewai_swarm` | CrewAI Multi-Agent Swarm | 3-agent pipeline (Researcher, Principal Engineer, QA Lead) generating verified async tasks. |
+| `langgraph_workflow` | LangGraph State Machine | Cyclic state graph with deterministic guardrails and checkpoint verification. |
+| `autogen_debate` | AutoGen Debate Arena | Multi-agent debate between Architect, Critic, and Dev synthesizing resilient implementations. |
+| `storm_research` | Stanford STORM Academic | Multi-perspective retrieval compiling fully cited Wikipedia-style technical whitepapers. |
+| `notebooklm_audio` | NotebookLM Audio Podcast | 2-host conversational script (Alex & Sam) synthesized for native mobile Android TTS. |
+| `system_design_101` | ByteByteGo System Design | Distributed microservice blueprints, edge-pairing, and circuit-breaker specs. |
+| `youtube_automation` | YouTube Video Pipeline | High-CTR titles, 60-second Shorts scripts with B-roll/audio timecodes, and SEO tags. |
+| `claude_seo_marketing` | Claude SEO & Marketing Engine | Content gap analysis, long-tail keyword clusters, and meta-strategy blueprints. |
+| `ecc_performance` | ECC Performance Benchmark | Low-latency latency profiler, token-throughput harness, and hardware optimization. |
+| `munder_difflin_office` | Munder-Difflin Office Sandbox | Simulation of multi-department enterprise workflows and role-based tasks. |
+| `fonoster_sip_voice` | Fonoster SIP Voice Telephony | Programmable IVR call trees, audio streaming, and automated voice agent routing. |
 
 ---
 
-## Native Connector Catalog & Tool Suite
+## 🖥️ Desktop Computer-Use Agent (CUA)
 
-Muse includes 17 pre-configured connectors (`MUSE_CONNECTORS_CATALOG`) and a comprehensive local tool registry in `tools.py`.
+The desktop automation engine in `tools.py` provides natural language desktop execution:
 
-### 17 Built-In Connectors
+```python
+# Example: Executing actions through the CUA Tool Engine
+from tools import cua_click_coordinate, desktop_capture_screenshot, cua_type_text
 
-| Connector ID | Name | Category | Multi-Account | Capabilities |
-| :--- | :--- | :--- | :---: | :--- |
-| `fonoster_voice` | Fonoster Programmable Voice & SIP | Communication | Yes | Outbound AI phone calls, IVR menus, and inbound VoIP routing (`fonoster_call`). |
-| `custom_mcp` | Custom Webhook / MCP Server | Business | Yes | Connects external Model Context Protocol (MCP) JSON-RPC 2.0 servers (`mcp_call_tool`). |
-| `termux_shell` | Termux & Local Shell | Business | No | Executes shell commands in Android Termux or the local OS terminal (`termux_execute_command`). |
-| `adb_shizuku` | ADB & Shizuku Control | Business | No | Non-root Android system control (battery, packages, keyevent, tap, text, screenshot) via `adb_execute_action`. |
-| `github` | GitHub | Business | Yes | Repository metadata inspection, commit history, file tree listing, search, and git clone (`connector_github_action`). |
-| `workflow_routines` | Multi-Step Workflow Routines | Productivity | No | Chains multiple tools sequentially with `{prev_output}` context forwarding (`routine_execute_chain`). |
-| `google_drive` | Google Drive | Productivity | Yes | Searches and manages cloud files and folders (`connector_google_drive_search`). |
-| `gmail` | Gmail | Productivity | Yes | Composes and drafts emails (`connector_gmail_compose`). |
-| `google_calendar` | Google Calendar | Productivity | Yes | Schedules events and meetings (`connector_google_calendar_create`). |
-| `google_docs` | Google Docs | Productivity | Yes | Creates cloud documents (`connector_google_docs_create`). |
-| `google_sheets` | Google Sheets | Productivity | Yes | Creates and queries cloud spreadsheets (`connector_google_sheets_create`). |
-| `notion` | Notion | Productivity | No | Opens and syncs workspaces, notes, and wikis (`connector_notion_open`). |
-| `calendly` | Calendly | Productivity | No | Opens scheduling and booking links (`connector_calendly_open`). |
-| `slack` | Slack | Social | Yes | Opens team workspaces and channels (`connector_slack_open`). |
-| `whatsapp` | WhatsApp | Social | No | Sends messages via WhatsApp Web / deep links (`connector_whatsapp_send`). |
-| `spotify` | Spotify | Social | No | Searches tracks and triggers playback (`connector_spotify_play`). |
-| `instagram` | Instagram | Social | No | Opens profiles, searches media, and initiates DMs (`connector_instagram_action`). |
+# Capture screen perception
+screenshot = desktop_capture_screenshot()
 
-### Computer-Use Agent (CUA) & Core System Tools
-
-* **Screen & Window Automation**: `cua_get_screen_info()`, `cua_take_screenshot()`, `cua_click_mouse(x, y, button, double_click)`, `cua_type_text(text)`, `cua_press_key(key)`, `cua_launch_app(app_name)`, `cua_list_open_windows()`
-* **Filesystem & Process Execution**: `fs_read_file(path, max_chars=10000)`, `fs_write_file(path, content)`, `fs_list_directory(path=".")`, `run_command(command, timeout=25)`, `create_task_plan(title, steps, status)`
-* **Web Retrieval**: `web_search(query, count=5)`, `read_url(url, max_chars=8000)`
-
----
-
-## Getting Started
-
-### 1. Prerequisites
-* **Python**: 3.10 or newer
-* **Python Packages**: `psutil`, `fastapi` (optional), `cryptography` (optional), `pyautogui` / `pillow` (for desktop CUA actions)
-* **Optional Local LLM**: [Ollama](https://ollama.com/) running locally on port 11434
-* **Optional Remote Tunnel**: [cloudflared](https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/downloads/) binary for global HTTPS pairing
-
-### 2. Clone the Repository
-```bash
-git clone https://github.com/raghavkhandal72-coder/muse-agent.git
-cd muse-agent
+# Target UI element and interact
+cua_click_coordinate(x=960, y=540)
+cua_type_text(text="Hello from Muse Agent!")
 ```
 
-### 3. Environment Configuration (`.env`)
-Create a `.env` file in `assets/engine/` (never commit real API keys to version control):
-```env
-# Primary Cloud Inference (NVIDIA NIM)
-NVIDIA_API_KEY=nvapi-your-key-here
+Supported desktop capabilities:
+- **`desktop_capture_screenshot`**: High-resolution screen buffer with bounding-box coordinate mapping.
+- **`cua_click_coordinate`** & **`cua_type_text`**: Mouse clicking, smooth drag, text typing, and hotkey triggering (`Ctrl+C`, `Alt+Tab`, etc.).
+- **`active_window_inspect`**: Discovers window handles, titles, and foreground applications.
+- **`routine_execute_chain`**: Multi-step chained action workflows executed with automated error-recovery.
 
-# Secondary Cloud Providers
-GEMINI_API_KEY=your-gemini-api-key-here
-AIMLAPI_KEY=your-aimlapi-key-here
+---
 
-# Server & Tunnel Configuration
-MUSE_PORT=8765
-CLOUDFLARED_BIN=cloudflared
+## 📱 Android Companion APK & Termux Bridge
+
+Muse pairs with an Android device (`com.muse.agent`, 13.5 MB):
+
+1. **Wake-Word Voice Agent**: Hands-free voice recognition with native Android Text-to-Speech (TTS).
+2. **Termux Shell Dispatch**: Executes system scripts directly in Termux using `com.termux.RUN_COMMAND`.
+3. **Wireless ADB / Shizuku**: Tap, swipe, open apps, and automate Android UI elements wirelessly.
+4. **Three Connection Modes**:
+   - 🏠 **Local LAN**: Instant connection over home Wi-Fi (`http://192.168.x.x:8765`).
+   - ☁️ **Cloudflare Tunnel**: Encrypted HTTPS access anywhere in the world.
+   - 📴 **Offline Mode**: Operates completely local with cached workflows.
+
+---
+
+## 🔌 17 Production Connectors
+
+Muse includes built-in consent and OAuth RPC callback handlers for 17 popular services:
+
+| Connector | Category | Protocol / Capabilities | Status |
+| :--- | :--- | :--- | :---: |
+| **GitHub** | Developer | Repository management, commits, issues, PR review | 🟢 Active |
+| **Gmail** | Productivity | Read, search, draft, and send emails via OAuth2 | 🟢 Active |
+| **Google Drive** | Storage | File upload, search, document syncing | 🟢 Active |
+| **Google Calendar** | Productivity | Event scheduling, reminders, availability checking | 🟢 Active |
+| **WhatsApp** | Messaging | Web/Noise protocol session login and message dispatch | 🟢 Active |
+| **Telegram** | Messaging | Bot API, channel monitoring, interactive replies | 🟢 Active |
+| **Slack** | Collaboration | Webhook & Bot user messaging, thread management | 🟢 Active |
+| **Discord** | Community | Webhook automation, server alerts, command triggers | 🟢 Active |
+| **Spotify** | Entertainment | Playback control, playlist management, search | 🟢 Active |
+| **Notion** | Knowledge | Database queries, page creation, notes sync | 🟢 Active |
+| **Trello** | Task Management | Board management, card updates, workflow movement | 🟢 Active |
+| **Jira** | Project Management | Issue tracking, sprint updates, ticket creation | 🟢 Active |
+| **Linear** | Engineering | Issue tracking, cycle management, developer triage | 🟢 Active |
+| **Asana** | Productivity | Task assignments, project tracking, milestone updates | 🟢 Active |
+| **Todoist** | Personal Tasks | Daily checklist sync, priority setting, reminders | 🟢 Active |
+| **Dropbox** | Cloud Storage | Secure file upload and public link generation | 🟢 Active |
+| **OneDrive** | Cloud Storage | Microsoft 365 cloud file sync and document access | 🟢 Active |
+
+---
+
+## 🛡️ Security & Privacy
+
+Muse is built from the ground up on **Local-First Privacy**:
+- 🔒 **No Cloud Lock-in**: All API keys, credentials, and settings are stored locally in `data/settings.json` and encrypted via `data/.vault_master.key`.
+- 🛡️ **Zero Tracking**: No telemetry or user prompts are ever sent to third parties without explicit provider configuration.
+- 📋 Read our [Security Policy](SECURITY.md) to report vulnerabilities responsibly.
+
+---
+
+## 🤝 Contributing
+
+Contributions are warmly welcomed! Please read our [Contributing Guidelines](CONTRIBUTING.md) to get started.
+
+1. Fork the Project (`https://github.com/raghavkhandal72-coder/muse-agent/fork`)
+2. Create your Feature Branch (`git checkout -b feature/AmazingConnector`)
+3. Commit your Changes (`git commit -m 'feat: add AmazingConnector'`)
+4. Push to the Branch (`git push origin feature/AmazingConnector`)
+5. Open a Pull Request
+
+---
+
+## 📜 Citation
+
+If you use Muse Agent in your academic research, projects, or applications, please cite:
+
+```bibtex
+@software{khandal2026muse,
+  author = {Khandal, Raghav},
+  title = {Muse AI Agent: Autonomous Hybrid Desktop and Mobile Agent Runtime},
+  url = {https://github.com/raghavkhandal72-coder/muse-agent},
+  version = {1.0.0},
+  year = {2026}
+}
 ```
 
-### 4. Run the Desktop Engine
-```bash
-cd assets/engine
-python3 main.py
-```
-On startup, `main.py` initializes the SQLite databases under `assets/engine/data/`, starts `MuseAgentHandler` on `http://0.0.0.0:8765`, optionally opens a Cloudflare Quick Tunnel via `RemoteTunnelManager`, and launches the web interface at `http://127.0.0.1:8765`.
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See [`LICENSE`](LICENSE) or [`LICENSE.md`](LICENSE.md) for full details.
 
 ---
 
-## Local Termux, ADB & PC Bridge Setup
-
-Muse is designed to operate seamlessly across an Android phone and a desktop PC:
-
-### Mode A: Android APK <-> Desktop PC over Local Wi-Fi (`:8765`)
-1. Connect your desktop PC and Android phone to the same local Wi-Fi network.
-2. Start the desktop server (`python3 assets/engine/main.py`) on port 8765.
-3. In the desktop UI, click **Companion QR / Pair Mobile** (`showPairQrModal()`) to view your LAN origin (`http://192.168.x.x:8765`).
-4. Open the Muse AI Android app, long-press the header or open the Server & Mode dialog (`showServerConfigDialog`), and enter your PC's LAN URL (`http://192.168.x.x:8765`).
-
-### Mode B: Global Remote Access via Cloudflare Tunnel
-1. Ensure `cloudflared` is installed and accessible on your host machine.
-2. When `main.py` starts `RemoteTunnelManager.start_tunnel(8765)`, it prints the active `https://<subdomain>.trycloudflare.com` URL to the console and saves it to `data/remote_tunnel.json`.
-3. Paste that `https://*.trycloudflare.com` URL into the Android app's server configuration dialog to control your desktop agent from any mobile network.
-
-### Mode C: On-Device Termux Execution (`com.termux.RUN_COMMAND`)
-To let the Android APK execute local shell commands or run the Python engine directly inside Termux on your phone:
-1. Install [Termux](https://termux.dev/) on your Android device.
-2. Enable external command execution inside Termux by running:
-   ```bash
-   mkdir -p ~/.termux
-   echo "allow-external-apps = true" >> ~/.termux/termux.properties
-   termux-reload-settings
-   ```
-3. Grant the Muse AI Android app the `com.termux.permission.RUN_COMMAND` permission in Android Settings -> Apps -> Muse AI -> Permissions.
-4. Both the WebView bridge (`MuseBridge.runTermuxCommand(cmd)`) and the backend tool (`termux_execute_command`) can now dispatch background scripts via `com.termux.app.RunCommandService`.
-
----
-
-## REST API & JavaScript Bridge Reference
-
-### Key HTTP Endpoints (`:8765`)
-
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/brain/orchestrate` | Executes a multi-agent workflow (`{"task": "...", "mode": "crewai_swarm"}`). |
-| `GET` | `/api/brain/engines` | Lists all 11 supported Master Brain orchestration modes. |
-| `POST` | `/api/vision/capture-screen` | Captures the host PC screen and runs vision analysis (`{"prompt": "..."}`). |
-| `POST` | `/api/goals/manage` | Adds or lists goals in the SQLite vault (`{"action": "add", "title": "..."}`). |
-| `GET` | `/api/telemetry` | Returns real-time host CPU and RAM utilization percentages (`{"cpu": ..., "ram": ...}`). |
-
-### Android WebView `@JavascriptInterface` (`MuseBridge` / `AndroidBridge`)
-
-The Android APK injects `window.MuseBridge` and `window.AndroidBridge` into the WebView with the following methods:
-* `speakText(text)` / `speak(text)` -- Synthesizes speech using native Android TextToSpeech.
-* `startVoiceRecognition(lang)` -- Launches native Android speech recognition and invokes `window.onVoiceRecognized(transcript)`.
-* `runTermuxCommand(command)` -- Sends an intent to `com.termux.app.RunCommandService`.
-* `configureServer()` / `showServerConfigDialog()` -- Opens the native Android dialog to switch between Live Desktop PC, Cloudflare Tunnel, or Offline Mode.
-* `copyToClipboard(text)`, `shareText(text)`, `makePhoneCall(number)`, `downloadToGallery(url)`, `vibrate(ms)` -- Native Android device utilities.
-
----
-
-## User Settings Schema (`data/settings.json`)
-
-Managed via `settings_manager.py`, all settings are validated against `ALLOWED_KEYS`:
-
-| Key | Default | Allowed Values | Description |
-| :--- | :--- | :--- | :--- |
-| `theme` | `"dark"` | `"dark"`, `"light"`, `"system"` | UI theme mode. |
-| `reply_lang` | `"hinglish"` | `"hinglish"`, `"hindi"`, `"english"`, `"en"`, `"hi"` | Default assistant response language. |
-| `style` | `"balanced"` | `"concise"`, `"detailed"`, `"code-first"`, `"balanced"` | Response verbosity and formatting style. |
-| `voice_lang` | `"en-IN"` | Any BCP-47 locale tag | Speech recognition and TTS language. |
-| `voice_speed` | `"normal"` | `"slow"`, `"normal"`, `"fast"`, or 0.1-3.0 | Speech synthesis rate. |
-| `write_files` | `"ask"` | `"off"`, `"ask"`, `"allow"`, `true`, `false` | Permission gate for filesystem writes. |
-| `skill_mode` | `"selected"` | `"selected"`, `"all"`, `"auto"`, `"always"`, `"manual"` | Plugin/skill routing policy. |
-| `log_keep` | `"90"` | Integer/string days | Retention window before `prune_activity_logs(days)` trims old logs. |
-
----
-
-## Security & Pre-Release Notes
-
-* **Never hardcode API keys**: Always load `NVIDIA_API_KEY`, `GEMINI_API_KEY`, and `AIMLAPI_KEY` from environment variables or store them via `LocalEncryptedVault.store_secret(key, value)` in `settings_manager.py`.
-* **Command & File Guardrails**: Keep `write_files` set to `"ask"` in untrusted environments, and review shell commands before execution when `run_command` or `termux_execute_command` is enabled.
-
----
-
-## License
-
-Distributed under the MIT License. See [LICENSE](file:///E:/muse/LICENSE) for full terms.
+<p align="center">
+  <b>Created with ❤️ by <a href="https://github.com/raghavkhandal72-coder">Raghav Khandal (@raghavkhandal72-coder)</a></b><br>
+  <i>⭐ If you find Muse Agent useful, please give it a star on GitHub! ⭐</i>
+</p>
