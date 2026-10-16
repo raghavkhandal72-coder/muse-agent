@@ -1,43 +1,42 @@
-name: 🐛 Bug Report
-description: Create a report to help us improve Muse AI Agent
+name: "🐛 Bug Report"
+description: File a bug report to help improve Muse Agent
+title: "[BUG]: "
 labels: ["bug", "triage"]
 body:
   - type: markdown
     attributes:
-      value: Thanks for taking the time to report an issue in Muse Agent!
-  - type: input
-    id: version
-    attributes:
-      label: Muse Version / Commit
-      placeholder: "e.g. v1.0.0 or commit 94eabfb"
-    validations:
-      required: true
-  - type: dropdown
-    id: platform
-    attributes:
-      label: Operating System / Platform
-      options:
-        - Windows 11 / 10
-        - Android APK (companion)
-        - Termux (headless)
-        - Linux (Ubuntu/Debian)
-        - macOS
-    validations:
-      required: true
+      value: Thank you for reporting an issue! Please provide as much detail as possible.
   - type: textarea
     id: description
     attributes:
-      label: What happened?
-      placeholder: Describe the bug clearly.
+      label: Bug Description
+      description: A clear and concise description of what the bug is.
     validations:
       required: true
   - type: textarea
     id: reproduction
     attributes:
-      label: Steps to reproduce
+      label: Steps to Reproduce
+      description: How can we reproduce this behavior?
       placeholder: |
-        1. Run 'python main.py'
-        2. Execute tool '...'
+        1. Run 'muse run'
+        2. Enter prompt '...'
         3. See error
     validations:
       required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Windows 11 / 10
+        - Ubuntu / Debian Linux
+        - macOS (Apple Silicon / Intel)
+        - Docker Container
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Output / Traceback
+      render: shell

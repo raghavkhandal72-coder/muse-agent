@@ -1,14 +1,12 @@
 ## Description
-Please summarize the changes and list any dependencies required.
+<!-- Describe what this PR does and why it is needed. -->
 
-- Fixes issue #(issue number)
-- Type of change:
-  - [ ] 🐛 Bug fix
-  - [ ] 🚀 New connector or swarm engine mode
-  - [ ] ⚡ Performance optimization
-  - [ ] 📚 Documentation update
+## Changes Made
+- 
 
-## Testing
-- [ ] Tested on Windows / Linux
-- [ ] Tested on Android APK Companion (if applicable)
-- [ ] All tests and health check suites pass (`python main.py --headless`)
+## Checklist
+- [ ] My code adheres to the coding style guidelines of this project.
+- [ ] I have run `python scripts/test_runner.py` and all tests pass cleanly.
+- [ ] I have added/updated relevant unit tests in `tests/`.
+- [ ] Documentation and rules (`CLAUDE.md`, `.cursorrules`, etc.) updated if applicable.
+- [ ] No secrets, `.env` files, or API keys are committed.

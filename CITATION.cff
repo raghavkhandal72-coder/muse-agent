@@ -1,17 +1,22 @@
 cff-version: 1.2.0
-message: "If you use Muse AI Agent in your research, product, or software, please cite it as below."
+message: "If you use Muse Agent in your research or applications, please cite it using these metadata."
+title: "Muse: Autonomous Cross-Platform AI Agent with Computer-Use Architecture (CUA) and Agent Swarms"
 authors:
-  - family-names: Khandal
-    given-names: Raghav
-    orcid: "https://github.com/raghavkhandal72-coder"
-title: "Muse AI Agent: Autonomous Hybrid Desktop and Mobile Agent Runtime"
-version: 1.0.0
-date-released: 2026-10-16
-url: "https://github.com/raghavkhandal72-coder/muse-agent"
+  - family-names: "Khandal"
+    given-names: "Raghav"
+    orcid: "https://orcid.org"
+    affiliation: "Muse AI Project"
+version: "1.0.0"
+date-released: "2026-10-16"
+license: "MIT"
 repository-code: "https://github.com/raghavkhandal72-coder/muse-agent"
+url: "https://raghavkhandal72-coder.github.io/muse-agent/"
 keywords:
-  - autonomous-agents
-  - computer-use
-  - multi-agent-swarm
-  - android-agent
-  - mcp-tools
+  - "ai agent"
+  - "autonomous agent"
+  - "computer use agent"
+  - "cua"
+  - "agent swarm"
+  - "local llm"
+  - "ollama"
+  - "raghav khandal"

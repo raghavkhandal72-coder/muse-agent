@@ -1,0 +1,21 @@
+name: Welcome Contributors
+
+on:
+  issues:
+    types: [opened]
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  welcome:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+    - uses: actions/first-interaction@v3
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: '👋 Welcome to **Muse AI Agent**! Thank you for opening an issue. Raghav Khandal (@raghavkhandal72-coder) and the community will review it shortly. Please ensure you have checked `CLAUDE.md` and `docs/SHOWCASE.md`.'
+        pr-message: '🎉 Wow, thank you for your contribution to **Muse AI Agent**! A maintainer will review your pull request soon. If this is your first time, please make sure your tests pass with `python -m unittest discover tests`.'
