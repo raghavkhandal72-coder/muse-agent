@@ -1,7 +1,7 @@
 pyautogui>=0.9.54
 pillow>=10.0.0
 pywebview>=4.0.0
-selenium>=4.15.0
+selenium>=4.51.0
 pyinstaller>=6.0.0
 requests>=2.31.0
 python-dotenv>=1.0.0
