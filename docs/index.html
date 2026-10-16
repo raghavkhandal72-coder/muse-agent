@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Google SEO Meta Tags -->
-  <title>Muse Agent (muse-agent) | Autonomous Hybrid Desktop & Mobile AI Agent Runtime</title>
-  <meta name="title" content="Muse Agent (muse-agent) | Autonomous Hybrid Desktop & Mobile AI Agent Runtime">
-  <meta name="description" content="Official website of Muse Agent (muse-agent) by Raghav Khandal (@raghavkhandal72-coder). Features Computer-Use (CUA), REA reverse engineering, multi-agent swarm orchestrator, and native Android companion APK.">
-  <meta name="keywords" content="muse agent, muse agents, muse ai agent, meta muse, raghav khandal, autonomous agents, computer use agent, cua, mcp agent, reverse engineering anything, rea, android agent apk, termux bridge, local first ai">
+  <title>Muse Agent — The Autonomous Hybrid Desktop & Mobile AI Runtime</title>
+  <meta name="title" content="Muse Agent — The Autonomous Hybrid Desktop & Mobile AI Runtime">
+  <meta name="description" content="Twelve engines. One autonomous AI agent. Computer-Use (CUA), REA reverse engineering, multi-agent swarms, and wireless Android companion by Raghav Khandal (@raghavkhandal72-coder).">
+  <meta name="keywords" content="muse agent, muse agents, muse ai agent, meta muse, raghav khandal, getartcraft, autonomous agents, computer use agent, cua, rea reverse engineering, android agent apk, termux bridge, local first ai">
   <meta name="author" content="Raghav Khandal">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <link rel="canonical" href="https://raghavkhandal72-coder.github.io/muse-agent/">
@@ -16,20 +16,25 @@
   <!-- Open Graph / Facebook / WhatsApp -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://raghavkhandal72-coder.github.io/muse-agent/">
-  <meta property="og:title" content="Muse Agent - Autonomous Hybrid Desktop & Mobile Agent Runtime">
-  <meta property="og:description" content="See any desktop task or mobile routine. Automate, reverse-engineer, and master it down to the system level with Muse Agent by Raghav Khandal.">
+  <meta property="og:title" content="Muse Agent — Twelve engines. One autonomous agent.">
+  <meta property="og:description" content="Computer-Use (CUA), REA binary engine, 11 swarm orchestrators, and wireless Android companion. Created by Raghav Khandal.">
   <meta property="og:image" content="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/assets/github_social_preview.png">
   <meta property="og:site_name" content="Muse Agent">
 
   <!-- Twitter Card -->
   <meta property="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://raghavkhandal72-coder.github.io/muse-agent/">
-  <meta property="twitter:title" content="Muse Agent - Autonomous Hybrid Desktop & Mobile Agent Runtime">
-  <meta property="twitter:description" content="Autonomous desktop Computer-Use (CUA), multi-agent swarm, REA reverse engineering, and native Android APK. Created by Raghav Khandal.">
+  <meta property="twitter:title" content="Muse Agent — Twelve engines. One autonomous agent.">
+  <meta property="twitter:description" content="Autonomous desktop CUA, REA reverse engineering, multi-agent swarms, and Android APK. Created by Raghav Khandal.">
   <meta property="twitter:image" content="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/assets/github_social_preview.png">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/logo.png">
+
+  <!-- Typography: Inter & Space Grotesk -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 
   <!-- Google Structured Data (Schema.org JSON-LD) -->
   <script type="application/ld+json">
@@ -37,209 +42,1084 @@
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "Muse Agent",
-    "alternateName": ["Muse Agents", "Muse AI Agent", "Meta Muse Agent"],
+    "alternateName": ["Muse Agents", "Muse AI Agent", "Meta Muse"],
     "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Windows, Android, Linux, macOS, iOS Web",
+    "operatingSystem": "Windows, Android, Linux, macOS",
     "url": "https://github.com/raghavkhandal72-coder/muse-agent",
     "downloadUrl": "https://github.com/raghavkhandal72-coder/muse-agent/releases",
     "softwareVersion": "1.0.0",
     "author": {
       "@type": "Person",
       "name": "Raghav Khandal",
-      "url": "https://github.com/raghavkhandal72-coder",
-      "sameAs": [
-        "https://github.com/raghavkhandal72-coder",
-        "https://github.com/raghavkhandal72-coder/muse-agent"
-      ]
+      "url": "https://github.com/raghavkhandal72-coder"
     },
-    "description": "Muse Agent is an open-source, hybrid desktop-and-mobile autonomous AI agent runtime featuring Computer-Use Agent (CUA), REA reverse engineering, multi-agent swarm orchestrator, and Android companion APK.",
-    "offers": {
-      "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD"
-    }
+    "description": "Muse Agent is an open-source, hybrid desktop-and-mobile autonomous AI agent runtime featuring Computer-Use Agent (CUA), REA reverse engineering, multi-agent swarm orchestrator, and Android companion APK."
   }
   </script>
 
   <style>
     :root {
-      --bg: #090d16;
-      --card-bg: rgba(17, 24, 39, 0.7);
-      --card-border: rgba(56, 189, 248, 0.2);
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.15);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg: #070709;
+      --bg-surface: #0e0e12;
+      --bg-elevated: #15161c;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-highlight: rgba(255, 255, 255, 0.18);
+      --text-main: #f4f4f6;
+      --text-muted: #8e909a;
+      --text-dim: #5c5e69;
+      --accent-blue: #2563eb;
+      --accent-cyan: #06b6d4;
+      --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-display: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       background-color: var(--bg);
-      color: var(--text);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      font-size: 15px;
       line-height: 1.6;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 2rem 1rem;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
-    .container {
-      max-width: 960px;
-      width: 100%;
-    }
-    header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .logo {
-      width: 110px;
-      height: 110px;
-      border-radius: 26px;
-      box-shadow: 0 10px 30px rgba(0, 102, 255, 0.3);
-      margin-bottom: 1.5rem;
-      transition: transform 0.3s ease;
-    }
-    .logo:hover { transform: scale(1.05); }
-    h1 {
-      font-size: 2.5rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-      background: linear-gradient(135deg, #ffffff 40%, #38bdf8 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
-      max-width: 700px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 2.5rem;
-    }
-    .btn {
-      padding: 0.8rem 1.6rem;
-      border-radius: 10px;
-      font-weight: 600;
+
+    a {
+      color: inherit;
       text-decoration: none;
+    }
+
+    /* Top Navigation Bar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(7, 7, 9, 0.85);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 2.5rem;
+      height: 64px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb 60%, #60a5fa);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover {
+      color: #fff;
+    }
+
+    .nav-badge-tab {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      padding: 0.35rem 0.8rem;
+      border-radius: 4px;
+      color: #fff !important;
+      font-weight: 700;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .btn-launch-nav {
+      background: #ffffff;
+      color: #000000;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.6rem 1.4rem;
+      border-radius: 4px;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+    }
+    .btn-launch-nav:hover {
+      background: #e2e8f0;
+      transform: translateY(-1px);
+    }
+
+    /* Hero Section Container */
+    .hero-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2.5rem 2.5rem 5rem 2.5rem;
+    }
+
+    /* Meta Tracker Line */
+    .meta-line {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--border-subtle);
+      padding-bottom: 1rem;
+      margin-bottom: 2.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .meta-line span.active {
+      color: var(--text-muted);
+    }
+
+    .meta-line .status-dot {
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      margin-right: 6px;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    /* Hero Grid Layout */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 4.5rem;
+      align-items: start;
+    }
+
+    /* Left Hero Content */
+    .hero-left h1 {
+      font-family: var(--font-display);
+      font-size: 4.8rem;
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.8rem;
+      color: #ffffff;
+    }
+
+    .hero-left h1 span.gradient-word {
+      background: linear-gradient(135deg, #ffffff 30%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.18rem;
+      line-height: 1.65;
+      color: var(--text-muted);
+      margin-bottom: 2.4rem;
+      max-width: 620px;
+    }
+
+    /* Primary CTA Buttons */
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .btn-primary {
+      background: #ffffff;
+      color: #000000;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.75rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.2s ease;
+      border: 1px solid #ffffff;
+    }
+    .btn-primary:hover {
+      background: #e2e8f0;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.03);
+      color: #ffffff;
+      border: 1px solid var(--border-subtle);
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.95rem 1.75rem;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       transition: all 0.2s ease;
     }
-    .btn-primary {
-      background: #0284c7;
-      color: white;
-      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: var(--border-highlight);
+      transform: translateY(-2px);
     }
-    .btn-primary:hover { background: #0369a1; transform: translateY(-2px); }
-    .btn-secondary {
-      background: rgba(30, 41, 59, 0.8);
-      color: var(--text);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+
+    .platform-note {
+      font-family: var(--font-mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 1.2rem;
     }
-    .btn-secondary:hover { background: rgba(51, 65, 85, 0.9); transform: translateY(-2px); }
-    .preview-card {
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--card-border);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-      margin-bottom: 3rem;
+
+    .recommendation-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 6px;
+      padding: 1.1rem 1.35rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      max-width: 600px;
     }
-    .preview-card img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .recommendation-box strong {
+      color: #ffffff;
     }
-    .grid {
+    .recommendation-box a {
+      color: #60a5fa;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* Share & Social Links Bar */
+    .share-bar {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border-top: 1px solid var(--border-subtle);
+      padding-top: 1.25rem;
+      max-width: 600px;
+    }
+    .share-bar a {
+      color: var(--text-muted);
+      transition: color 0.2s ease;
+    }
+    .share-bar a:hover {
+      color: #ffffff;
+    }
+
+    /* Right Column: Muse Engines Grid */
+    .hero-right {
+      position: relative;
+    }
+
+    .engines-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.6rem;
+    }
+
+    .engines-title {
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .engines-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+    }
+
+    /* SQUIRCLE ICONS GRID (ArtCraft Inspired) */
+    .engines-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.1rem;
+      margin-bottom: 2rem;
+    }
+
+    .engine-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.55rem;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+    .engine-card:hover {
+      transform: translateY(-4px);
+    }
+    .engine-card:hover .squircle-icon {
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.7), 0 0 16px rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.4);
+    }
+
+    .squircle-icon {
+      width: 76px;
+      height: 76px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+
+    .squircle-icon svg {
+      width: 38px;
+      height: 38px;
+      filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.4));
+    }
+
+    .engine-label {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      letter-spacing: -0.01em;
+      transition: color 0.2s ease;
+    }
+    .engine-card:hover .engine-label {
+      color: #ffffff;
+    }
+
+    /* Engine Specific Squircles */
+    .icon-cua {
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+    }
+    .icon-rea {
+      background: linear-gradient(135deg, #b91c1c, #ef4444);
+    }
+    .icon-android {
+      background: linear-gradient(135deg, #047857, #10b981);
+    }
+    .icon-swarm {
+      background: linear-gradient(135deg, #6d28d9, #8b5cf6);
+    }
+    .icon-vault {
+      background: linear-gradient(135deg, #b45309, #f59e0b);
+    }
+    .icon-ollama {
+      background: linear-gradient(135deg, #be185d, #ec4899);
+    }
+    .icon-voice {
+      background: linear-gradient(135deg, #0284c7, #38bdf8);
+    }
+    .icon-connectors {
+      background: linear-gradient(135deg, #4338ca, #6366f1);
+    }
+    .icon-browser {
+      background: linear-gradient(135deg, #0f766e, #14b8a6);
+    }
+    .icon-memory {
+      background: linear-gradient(135deg, #c2410c, #f97316);
+    }
+    .icon-tunnel {
+      background: linear-gradient(135deg, #4d7c0f, #84cc16);
+    }
+    .icon-cli {
+      background: linear-gradient(135deg, #334155, #64748b);
+    }
+    .icon-vision {
+      background: linear-gradient(135deg, #701a75, #c026d3);
+    }
+    .icon-code {
+      background: linear-gradient(135deg, #155e75, #0891b2);
+    }
+    .icon-docker {
+      background: linear-gradient(135deg, #1e293b, #475569);
+    }
+
+    /* Engine Detail Interactive Drawer */
+    .engine-preview-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 1.25rem 1.5rem;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      line-height: 1.5;
+    }
+
+    .engine-preview-box .tag {
+      color: #38bdf8;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+      display: inline-block;
+    }
+    .engine-preview-box .text {
+      color: var(--text-muted);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+    }
+
+    /* Navigation Principles Lineup */
+    .principles-footer {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
       gap: 1.5rem;
-      margin-bottom: 3rem;
+      font-family: var(--font-mono);
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 1.5rem;
     }
-    .feature {
-      background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 1.5rem;
-      backdrop-filter: blur(10px);
+    .principles-footer a:hover {
+      color: #fff;
     }
-    .feature h3 {
-      font-size: 1.2rem;
-      margin-bottom: 0.5rem;
+
+    /* Terminal Quickstart Strip */
+    .terminal-section {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--bg-surface);
+      padding: 3rem 2.5rem;
+      margin-top: 2rem;
+    }
+    .terminal-inner {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .terminal-left h3 {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+      color: #fff;
+    }
+    .terminal-left p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.6;
+    }
+
+    .terminal-window {
+      background: #060608;
+      border: 1px solid var(--border-highlight);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+      font-family: var(--font-mono);
+      font-size: 0.86rem;
+    }
+    .terminal-header {
+      background: #111116;
+      border-bottom: 1px solid var(--border-subtle);
+      padding: 0.6rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+    .dot-red { background: #ef4444; }
+    .dot-yellow { background: #f59e0b; }
+    .dot-green { background: #10b981; }
+    .terminal-body {
+      padding: 1.25rem 1.5rem;
+      color: #e2e8f0;
+      line-height: 1.7;
+    }
+    .prompt {
       color: #38bdf8;
     }
-    .feature p {
-      color: var(--text-muted);
-      font-size: 0.95rem;
+    .cmd {
+      color: #f8fafc;
+      font-weight: 600;
     }
-    footer {
-      text-align: center;
+    .output {
       color: #64748b;
-      font-size: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 2rem;
-      width: 100%;
     }
-    footer a { color: var(--accent); text-decoration: none; }
+
+    /* Feature Deep Dive Grid */
+    .features-section {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 5rem 2.5rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 2.5rem;
+      color: #fff;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .feature-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.25s ease;
+    }
+    .feature-card:hover {
+      border-color: var(--border-highlight);
+      transform: translateY(-3px);
+      background: var(--bg-elevated);
+    }
+    .feature-badge {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-bottom: 0.8rem;
+    }
+    .feature-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.65rem;
+      color: #ffffff;
+    }
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border-subtle);
+      padding: 3rem 2.5rem;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+    }
+    footer a {
+      color: var(--text-muted);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    footer a:hover {
+      color: #ffffff;
+    }
+
+    /* Responsive */
+    @media (max-width: 1100px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 3.5rem;
+      }
+      .hero-left h1 {
+        font-size: 3.6rem;
+      }
+      .engines-grid {
+        grid-template-columns: repeat(5, 1fr);
+      }
+      .terminal-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .navbar {
+        padding: 0.75rem 1.25rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .hero-container {
+        padding: 1.5rem 1.25rem;
+      }
+      .hero-left h1 {
+        font-size: 2.8rem;
+      }
+      .engines-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .squircle-icon {
+        width: 68px;
+        height: 68px;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header>
-      <img src="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/logo.png" alt="Muse Agent Logo" class="logo">
-      <h1>Muse Agent (muse-agent)</h1>
-      <p class="subtitle">The Autonomous Hybrid Desktop & Mobile AI Agent Runtime created by <strong>Raghav Khandal (@raghavkhandal72-coder)</strong>.</p>
-      
-      <div class="cta-buttons">
-        <a href="https://github.com/raghavkhandal72-coder/muse-agent" class="btn btn-primary">⭐ View on GitHub</a>
-        <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases" class="btn btn-secondary">📱 Download Android APK</a>
-        <a href="https://github.com/raghavkhandal72-coder/muse-agent#readme" class="btn btn-secondary">📖 Documentation</a>
-      </div>
-    </header>
 
-    <div class="preview-card">
-      <img src="https://raw.githubusercontent.com/raghavkhandal72-coder/muse-agent/main/assets/muse_interface.png" alt="Muse Agent Desktop UI Showcase">
+  <!-- Top Navigation Bar -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="https://github.com/raghavkhandal72-coder/muse-agent" class="brand-logo">
+        <div class="brand-icon">M</div>
+        <span>MUSE</span>
+      </a>
+      <div class="nav-links">
+        <a href="#hero">OVERVIEW</a>
+        <a href="#engines" class="nav-badge-tab">ENGINES</a>
+        <a href="#quickstart">CLI</a>
+        <a href="#features">CAPABILITIES</a>
+        <a href="https://github.com/raghavkhandal72-coder/muse-agent#readme" target="_blank">DOCS</a>
+        <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases" target="_blank">APK</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="https://github.com/raghavkhandal72-coder/muse-agent" target="_blank" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted); font-weight: 600;">
+        ⭐ STAR v1.0.0
+      </a>
+      <a href="https://github.com/raghavkhandal72-coder/muse-agent" class="btn-launch-nav" target="_blank">
+        LAUNCH AGENT
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero-container" id="hero">
+    
+    <!-- Meta Tracker -->
+    <div class="meta-line">
+      <div><span class="status-dot"></span>01 / AUTONOMOUS HYBRID RUNTIME</div>
+      <div><span class="active">FIFTEEN ENGINES</span> &bull; 100% LOCAL-FIRST &bull; MIT LICENSE &bull; 001% LIVE</div>
     </div>
 
-    <section class="grid">
-      <div class="feature">
-        <h3>🖥️ Desktop Computer-Use (CUA)</h3>
-        <p>Autonomous mouse clicking, text typing, multi-monitor screenshot capture, and desktop workflow automation via PyAutoGUI and vision models.</p>
+    <!-- Main Hero 2-Column Grid -->
+    <div class="hero-grid">
+      
+      <!-- Left Column: Giant Editorial Typography & Actions -->
+      <div class="hero-left">
+        <h1>
+          Fifteen engines.<br>
+          <span class="gradient-word">One agent.</span>
+        </h1>
+        
+        <p class="hero-desc">
+          Desktop Computer-Use automation, REA reverse engineering, multi-agent swarm consensus, wireless Android bridge, encrypted local vault, and 17+ production connectors. Native, cross-platform autonomous AI runtime from Raghav Khandal (@raghavkhandal72-coder), built in Python &amp; Rust and 100% free to use.
+        </p>
+
+        <!-- CTAs -->
+        <div class="cta-row">
+          <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases/latest" class="btn-primary" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            DOWNLOAD APK &amp; APP
+          </a>
+          <a href="https://github.com/raghavkhandal72-coder/muse-agent" class="btn-secondary" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            BROWSE ON GITHUB
+          </a>
+        </div>
+
+        <div class="platform-note">
+          FOR WINDOWS &bull; LINUX &bull; MACOS &bull; ANDROID COMPANION (ARM64 / X86_64)
+        </div>
+
+        <!-- Recommended Note -->
+        <div class="recommendation-box">
+          <strong>Recommended:</strong> Install Muse via <code>pip install muse-agent</code> or clone the repo. Launch with 1-click batch scripts (<code>Start_Muse.bat</code> / <code>start_muse.sh</code>) to automatically run CUA, Swarms, and local web dashboard. <a href="https://github.com/raghavkhandal72-coder/muse-agent#quickstart" target="_blank">Learn more &rarr;</a>
+        </div>
+
+        <!-- Share & Socials -->
+        <div class="share-bar">
+          <span>SHARE:</span>
+          <a href="https://github.com/raghavkhandal72-coder/muse-agent" target="_blank">GITHUB</a>
+          <a href="https://twitter.com/intent/tweet?text=Muse%20Agent%20is%20insane!%20Autonomous%20Computer-Use,%20Swarm%20consensus,%20and%20Android%20companion%20by%20@raghavkhandal72-coder:%20https://github.com/raghavkhandal72-coder/muse-agent" target="_blank">X / TWITTER</a>
+          <a href="https://reddit.com/r/LocalLLaMA" target="_blank">REDDIT</a>
+          <a href="https://news.ycombinator.com" target="_blank">HACKER NEWS</a>
+          <a href="https://linkedin.com" target="_blank">LINKEDIN</a>
+        </div>
       </div>
-      <div class="feature">
-        <h3>🔍 REA Reverse Engineering</h3>
-        <p>Built-in integration with the 200,000-star REA toolchain for inspecting Electron/JavaScript apps, validating crypto protocols, and analyzing binaries.</p>
+
+      <!-- Right Column: SQUIRCLE ICONS MATRIX (ArtCraft Style) -->
+      <div class="hero-right" id="engines">
+        
+        <div class="engines-header">
+          <div class="engines-title">MUSE ENGINES</div>
+          <div class="engines-badge">CLICK TO INSPECT</div>
+        </div>
+
+        <!-- 15 SQUIRCLE APPS MATRIX (3 Rows x 5 Columns) -->
+        <div class="engines-grid">
+          
+          <!-- 1. CUA Engine -->
+          <div class="engine-card" onclick="showEngine('cua')">
+            <div class="squircle-icon icon-cua">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="m14 10-3 3-1.5-1.5"/></svg>
+            </div>
+            <div class="engine-label">CuaAgent</div>
+          </div>
+
+          <!-- 2. REA Engine -->
+          <div class="engine-card" onclick="showEngine('rea')">
+            <div class="squircle-icon icon-rea">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><path d="M11 8v6"/><path d="M8 11h6"/></svg>
+            </div>
+            <div class="engine-label">ReaBinary</div>
+          </div>
+
+          <!-- 3. Android Companion -->
+          <div class="engine-card" onclick="showEngine('android')">
+            <div class="squircle-icon icon-android">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            </div>
+            <div class="engine-label">AndroidBridge</div>
+          </div>
+
+          <!-- 4. Multi-Agent Swarm -->
+          <div class="engine-card" onclick="showEngine('swarm')">
+            <div class="squircle-icon icon-swarm">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+            </div>
+            <div class="engine-label">SwarmMesh</div>
+          </div>
+
+          <!-- 5. Local Encrypted Vault -->
+          <div class="engine-card" onclick="showEngine('vault')">
+            <div class="squircle-icon icon-vault">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="engine-label">LocalVault</div>
+          </div>
+
+          <!-- 6. Ollama Local LLMs -->
+          <div class="engine-card" onclick="showEngine('ollama')">
+            <div class="squircle-icon icon-ollama">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a8 8 0 0 0-8 8c0 5 8 12 8 12s8-7 8-12a8 8 0 0 0-8-8z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="engine-label">OllamaLocal</div>
+          </div>
+
+          <!-- 7. Voice Wake-word -->
+          <div class="engine-card" onclick="showEngine('voice')">
+            <div class="squircle-icon icon-voice">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+            </div>
+            <div class="engine-label">VoiceWake</div>
+          </div>
+
+          <!-- 8. 17+ Production Connectors -->
+          <div class="engine-card" onclick="showEngine('connectors')">
+            <div class="squircle-icon icon-connectors">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            </div>
+            <div class="engine-label">ConnectHub</div>
+          </div>
+
+          <!-- 9. Headless Browser -->
+          <div class="engine-card" onclick="showEngine('browser')">
+            <div class="squircle-icon icon-browser">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div class="engine-label">BrowserEye</div>
+          </div>
+
+          <!-- 10. Semantic Memory -->
+          <div class="engine-card" onclick="showEngine('memory')">
+            <div class="squircle-icon icon-memory">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+            </div>
+            <div class="engine-label">MemoryCore</div>
+          </div>
+
+          <!-- 11. Cloud Tunnel Zero -->
+          <div class="engine-card" onclick="showEngine('tunnel')">
+            <div class="squircle-icon icon-tunnel">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-2 2.5 3 2.5-5 5 3 2-6 8 2-6-3-2 5-5-3-2.5z"/></svg>
+            </div>
+            <div class="engine-label">TunnelZero</div>
+          </div>
+
+          <!-- 12. CLI Developer Runner -->
+          <div class="engine-card" onclick="showEngine('cli')">
+            <div class="squircle-icon icon-cli">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+            </div>
+            <div class="engine-label">CliRunner</div>
+          </div>
+
+          <!-- 13. Vision Inspector -->
+          <div class="engine-card" onclick="showEngine('vision')">
+            <div class="squircle-icon icon-vision">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </div>
+            <div class="engine-label">VisionEye</div>
+          </div>
+
+          <!-- 14. Code Automator -->
+          <div class="engine-card" onclick="showEngine('code')">
+            <div class="squircle-icon icon-code">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+            </div>
+            <div class="engine-label">DevCoder</div>
+          </div>
+
+          <!-- 15. Docker Container Suite -->
+          <div class="engine-card" onclick="showEngine('docker')">
+            <div class="squircle-icon icon-docker">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12.5a6 6 0 0 0-4-5.5V6a2 2 0 0 0-2-2h-3v3H9V4H6a2 2 0 0 0-2 2v1A6 6 0 0 0 2 12.5C2 17 6 20 12 20s10-3 10-7.5z"/></svg>
+            </div>
+            <div class="engine-label">DockerStack</div>
+          </div>
+
+        </div>
+
+        <!-- Dynamic Engine Info Inspector Box -->
+        <div class="engine-preview-box" id="enginePreview">
+          <div class="tag" id="previewTag">// ENGINE 01 &bull; DESKTOP COMPUTER-USE (CUA)</div>
+          <div class="text" id="previewText">
+            Autonomous mouse clicking, text typing, multi-monitor screenshot capture, and desktop workflow automation via PyAutoGUI and vision models.
+          </div>
+        </div>
+
+        <!-- Principles Link Footer -->
+        <div class="principles-footer">
+          <a href="#features">LINEUP</a>
+          <a href="#quickstart">PRINCIPLES</a>
+          <a href="https://github.com/raghavkhandal72-coder/muse-agent" target="_blank">GET STARTED &rarr;</a>
+        </div>
+
       </div>
-      <div class="feature">
-        <h3>📱 Android Companion APK</h3>
-        <p>13.5 MB native Android app with Termux shell bridge, hands-free wake-word voice recognition, and wireless ADB control.</p>
+
+    </div>
+
+  </div>
+
+  <!-- Terminal Quickstart Section -->
+  <section class="terminal-section" id="quickstart">
+    <div class="terminal-inner">
+      <div class="terminal-left">
+        <h3>Zero setup.<br>Instant autonomous power.</h3>
+        <p>
+          Muse Agent runs anywhere Python is installed. With standard pip packaging, a single command starts your personal local AI agent server with CUA, local memory, and reverse tunnel.
+        </p>
       </div>
-      <div class="feature">
-        <h3>🤖 Multi-Agent Swarm</h3>
-        <p>11 pre-configured swarm engines including CrewAI multi-role teams, LangGraph cyclic state machines, AutoGen debates, and Stanford STORM research.</p>
+
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="dot dot-red"></div>
+          <div class="dot dot-yellow"></div>
+          <div class="dot dot-green"></div>
+          <span style="font-size: 0.72rem; color: #64748b; margin-left: 0.5rem;">bash — muse-agent v1.0.0</span>
+        </div>
+        <div class="terminal-body">
+          <div><span class="prompt">$</span> <span class="cmd">pip install muse-agent</span></div>
+          <div class="output">&bull; Installing muse-agent [1.0.0] dependencies... Done!</div>
+          <br>
+          <div><span class="prompt">$</span> <span class="cmd">muse doctor</span></div>
+          <div class="output">[PASS] Hardware: CPU 12-cores | Display: Active | Memory: 16 GB</div>
+          <div class="output">[PASS] CUA Screen Engine: Ready (PyAutoGUI + Vision)</div>
+          <div class="output">[PASS] REA Inspector: Health Status OK (Reverse Engineering Engine)</div>
+          <br>
+          <div><span class="prompt">$</span> <span class="cmd">muse run</span></div>
+          <div class="output">🚀 Muse Agent 1.0.0 online at http://127.0.0.1:8765</div>
+        </div>
       </div>
-      <div class="feature">
-        <h3>🔌 17+ Production Connectors</h3>
+    </div>
+  </section>
+
+  <!-- Capabilities Cards Grid -->
+  <section class="features-section" id="features">
+    <div class="section-title">CORE RUNTIME ARCHITECTURE</div>
+    <div class="cards-grid">
+      
+      <div class="feature-card">
+        <div class="feature-badge">01 / COMPUTER-USE</div>
+        <h4>Desktop CUA Automation</h4>
+        <p>Autonomous mouse movement, coordinate clicks, multi-monitor screenshot analysis, and hotkey execution across Windows, macOS, and Linux.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-badge">02 / REVERSE ENGINEERING</div>
+        <h4>REA Engine Integration</h4>
+        <p>Native integration with the 200,000-star REA toolchain for inspecting Electron/JavaScript apps, validating crypto protocols, and decompiling binaries.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-badge">03 / MOBILE RUNTIME</div>
+        <h4>Android Companion APK</h4>
+        <p>13.5 MB native Android app with Termux shell bridge, hands-free wake-word voice recognition, and wireless ADB control from anywhere.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-badge">04 / MULTI-AGENT SWARMS</div>
+        <h4>11 Swarm Topologies</h4>
+        <p>Pre-configured swarm engines including CrewAI multi-role teams, LangGraph cyclic state machines, AutoGen debates, and Stanford STORM research.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-badge">05 / ECOSYSTEM BRIDGES</div>
+        <h4>17+ Production Connectors</h4>
         <p>Built-in OAuth and consent bridges for GitHub, Gmail, WhatsApp, Telegram, Slack, Discord, Google Drive, Spotify, Notion, and Jira.</p>
       </div>
-      <div class="feature">
-        <h3>🔒 100% Local-First Security</h3>
-        <p>AES-256-GCM encrypted local vault, SQLite semantic memories, and offline Ollama fallback without cloud lock-in.</p>
-      </div>
-    </section>
 
-    <footer>
-      <p>Created with ❤️ by <a href="https://github.com/raghavkhandal72-coder">Raghav Khandal (@raghavkhandal72-coder)</a> • Released under the MIT License.</p>
-      <p style="margin-top: 0.5rem; font-size: 0.8rem;">Keywords: Muse Agent, Muse Agents, Muse AI Agent, Meta Muse, Raghav Khandal, Computer-Use Agent.</p>
-    </footer>
-  </div>
+      <div class="feature-card">
+        <div class="feature-badge">06 / ZERO-KNOWLEDGE SECURITY</div>
+        <h4>100% Local-First Vault</h4>
+        <p>AES-256-GCM encrypted local vault, SQLite semantic memories, and offline Ollama fallback without cloud lock-in or telemetry leaks.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Created by <a href="https://github.com/raghavkhandal72-coder" target="_blank">Raghav Khandal (@raghavkhandal72-coder)</a> &bull; Licensed under MIT &bull; <a href="https://github.com/raghavkhandal72-coder/muse-agent" target="_blank">GitHub Repository</a> &bull; <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases" target="_blank">Releases</a>
+    </p>
+  </footer>
+
+  <!-- Interactive Engine Click Script -->
+  <script>
+    const engineData = {
+      cua: {
+        tag: "// ENGINE 01 • DESKTOP COMPUTER-USE (CUA)",
+        text: "Autonomous mouse clicking, text typing, multi-monitor screenshot capture, and desktop workflow automation via PyAutoGUI and vision models."
+      },
+      rea: {
+        tag: "// ENGINE 02 • REA REVERSE ENGINEERING",
+        text: "Built-in integration with the 200,000-star REA toolchain for inspecting Electron/JavaScript apps, validating crypto protocols, and analyzing binaries."
+      },
+      android: {
+        tag: "// ENGINE 03 • ANDROID COMPANION APK",
+        text: "13.5 MB native Android app with Termux shell bridge, hands-free wake-word voice recognition, and wireless ADB control."
+      },
+      swarm: {
+        tag: "// ENGINE 04 • MULTI-AGENT SWARM",
+        text: "11 pre-configured swarm engines including CrewAI multi-role teams, LangGraph cyclic state machines, AutoGen debates, and Stanford STORM research."
+      },
+      vault: {
+        tag: "// ENGINE 05 • LOCAL ENCRYPTED VAULT",
+        text: "AES-256-GCM encrypted local credential vault, zero-knowledge master password protection, and automated secret sanitation."
+      },
+      ollama: {
+        tag: "// ENGINE 06 • OLLAMA LOCAL LLM ENGINE",
+        text: "100% offline local inference support for Llama 3.3, Mistral, Qwen, and Gemma models without cloud API dependencies."
+      },
+      voice: {
+        tag: "// ENGINE 07 • VOICE WAKE-WORD SYSTEM",
+        text: "Continuous background audio listener with custom wake-word ('Hey Muse') and real-time text-to-speech audio feedback."
+      },
+      connectors: {
+        tag: "// ENGINE 08 • 17+ PRODUCTION CONNECTORS",
+        text: "Built-in OAuth and consent bridges for GitHub, Gmail, WhatsApp, Telegram, Slack, Discord, Google Drive, Spotify, Notion, and Jira."
+      },
+      browser: {
+        tag: "// ENGINE 09 • HEADLESS BROWSER VISION",
+        text: "Puppeteer / Playwright headless DOM parsing, web scraping, and visual screenshot verification."
+      },
+      memory: {
+        tag: "// ENGINE 10 • SEMANTIC MEMORY STREAM",
+        text: "Long-term episodic and working memory backed by SQLite and dense vector embeddings for continuous context recall."
+      },
+      tunnel: {
+        tag: "// ENGINE 11 • CLOUD TUNNEL ZERO",
+        text: "Zero-config Ngrok and LocalTunnel reverse proxies to securely control your desktop agent from anywhere via mobile phone."
+      },
+      cli: {
+        tag: "// ENGINE 12 • CLI DEVELOPER RUNNER",
+        text: "Full-featured interactive terminal CLI with 'muse run', 'muse server', 'muse doctor', and 'muse tunnel' commands."
+      },
+      vision: {
+        tag: "// ENGINE 13 • MULTIMODAL VISION EYE",
+        text: "High-resolution desktop screen visual parsing using Gemini 2.5 Pro, Claude 3.7 Sonnet, and GPT-4o vision APIs."
+      },
+      code: {
+        tag: "// ENGINE 14 • AUTONOMOUS DEV CODER",
+        text: "Multi-file code generation, syntax linting, self-healing test repair, and git branch workflow automation."
+      },
+      docker: {
+        tag: "// ENGINE 15 • DOCKER CONTAINER SUITE",
+        text: "Production containerization with Xvfb virtual display buffer for headless CUA execution and companion Ollama service."
+      }
+    };
+
+    function showEngine(key) {
+      const data = engineData[key];
+      if (data) {
+        document.getElementById('previewTag').innerText = data.tag;
+        document.getElementById('previewText').innerText = data.text;
+      }
+    }
+  </script>
+
 </body>
 </html>
