@@ -15,7 +15,7 @@ jobs:
     - uses: actions/checkout@v4
 
     - name: Create GitHub Release
-      uses: softprops/action-gh-release@v2
+      uses: softprops/action-gh-release@v3
       with:
         name: "Muse AI Agent Release ${{ github.ref_name }}"
         draft: false
