@@ -8,7 +8,7 @@
   <img src="logo.png" width="128" height="128" alt="Muse AI Agent Logo" />
 </a>
 
-# Muse: Autonomous Hybrid Desktop & Mobile Agent Runtime
+# Muse Agent (muse-agent) - Autonomous Hybrid Desktop & Mobile Agents Runtime
 
 ### One MCP & Runtime for Computer-Use, Reverse Engineering, Swarm Orchestration, and Android Control.
 
@@ -50,6 +50,13 @@ git clone https://github.com/raghavkhandal72-coder/muse-agent.git && cd muse-age
 <img src="assets/muse_interface.png" width="960" alt="Muse Live Desktop & Hatch Interface" />
 
 <br />
+
+
+<!-- GitHub Search & SEO Optimization -->
+<p align="center">
+  <b>Official Repository:</b> <code>raghavkhandal72-coder/muse-agent</code> &bull; 
+  <b>Keywords:</b> <i>muse agent, muse agents, muse ai agent, meta muse, autonomous agent, computer use, rea agent</i>
+</p>
 
 </div>
 
