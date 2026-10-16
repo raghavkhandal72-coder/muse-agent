@@ -247,6 +247,25 @@ Contributions are warmly welcomed! Please read our [Contributing Guidelines](CON
 
 ---
 
+
+---
+
+## 📈 Star History & Growth
+
+Support open-source autonomous agent technology! If you find Muse AI Agent exciting, please star the repository — it helps more developers discover the project and accelerates development of new connectors and swarm engines.
+
+<p align="center">
+  <a href="https://star-history.com/#raghavkhandal72-coder/muse-agent&Date">
+    <img src="https://api.star-history.com/svg?repos=raghavkhandal72-coder/muse-agent&type=Date" width="100%" alt="Muse Agent Star History Chart" />
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent/stargazers">
+    <img src="https://img.shields.io/badge/⭐%20Star%20on%20GitHub-raghavkhandal72--coder%2Fmuse--agent-gold?style=for-the-badge&logo=github" alt="Star on GitHub" />
+  </a>
+</p>
+
 ## 📄 License
 
 Distributed under the **MIT License**. See [`LICENSE`](LICENSE) for details.
