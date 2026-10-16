@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  muse-agent:
+    build: .
+    container_name: muse-agent-runtime
+    restart: unless-stopped
+    ports:
+      - "8765:8765"
+    environment:
+      - MUSE_PORT=8765
+      - MUSE_HEADLESS=1
+      - OLLAMA_HOST=http://ollama:11434
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: muse-ollama-backend
+    restart: unless-stopped
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_models:/root/.ollama
+
+volumes:
+  ollama_models:

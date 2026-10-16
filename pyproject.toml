@@ -1,0 +1,57 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "muse-agent"
+version = "1.0.0"
+description = "The Autonomous Hybrid Desktop & Mobile Agent Runtime"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Raghav Khandal", email = "raghavkhandal72@gmail.com" }
+]
+keywords = [
+    "muse-agent",
+    "muse-agents",
+    "ai-agent",
+    "autonomous-agents",
+    "computer-use",
+    "cua",
+    "reverse-engineering",
+    "mcp",
+    "swarm",
+    "android-agent",
+    "ollama"
+]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Libraries :: Application Frameworks"
+]
+dependencies = [
+    "requests>=2.28.0",
+    "pillow>=9.5.0",
+    "pyautogui>=0.9.54",
+    "websockets>=11.0",
+    "cryptography>=41.0.0"
+]
+
+[project.urls]
+Homepage = "https://raghavkhandal72-coder.github.io/muse-agent/"
+Repository = "https://github.com/raghavkhandal72-coder/muse-agent"
+Issues = "https://github.com/raghavkhandal72-coder/muse-agent/issues"
+Changelog = "https://github.com/raghavkhandal72-coder/muse-agent/releases"
+
+[project.scripts]
+muse = "cli:main"
+muse-agent = "cli:main"
+muse-server = "cli:server_cmd"

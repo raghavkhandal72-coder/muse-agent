@@ -39,6 +39,10 @@ class ReaDoctor {
 
     return report;
   }
+
+  static runDoctor() {
+    return this.runDiagnostics();
+  }
 }
 
 function path_temp_check() {
@@ -46,4 +50,7 @@ function path_temp_check() {
   return require('node:path').join(tmpDir, `rea_test_${Date.now()}.tmp`);
 }
 
+ReaDoctor.runDoctor = ReaDoctor.runDiagnostics;
 module.exports = ReaDoctor;
+module.exports.runDoctor = ReaDoctor.runDiagnostics;
+module.exports.runDiagnostics = ReaDoctor.runDiagnostics;
