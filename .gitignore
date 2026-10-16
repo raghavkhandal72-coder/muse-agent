@@ -58,3 +58,8 @@ data/*.db
 data/remote_tunnel.json
 
 data/settings.json
+
+# Packaging & Distribution Artifacts
+*.egg-info/
+build/
+dist/
