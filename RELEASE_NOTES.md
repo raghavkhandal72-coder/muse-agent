@@ -21,7 +21,7 @@ We are open-sourcing Muse AI Agent, a full-stack autonomous AI agent platform th
 
 ### 3. Computer-Use Agent (CUA) & 17 Native Connectors (`tools.py`)
 * **Live Screen Vision & Desktop Control**: Full mouse, keyboard, window inspection, app launching, and live screen vision analysis (`/api/vision/capture-screen`).
-* **17 Pre-Configured Connectors**: Built-in catalog (`MUSE_CONNECTORS_CATALOG`) spanning Fonoster Voice, Custom MCP Servers (JSON-RPC 2.0 `tools/call`), Termux Shell, ADB & Shizuku Control, Multi-Step Workflow Routines, GitHub, Google Drive, Gmail, Google Calendar, Google Docs, Google Sheets, Notion, Calendly, Slack, WhatsApp, Spotify, and Instagram.
+* **17 Pre-Configured Connectors**: Built-in catalog spanning Fonoster Voice, Custom MCP Servers (JSON-RPC 2.0 `tools/call`), Termux Shell, ADB & Shizuku Control, Multi-Step Workflow Routines, GitHub, Google Drive, Gmail, Google Calendar, Google Docs, Google Sheets, Notion, Calendly, Slack, WhatsApp, Spotify, and Instagram.
 
 ### 4. Local-First Memory, Goals Vault & Encrypted Secrets (`settings_manager.py`)
 * **Persistent SQLite Storage**: Local memories and goals tables (`/api/goals/manage`) plus automatic Second Brain JSON backup (`backup_second_brain()`).
@@ -40,15 +40,5 @@ git clone https://github.com/raghavkhandal72-coder/muse-agent.git
 cd muse-agent/assets/engine
 python3 main.py
 ```
+
 Download the attached `Muse_Agent.apk` from the [GitHub Releases page](https://github.com/raghavkhandal72-coder/muse-agent/releases) to pair your Android phone over local Wi-Fi (`:8765`) or Cloudflare Tunnel.
-
----
-
-## Pre-Release Sanitization Checklist (Complete Before Tagging v1.0.0)
-
-Before attaching `Muse_Agent.apk` to your GitHub Release or pushing the repository history to `github.com/raghavkhandal72-coder/muse-agent`, verify these 5 cleanup steps:
-1. **Strip Hardcoded API Keys**: Fallbacks for `NVIDIA_KEY`, `NVIDIA_KEYS_POOL`, `GEMINI_KEY`, and `AIMLAPI_KEY` are stripped from git and strictly read from `.env` or `os.environ`.
-2. **Replace Hardcoded Windows Paths**: Paths are anchored relative to `Path(__file__).resolve().parent`.
-3. **Remove Hardcoded LAN IP in Android Defaults**: Mobile app defaults to `127.0.0.1:8765` and uses dynamic LAN QR pairing.
-4. **Remove Proprietary Files & Zero-Padded Binaries**: Debloated APK from 62.7 MB down to 13.57 MB, stripped all Meta Platforms copyright markers.
-5. **Add `.gitignore` and `.env.example`**: Secrets and runtime local database files are excluded from version control.

@@ -1,32 +1,19 @@
-<div align="center">
-
-<a href="https://github.com/raghavkhandal72-coder/muse-agent">
-  <img src="logo.png" width="130" height="130" alt="Muse AI Agent Logo" style="border-radius: 28px; box-shadow: 0 10px 30px rgba(37,99,235,0.4);" />
-</a>
-
-# ⚡ Muse Agent (muse-agent)
-### Fifteen Engines. One Autonomous AI Agent.
-**The Autonomous Hybrid Desktop & Mobile Agent Runtime by [Raghav Khandal (@raghavkhandal72-coder)](https://github.com/raghavkhandal72-coder)**
+# Muse AI Agent (`muse-agent`)
 
 <p align="center">
-  <b><a href="https://raghavkhandal72-coder.github.io/muse-agent/">🌐 Live Interactive Website</a></b> &bull;
-  <b><a href="https://github.com/raghavkhandal72-coder/muse-agent/releases/latest">📱 Download Android APK</a></b> &bull;
-  <b><a href="docs/SHOWCASE.md">🎬 Showcase Demos</a></b> &bull;
-  <b><a href="ROADMAP.md">🗺️ Technical Roadmap</a></b>
+  <img src="docs/assets/hero_banner.jpg" alt="Muse AI Agent — Open-Source Multi-Agent Swarm, Desktop CUA & Android/Termux Bridge" width="100%" />
 </p>
 
-<!-- Official Shields Matrix -->
 <p align="center">
-  <a href="https://github.com/raghavkhandal72-coder/muse-agent/stargazers"><img src="https://img.shields.io/github/stars/raghavkhandal72-coder/muse-agent?style=flat-square&logo=github&color=gold" alt="GitHub Stars" /></a>
-  <a href="https://github.com/raghavkhandal72-coder/muse-agent/network/members"><img src="https://img.shields.io/github/forks/raghavkhandal72-coder/muse-agent?style=flat-square&logo=github&color=blue" alt="GitHub Forks" /></a>
-  <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases/latest"><img src="https://img.shields.io/github/v/release/raghavkhandal72-coder/muse-agent?style=flat-square&color=10b981&label=Release" alt="Latest Release" /></a>
-  <a href="https://github.com/raghavkhandal72-coder/muse-agent/actions"><img src="https://img.shields.io/github/actions/workflow/status/raghavkhandal72-coder/muse-agent/ci.yml?branch=main&style=flat-square&logo=githubactions&logoColor=white&label=CI%20Build" alt="CI Build" /></a>
-  <a href="https://pypi.org/project/muse-agent/"><img src="https://img.shields.io/badge/PyPI-muse--agent-blue?style=flat-square&logo=pypi&logoColor=white" alt="PyPI Package" /></a>
-  <a href="https://github.com/raghavkhandal72-coder/muse-agent/releases"><img src="https://img.shields.io/badge/Android-APK%20(13.5MB)-339933?style=flat-square&logo=android&logoColor=white" alt="Android APK" /></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-f4c430?style=flat-square" alt="License MIT" /></a>
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent/actions"><img src="https://img.shields.io/github/actions/workflow/status/raghavkhandal72-coder/muse-agent/ci.yml?branch=main&label=CI%20%26%20Security%20Audit&logo=github" alt="CI Status" /></a>
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent/stargazers"><img src="https://img.shields.io/github/stars/raghavkhandal72-coder/muse-agent?style=flat&logo=github&color=yellow" alt="GitHub Stars" /></a>
+  <a href="https://github.com/raghavkhandal72-coder"><img src="https://img.shields.io/badge/Author-raghavkhandal72--coder-181717.svg?logo=github" alt="GitHub Profile" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT" /></a>
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB.svg?logo=python&logoColor=white" alt="Python 3.10+" /></a>
+  <a href="https://developer.android.com/"><img src="https://img.shields.io/badge/Android-Companion%20APK-3DDC84.svg?logo=android&logoColor=white" alt="Android APK" /></a>
+  <a href="https://modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP-JSON--RPC%202.0-purple.svg" alt="MCP Compatible" /></a>
 </p>
 
-<!-- Universal Agent Standard Badges -->
 <p align="center">
   <a href="CLAUDE.md"><img src="https://img.shields.io/badge/Claude%20Code-Certified-orange?style=flat-square&logo=anthropic" alt="Claude Code" /></a>
   <a href=".cursorrules"><img src="https://img.shields.io/badge/Cursor-Certified-black?style=flat-square" alt="Cursor" /></a>
@@ -37,38 +24,7 @@
   <a href="AGENTS.md"><img src="https://img.shields.io/badge/Universal%20Standard-Ready-10b981?style=flat-square" alt="Universal Agents" /></a>
 </p>
 
-<br />
-
-<a href="https://raghavkhandal72-coder.github.io/muse-agent/">
-  <img src="assets/github_social_preview.png" width="960" alt="Muse Agent - Autonomous Hybrid Desktop & Mobile Agent Runtime" style="border-radius: 12px; border: 1px solid rgba(255,255,255,0.15);" />
-</a>
-
-<br />
-<br />
-
-**[⚡ 1-Minute Quickstart](#-1-minute-quickstart)** &bull;
-**[📊 Why Muse Agent?](#-why-muse-agent)** &bull;
-**[🧩 The 15 Engines](#-the-15-muse-engines)** &bull;
-**[🖥️ Desktop CUA](#️-desktop-computer-use-cua)** &bull;
-**[🔍 REA Reverse Engineering](#-rea-reverse-engineer-anything)** &bull;
-**[🤖 11 Swarm Topologies](#-multi-agent-swarm-orchestrator)** &bull;
-**[📱 Android APK](#-android-companion-apk--termux-bridge)** &bull;
-**[🔌 17+ Connectors](#-17-production-connectors)** &bull;
-**[📈 Star Growth](#-star-history--community)**
-
-<br />
-
-```bash
-pip install muse-agent && muse run
-```
-
-<!-- GitHub Search & SEO Optimization -->
-<p align="center">
-  <b>Official Repository:</b> <code>raghavkhandal72-coder/muse-agent</code> &bull; 
-  <b>Search Keywords:</b> <i>muse agent, muse agents, muse ai agent, meta muse, autonomous agent, computer use agent, cua, rea reverse engineering, android agent apk, raghav khandal</i>
-</p>
-
-</div>
+**Muse AI Agent** is an open-source, hybrid desktop-and-mobile autonomous agent runtime created by **[Raghav Khandal (@raghavkhandal72-coder)](https://github.com/raghavkhandal72-coder)**. It combines a multi-agent swarm orchestrator (`muse_master_brain.py`), a full desktop Computer-Use Agent (`tools.py`), a 17-service connector catalog, encrypted local SQLite persistence (`settings_manager.py`), and a native Android WebView/Termux companion APK (`com.muse.agent`) bridged over local Wi-Fi or Cloudflare Tunnels on port `8765`.
 
 ---
 
@@ -98,33 +54,28 @@ How Muse Agent compares to other industry agent frameworks:
 
 ## ⚡ 1-Minute Quickstart
 
-### Option 1: 1-Click Launchers (Easiest)
+### Option 1: Universal 1-Line Installer
+* **Windows (PowerShell)**:
+  ```powershell
+  powershell -c "irm https://raghavkhandal72-coder.github.io/muse-agent/install.ps1 | iex"
+  ```
+* **Linux / macOS (Bash)**:
+  ```bash
+  curl -fsSL https://raghavkhandal72-coder.github.io/muse-agent/install.sh | bash
+  ```
+
+### Option 2: 1-Click Launchers (Easiest)
 * **Windows**: Double-click [`Start_Muse.bat`](Start_Muse.bat)
 * **Linux / macOS**: Run `./start_muse.sh`
 
-### Option 2: Python CLI (Recommended for Developers)
+### Option 3: Python CLI
 ```bash
-# 1. Install via pip
-pip install muse-agent
-
-# 2. Run system doctor to verify display & drivers
-muse doctor
-
-# 3. Launch interactive Muse Agent
-muse run
-```
-
-### Option 3: Docker Container Suite
-```bash
-docker compose up -d
-# Muse CUA with Xvfb virtual display buffer is now running at http://localhost:8765
+pip install muse-agent && muse run
 ```
 
 ---
 
 ## 🧩 The 15 Muse Engines
-
-Muse is built as a modular multi-engine architecture where each subsystem handles specialized execution:
 
 | Icon | Engine | Architecture & Purpose |
 | :---: | :--- | :--- |
@@ -147,8 +98,6 @@ Muse is built as a modular multi-engine architecture where each subsystem handle
 ---
 
 ## 🖥️ Desktop Computer-Use (CUA)
-
-Muse can autonomously control any desktop application just like a human engineer:
 
 ```python
 from tools import cua_click_coordinate, cua_type_text, cua_take_screenshot
@@ -174,6 +123,58 @@ Native integration with the **200,000-star REA toolchain**:
   ```bash
   python scripts/test_runner.py
   ```
+
+---
+
+## 🏗️ System Architecture
+
+```mermaid
+flowchart TD
+    subgraph MobileClients [Mobile & Web Clients]
+        APK[Android Companion APK - 13.5MB]
+        WebUI[Desktop Web Dashboard]
+        Termux[Termux Bridge & Wireless ADB]
+    end
+
+    subgraph GatewayLayer [Transport & Zero-Config Tunnels]
+        LAN[Local Wi-Fi Subnet - Port 8765]
+        Tunnel[Cloudflare / Ngrok Reverse Tunnel]
+        Server[Muse Runtime Handler - Port 8765]
+    end
+
+    subgraph CoreEngine [Muse 15-Engine Runtime]
+        Brain[Master Brain Orchestrator]
+        CUA[Desktop CUA & Visual Screen Engine]
+        REA[REA Binary & App Reverse Engineer]
+        Swarms[11 Multi-Agent Swarm Topologies]
+        Vault[AES-256-GCM Encrypted Vault]
+        Memory[(SQLite Vector Memories)]
+    end
+
+    subgraph InferenceProviders [Hybrid Model Inference]
+        Claude[Claude 3.7 Sonnet / Code]
+        Gemini[Google Gemini 2.5 Pro]
+        OpenAI[GPT-4o Vision API]
+        Ollama[Local Offline Ollama GGUF]
+    end
+
+    APK --> LAN
+    APK --> Tunnel
+    APK --> Termux
+    WebUI --> Server
+    LAN --> Server
+    Tunnel --> Server
+    Server --> Brain
+    Brain --> CUA
+    Brain --> REA
+    Brain --> Swarms
+    Brain --> Vault
+    Brain --> Memory
+    Brain --> Claude
+    Brain --> Gemini
+    Brain --> OpenAI
+    Brain -.-> Ollama
+```
 
 ---
 
@@ -230,58 +231,6 @@ Built-in consent and OAuth RPC callback handlers for 17 popular platforms:
 | **Todoist** | Personal Tasks | Daily checklist sync, priority setting, reminders | 🟢 Active |
 | **Dropbox** | Cloud Storage | Secure file upload and public link generation | 🟢 Active |
 | **OneDrive** | Cloud Storage | Microsoft 365 cloud file sync and document access | 🟢 Active |
-
----
-
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    subgraph MobileClients [Mobile & Web Clients]
-        APK[Android Companion APK - 13.5MB]
-        WebUI[Desktop Web Dashboard]
-        Termux[Termux Bridge & Wireless ADB]
-    end
-
-    subgraph GatewayLayer [Transport & Zero-Config Tunnels]
-        LAN[Local Wi-Fi Subnet - Port 8765]
-        Tunnel[Cloudflare / Ngrok Reverse Tunnel]
-        Server[Muse Runtime Handler - Port 8765]
-    end
-
-    subgraph CoreEngine [Muse 15-Engine Runtime]
-        Brain[Master Brain Orchestrator]
-        CUA[Desktop CUA & Visual Screen Engine]
-        REA[REA Binary & App Reverse Engineer]
-        Swarms[11 Multi-Agent Swarm Topologies]
-        Vault[AES-256-GCM Encrypted Vault]
-        Memory[(SQLite Vector Memories)]
-    end
-
-    subgraph InferenceProviders [Hybrid Model Inference]
-        Claude[Claude 3.7 Sonnet / Code]
-        Gemini[Google Gemini 2.5 Pro]
-        OpenAI[GPT-4o Vision API]
-        Ollama[Local Offline Ollama GGUF]
-    end
-
-    APK --> LAN
-    APK --> Tunnel
-    APK --> Termux
-    WebUI --> Server
-    LAN --> Server
-    Tunnel --> Server
-    Server --> Brain
-    Brain --> CUA
-    Brain --> REA
-    Brain --> Swarms
-    Brain --> Vault
-    Brain --> Memory
-    Brain --> Claude
-    Brain --> Gemini
-    Brain --> OpenAI
-    Brain -.-> Ollama
-```
 
 ---
 

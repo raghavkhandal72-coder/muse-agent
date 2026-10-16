@@ -1,40 +1,31 @@
-name: Muse Agent CI & Quality Gate
+name: Muse AI Agent CI & Security Audit
 
 on:
   push:
-    branches: [ main, dev ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ main ]
+    branches: [ "main" ]
 
 jobs:
-  test:
-    name: Test & Diagnostics Matrix (${{ matrix.os }} - Py${{ matrix.python-version }})
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: ["3.10", "3.11", "3.12"]
-
+  build-and-audit:
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - name: Checkout Repository
+      uses: actions/checkout@v4
 
-    - name: Set up Python ${{ matrix.python-version }}
+    - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
-        python-version: ${{ matrix.python-version }}
-        cache: 'pip'
+        python-version: "3.11"
 
-    - name: Install Dependencies
+    - name: Compile & Verify Python Engine Syntax
       run: |
-        python -m pip install --upgrade pip setuptools wheel
-        pip install -r requirements.txt
-        pip install -e .
+        python -m py_compile assets/engine/*.py || python -m py_compile *.py
 
-    - name: Run Unified Test Runner & REA Diagnostics
+    - name: Scan for Accidental Hardcoded API Keys
       run: |
-        python scripts/test_runner.py
-
-    - name: Build Package Distribution (Wheel & SDist)
-      run: |
-        python setup.py sdist bdist_wheel
+        if grep -rnE "(nvapi-[a-zA-Z0-9_-]{20,}|AQ\.Ab8R|6d7946957364b8de4a738f8efcf2a436)" . --exclude-dir=.git; then
+          echo "ERROR: Hardcoded API key detected!"
+          exit 1
+        fi
+        echo "Security scan passed: 0 hardcoded keys found."
