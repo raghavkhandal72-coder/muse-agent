@@ -34,9 +34,6 @@ def run_server():
     import main
     main.main()
 
-def server_cmd():
-    run_server()
-
 def run_doctor():
     print("[*] Running REA System and Toolchain Diagnostics...")
     doctor_path = os.path.join(BASE_DIR, "rea-inspector", "lib", "doctor.js").replace("\\", "/")
@@ -62,10 +59,40 @@ def run_tunnel():
     except Exception as e:
         print("[-] Error spawning tunnel:", e)
 
+def run_heal():
+    print("[*] Running Autonomous Self-Healing Diagnostic Engine...")
+    os.chdir(BASE_DIR)
+    try:
+        import muse_self_healing
+        muse_self_healing.run_self_healing_suite()
+    except Exception as e:
+        print("[-] Self-healing error:", e)
+
+def run_hud():
+    print("[*] Generating OmniParse CUA Screen Bounding-Box Overlay...")
+    os.chdir(BASE_DIR)
+    try:
+        import cua_hud
+        res = cua_hud.generate_screen_hud()
+        print(f"[+] CUA Visual HUD generated successfully: {res['output_path']}")
+        print(f"[+] Total interactive elements tagged: {res['total_tags']}")
+    except Exception as e:
+        print("[-] HUD generation error:", e)
+
+def run_benchmark():
+    print("[*] Running Hardware & Neural Token Benchmark...")
+    os.chdir(BASE_DIR)
+    try:
+        import neural_benchmark
+        neural_benchmark.run_benchmark()
+    except Exception as e:
+        print("[-] Benchmark error:", e)
+
 def main():
     parser = argparse.ArgumentParser(description="Muse AI Agent CLI Tool")
-    parser.add_argument("command", nargs="?", default="run", choices=["run", "server", "doctor", "tunnel", "version"],
-                        help="Command to execute (run, server, doctor, tunnel, version)")
+    parser.add_argument("command", nargs="?", default="run", 
+                        choices=["run", "server", "doctor", "tunnel", "heal", "hud", "benchmark", "version"],
+                        help="Command to execute")
     parser.add_argument("--headless", action="store_true", help="Run server in headless mode without GUI")
     
     args = parser.parse_args()
@@ -82,6 +109,12 @@ def main():
         run_doctor()
     elif args.command == "tunnel":
         run_tunnel()
+    elif args.command == "heal":
+        run_heal()
+    elif args.command == "hud":
+        run_hud()
+    elif args.command == "benchmark":
+        run_benchmark()
     else:
         run_gui()
 
