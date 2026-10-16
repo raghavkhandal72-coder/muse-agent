@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>REA Mobile Suite</title>
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#1e293b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="REASuite">
+  <link rel="apple-touch-icon" href="/icon.svg">
+  <style>
+    :root { --bg: #0f172a; --card-bg: #1e293b; --accent: #3b82f6; --text: #f8fafc; --muted: #94a3b8; --border: #334155; --success: #10b981; }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+    body { background: var(--bg); color: var(--text); min-height: 100vh; display: flex; flex-direction: column; padding: 12px; }
+    header { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; background: var(--card-bg); border-radius: 14px; margin-bottom: 12px; border: 1px solid var(--border); }
+    .logo-group { display: flex; align-items: center; gap: 10px; }
+    .logo-img { width: 32px; height: 32px; }
+    .title { font-size: 1.15rem; font-weight: 700; }
+    .badge { font-size: 0.72rem; background: rgba(59, 130, 246, 0.2); color: var(--accent); padding: 3px 8px; border-radius: 20px; }
+    #install-banner { display: none; background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; padding: 10px 14px; border-radius: 12px; margin-bottom: 12px; font-size: 0.88rem; justify-content: space-between; align-items: center; }
+    #install-btn { background: #fff; color: #1e3a8a; border: none; font-weight: 600; padding: 6px 12px; border-radius: 8px; cursor: pointer; }
+    .nav-tabs { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 6px; margin-bottom: 12px; }
+    .nav-btn { background: var(--card-bg); border: 1px solid var(--border); color: var(--muted); padding: 8px 14px; border-radius: 10px; font-size: 0.85rem; white-space: nowrap; cursor: pointer; }
+    .nav-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .tab-content { display: none; background: var(--card-bg); border-radius: 14px; padding: 16px; border: 1px solid var(--border); flex: 1; }
+    .tab-content.active { display: block; }
+    h2 { font-size: 1.1rem; margin-bottom: 12px; }
+    label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+    input, textarea { width: 100%; background: #0f172a; border: 1px solid var(--border); color: #fff; padding: 10px 12px; border-radius: 10px; margin-bottom: 12px; outline: none; }
+    .btn { width: 100%; background: var(--accent); color: #fff; border: none; padding: 12px; font-size: 0.95rem; font-weight: 600; border-radius: 10px; cursor: pointer; }
+    .result-box { margin-top: 14px; background: #090d16; border: 1px solid var(--border); padding: 12px; border-radius: 10px; font-family: monospace; font-size: 0.82rem; word-break: break-all; white-space: pre-wrap; color: #38bdf8; max-height: 250px; overflow-y: auto; }
+    .doctor-item { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem; }
+    .status-badge { font-size: 0.75rem; padding: 2px 8px; border-radius: 12px; background: rgba(16, 185, 129, 0.2); color: var(--success); font-weight: 600; }
+    footer { text-align: center; font-size: 0.75rem; color: var(--muted); padding: 14px 0 6px 0; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo-group">
+      <img src="/icon.svg" alt="REA Logo" class="logo-img">
+      <span class="title">REA Mobile</span>
+    </div>
+    <span class="badge">PWA Ready</span>
+  </header>
+
+  <div id="install-banner">
+    <span>📲 Install as Mobile App</span>
+    <button id="install-btn">Install</button>
+  </div>
+
+  <div class="nav-tabs">
+    <button class="nav-btn active" onclick="switchTab('tab-hash', this)">⚡ Hash</button>
+    <button class="nav-btn" onclick="switchTab('tab-crypto', this)">🔐 Encrypt</button>
+    <button class="nav-btn" onclick="switchTab('tab-sanitize', this)">🛡️ Sanitize</button>
+    <button class="nav-btn" onclick="switchTab('tab-store', this)">💾 Storage</button>
+    <button class="nav-btn" onclick="switchTab('tab-doctor', this)">🩺 Doctor</button>
+  </div>
+
+  <div id="tab-hash" class="tab-content active">
+    <h2>SHA-256 Hasher</h2>
+    <label for="hash-input">Input String:</label>
+    <input type="text" id="hash-input" value="Hello Mobile">
+    <button class="btn" onclick="runHash()">Generate Hash</button>
+    <div id="hash-result" class="result-box">Click Generate Hash</div>
+  </div>
+
+  <div id="tab-crypto" class="tab-content">
+    <h2>AES-256-GCM Encryption</h2>
+    <label for="crypto-text">Plaintext:</label>
+    <input type="text" id="crypto-text" value="Confidential Mobile Data">
+    <label for="crypto-key">Key:</label>
+    <input type="text" id="crypto-key" value="MobileSecretKey2026">
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="runEncrypt()">Encrypt</button>
+      <button class="btn" style="background:#475569;" onclick="runDecrypt()">Decrypt</button>
+    </div>
+    <div id="crypto-result" class="result-box">Ready</div>
+  </div>
+
+  <div id="tab-sanitize" class="tab-content">
+    <h2>Input Sanitizer</h2>
+    <textarea id="sanitize-input" rows="3">&lt;script&gt;alert('test')&lt;/script&gt;</textarea>
+    <button class="btn" onclick="runSanitize()">Sanitize Text</button>
+    <div id="sanitize-result" class="result-box">Ready</div>
+  </div>
+
+  <div id="tab-store" class="tab-content">
+    <h2>Storage & Audit Log</h2>
+    <input type="text" id="store-key" placeholder="Key" value="user_token">
+    <input type="text" id="store-val" placeholder="Value" value="auth_99182">
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="runStoreSet()">Set Item</button>
+      <button class="btn" style="background:#475569;" onclick="runStoreGet()">Get Item</button>
+    </div>
+    <div id="store-result" class="result-box">Ready</div>
+  </div>
+
+  <div id="tab-doctor" class="tab-content">
+    <h2>REA System Doctor</h2>
+    <div id="doctor-list"><div>Loading...</div></div>
+    <button class="btn" style="margin-top:12px;" onclick="fetchDoctorReport()">Refresh Diagnostics</button>
+  </div>
+
+  <footer>REA Mobile PWA &bull; Works offline on Android & iOS</footer>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+# Large Binaries & Packages
+*.exe
+*.apk
+*.zip
+*.tar.gz
+*.iso
+*.dmg
+*.bin
+cloudflared.exe
+Muse_Agent.apk
+Muse.apk
+Muse.exe
+EndoCrashpadHandler.exe
+Updater.exe
+
+# Build & Dist
+dist/
+build/
+*.spec
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+.venv/
+env/
+venv/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs & Temp
+*.log
+.DS_Store
+Thumbs.db
+
+plugins/
+Muse Installer/
+*.bak*
+
+# Secrets & Environment
+.env
+*.env
+data/.vault_master.key
+
+# Media & Temp Renders
+renders/
+*.mp3
+*.wav
+muse_memory.db
+workspace_builds/
+
+# Local Runtime Databases & Tunnels
+data/*.db
+data/remote_tunnel.json
+
+data/settings.json

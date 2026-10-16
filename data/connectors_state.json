@@ -1,0 +1,254 @@
+{
+  "google_drive": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_google_drive_main",
+        "name": "Verified Account",
+        "email": "user@gmail.com",
+        "display_name": "Google Drive (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "gmail": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_gmail_1",
+        "name": "Primary User",
+        "email": "user@gmail.com",
+        "display_name": "Gmail (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "google_calendar": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_gcal_1",
+        "name": "Primary User",
+        "email": "user@gmail.com",
+        "display_name": "Google Calendar (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "google_docs": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_gdocs_1",
+        "name": "Primary User",
+        "email": "user@gmail.com",
+        "display_name": "Google Docs (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "google_sheets": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_gsheets_1",
+        "name": "Primary User",
+        "email": "user@gmail.com",
+        "display_name": "Google Sheets (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "whatsapp": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_wa_919876543210",
+        "name": "WhatsApp Account",
+        "phone": "+91 98765 43210",
+        "email": "whatsapp@web.link",
+        "display_name": "WhatsApp (+91 98765 43210 - Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "spotify": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_spotify_1",
+        "name": "Spotify Premium User",
+        "email": "user@spotify.com",
+        "display_name": "Spotify (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "github": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_github_main",
+        "name": "Active Account",
+        "email": "user@github.com",
+        "display_name": "Github (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "slack": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_slack_1",
+        "name": "Slack Workspace",
+        "email": "team@slack.com",
+        "display_name": "Slack (#general - Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "notion": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_notion_1",
+        "name": "Notion Workspace",
+        "email": "user@notion.so",
+        "display_name": "Notion (Notes & Tasks - Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "calendly": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_calendly_1",
+        "name": "Calendly Schedule",
+        "email": "user@calendly.com",
+        "display_name": "Calendly (Bookings Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "instagram": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_ig_metamuse_official",
+        "name": "@metamuse_official",
+        "username": "@metamuse_official",
+        "email": "metamuse_official@instagram.com",
+        "display_name": "Instagram (@metamuse_official - Active)",
+        "status": "active",
+        "linked_at": "Active Now",
+        "followers": "1.4k",
+        "dms_unread": 0
+      }
+    ]
+  },
+  "messenger": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_messenger_1",
+        "name": "Messenger User",
+        "email": "user@messenger.com",
+        "display_name": "Messenger (Connected & Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "fonoster_voice": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_fonoster_1",
+        "name": "Fonoster SIP Gateway",
+        "phone": "+1 800-MUSE-VOIP",
+        "display_name": "Fonoster Voice (SIP Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "custom_mcp": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_mcp_1",
+        "name": "Model Context Protocol Bridge",
+        "display_name": "MCP Bridge (26 Tools Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "termux_shell": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_termux_1",
+        "name": "Termux Android Shell",
+        "display_name": "Termux Shell (Bash Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "adb_shizuku": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_adb_1",
+        "name": "ADB Wireless / Shizuku",
+        "display_name": "ADB Shizuku (Service Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  },
+  "workflow_routines": {
+    "state": "connected",
+    "connected": true,
+    "accounts": [
+      {
+        "id": "acc_routines_1",
+        "name": "Autonomous Routines",
+        "display_name": "Routines Engine (Active)",
+        "status": "active",
+        "linked_at": "Active Now"
+      }
+    ]
+  }
+}

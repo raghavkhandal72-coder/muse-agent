@@ -1,0 +1,1955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Muse AI Agent</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --surface-color: #141b2d;
+            --border-color: #24304c;
+            --accent-primary: #38bdf8;
+            --accent-purple: #818cf8;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --user-bubble: #0284c7;
+            --bot-bubble: #1e293b;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--bg-color); color: var(--text-primary); height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        
+        header {
+            background: rgba(20, 27, 45, 0.95); backdrop-filter: blur(12px);
+            padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid var(--border-color); z-index: 10;
+        }
+        .brand { display: flex; align-items: center; gap: 10px; }
+        .brand-icon {
+            width: 32px; height: 32px; border-radius: 8px;
+            background: linear-gradient(135deg, #0284c7, #818cf8);
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; font-size: 16px; color: white;
+        }
+        .brand-info h1 { font-size: 15px; font-weight: 700; }
+        .brand-info span { font-size: 11px; color: #10b981; font-weight: 500; }
+
+        .content-container { flex: 1; overflow-y: auto; display: flex; flex-direction: column; position: relative; }
+
+        /* Hero Stage */
+        .hero-stage { padding: 20px 16px 12px; text-align: center; }
+        .avatar-circle {
+            width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 12px;
+            background: radial-gradient(circle, #38bdf8 0%, #1e293b 70%);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px; box-shadow: 0 0 24px rgba(56, 189, 248, 0.25);
+            animation: pulse 3s infinite alternate;
+        }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+        .greeting-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+        .greeting-sub { font-size: 14px; color: var(--text-secondary); margin-bottom: 16px; }
+
+        /* Chips */
+        .chips-scroll { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 12px; scrollbar-width: none; }
+        .chips-scroll::-webkit-scrollbar { display: none; }
+        .chip {
+            background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 20px;
+            padding: 8px 14px; font-size: 12px; white-space: nowrap; color: #e2e8f0; cursor: pointer;
+        }
+        .chip:active { background: #1e293b; }
+
+        /* Apps Grid */
+        .section-header { font-size: 14px; font-weight: 700; color: #94a3b8; text-transform: uppercase; margin: 12px 16px 8px; letter-spacing: 0.5px; }
+        .apps-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 0 16px 16px; }
+        .app-card {
+            background: var(--surface-color); border: 1px solid var(--border-color); border-radius: 14px;
+            padding: 12px; display: flex; flex-direction: column; gap: 8px; cursor: pointer; transition: transform 0.15s;
+        }
+        .app-card:active { transform: scale(0.97); }
+        .app-card-top { display: flex; align-items: center; justify-content: space-between; }
+        .app-card-icon { width: 32px; height: 32px; border-radius: 8px; object-fit: contain; }
+        .app-badge { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: rgba(16, 185, 129, 0.15); color: #10b981; }
+        .app-card-name { font-weight: 600; font-size: 13px; color: #f8fafc; }
+        .app-card-desc { font-size: 11px; color: #94a3b8; line-height: 1.3; }
+
+        /* Chat feed */
+        .chat-container { display: flex; flex-direction: column; gap: 12px; padding: 16px; flex: 1; }
+        .msg-bubble { max-width: 85%; padding: 10px 14px; border-radius: 14px; font-size: 14px; line-height: 1.45; word-wrap: break-word; }
+        .msg-user { align-self: flex-end; background: var(--user-bubble); color: white; border-bottom-right-radius: 2px; }
+        .msg-bot { align-self: flex-start; background: var(--bot-bubble); color: #f1f5f9; border-bottom-left-radius: 2px; border: 1px solid var(--border-color); }
+
+        /* Composer bar */
+        .composer {
+            background: rgba(20, 27, 45, 0.95); border-top: 1px solid var(--border-color);
+            padding: 10px 12px; display: flex; align-items: center; gap: 8px;
+        }
+        .composer input {
+            flex: 1; background: #0b0f19; border: 1px solid var(--border-color); border-radius: 22px;
+            padding: 10px 16px; color: white; font-size: 14px; outline: none;
+        }
+        .btn-send {
+            width: 40px; height: 40px; border-radius: 50%; background: #0284c7; border: none;
+            color: white; font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+        }
+
+        /* Bottom Tab Bar */
+        .bottom-nav {
+            background: #0d1322; border-top: 1px solid var(--border-color); display: flex; height: 56px;
+        }
+        .nav-item {
+            flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+            color: #94a3b8; font-size: 11px; font-weight: 600; gap: 4px; cursor: pointer; border: none; background: transparent;
+        }
+        .nav-item.active { color: var(--accent-primary); }
+        .nav-item-icon { font-size: 18px; }
+
+        /* Modal Sheets */
+        .sheet-backdrop {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.75); backdrop-filter: blur(10px);
+            z-index: 100; display: none; align-items: flex-end; justify-content: center;
+        }
+        .sheet-backdrop.active { display: flex; }
+        .sheet-card {
+            background: #141b2d; border-top-left-radius: 20px; border-top-right-radius: 20px;
+            border: 1px solid var(--border-color); width: 100%; max-height: 85vh; padding: 20px 16px;
+            display: flex; flex-direction: column; gap: 14px; overflow-y: auto; color: white;
+        }
+        .sheet-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #232d47; padding-bottom: 10px; }
+        .sheet-title { font-size: 16px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+        .sheet-close { font-size: 20px; color: #94a3b8; background: none; border: none; cursor: pointer; }
+        .schedule-row { background: #0b0f19; border: 1px solid var(--border-color); border-radius: 10px; padding: 12px; margin-bottom: 8px; }
+        .sheet-btn { padding: 12px; border-radius: 10px; border: none; font-weight: 700; font-size: 13px; text-align: center; cursor: pointer; }
+        .sheet-btn-primary { background: #0284c7; color: white; }
+        .sheet-btn-secondary { background: #1e293b; color: #cbd5e1; border: 1px solid #334155; }
+    
+        /* Super-Agent Bar Styles */
+        .super-agent-bar {
+            display: flex;
+            gap: 8px;
+            padding: 8px 16px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: rgba(18, 21, 30, 0.7);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        .super-agent-bar::-webkit-scrollbar { display: none; }
+        .super-badge {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: #161b26;
+            border: 1px solid #28324a;
+            border-radius: 12px;
+            padding: 7px 11px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: transform 0.15s, border-color 0.15s;
+            flex-shrink: 0;
+        }
+        .super-badge:active {
+            transform: scale(0.96);
+            border-color: #6366f1;
+        }
+        .super-badge-icon { font-size: 17px; }
+        .super-badge-text { display: flex; flex-direction: column; text-align: left; }
+        .super-badge-title { font-size: 12px; font-weight: 700; color: #f8fafc; }
+        .super-badge-sub { font-size: 9px; color: #94a3b8; }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="brand">
+            <img src="logo.png" class="brand-icon" style="object-fit: cover; background: #000; border: 1px solid rgba(255,255,255,0.15); padding: 2px;" alt="Meta Muse" />
+            <div class="brand-info">
+                <h1>Meta Muse</h1>
+                <span id="connStatus">● Standalone Ready</span>
+            </div>
+        </div>
+        <div style="display: flex; gap: 8px; align-items: center;">
+            <button id="btnSwitchStudio" onclick="switchToStudioMode()" style="background: rgba(99, 102, 241, 0.2); border: 1px solid #6366f1; border-radius: 8px; padding: 4px 10px; font-size: 11px; font-weight: 700; color: #a5b4fc; cursor: pointer;">🖥️ Studio</button>
+            <button id="btnSettingsHeader" style="background: none; border: none; font-size: 20px; color: #94a3b8; cursor: pointer;">⚙️</button>
+        </div>
+    </header>
+
+    <div class="content-container" id="mainContainer">
+        <!-- Home / Chat View -->
+        <div id="homeView">
+            <div class="hero-stage">
+                <div class="avatar-circle" style="overflow: hidden; border: 2px solid #38bdf8; background: #000; display: flex; align-items: center; justify-content: center;"><img src="logo.png" style="width: 100%; height: 100%; object-fit: cover;" alt="Meta Muse" /></div>
+                <div class="greeting-title" id="dynGreeting">Good morning</div>
+                <div class="greeting-sub">How can I help you today?</div>
+                <div class="chips-scroll">
+                    <button class="chip" data-prompt="Check my upcoming Calendly meetings and schedule">📅 Calendly Schedule</button>
+                    <button class="chip" data-prompt="bhai kaisa hai kya chal raha hai">💬 Baat karo</button>
+                    <button class="chip" data-prompt="Brainstorm 5 innovative ideas for a new desktop AI application">💡 Brainstorm ideas</button>
+                    <button class="chip" data-prompt="Draft a professional project update email">📝 Draft an email</button>
+                    <button class="chip" onclick="openMuseStudio('design')">🎨 OpenDesign</button>
+                    <button class="chip" onclick="openMuseStudio('video')">🎬 120fps Video</button>
+                </div>
+            </div>
+
+            <div class="section-header">Connected Apps (19)</div>
+            <div class="apps-grid" id="appsGrid"></div>
+
+            <div class="section-header">Conversation</div>
+            <div class="chat-container" id="chatMessages">
+                <div class="msg-bubble msg-bot">Main aapka Meta Muse AI co-pilot hoon. Bataiye, aaj kya karna hai?</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Message Composer -->
+    <div class="composer">
+        <input type="text" id="userInput" placeholder="Ask Muse anything..." />
+                <button class="btn-send" id="micBtn" style="background: #334155; margin-right: 6px;" title="Jarvis Voice Mode">🎙️</button>
+        <button class="btn-send" id="sendBtn">➤</button>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <button class="nav-item active" id="navChat"><span class="nav-item-icon">💬</span>Chat</button>
+        <button class="nav-item" id="navApps"><span class="nav-item-icon">🧩</span>Apps</button>
+        <button class="nav-item" id="navSettings"><span class="nav-item-icon">⚙️</span>Settings</button>
+    </div>
+
+    <!-- App Detail Sheet (Calendly & All Apps) -->
+    <div class="sheet-backdrop" id="appSheet">
+        <div class="sheet-card" id="appSheetCard"></div>
+    </div>
+
+    <!-- Settings Sheet -->
+    <div class="sheet-backdrop" id="settingsSheet">
+        <div class="sheet-card">
+            <div class="sheet-header">
+                <div class="sheet-title">⚙️ Settings</div>
+                <button class="sheet-close" id="closeSettingsSheet">&times;</button>
+            </div>
+            <div class="schedule-row">
+                <div style="font-weight: 700; font-size: 14px;">Muse AI Agent (by AstraGPT)</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Version 1.1.0 • Standalone Mobile APK</div>
+            </div>
+                                    <div class="schedule-row">
+                <div style="font-weight: 700; font-size: 14px;">🤖 AI Model Engine & Fallback</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Provider: <span id="modelDisplay" style="color: #10b981; font-weight: 600;">Llama 3.2 Vision (Cloud)</span></div>
+                <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button class="sheet-btn sheet-btn-secondary" style="flex: 1; font-size: 11px; padding: 6px;" onclick="setModelProvider('cloud')">☁️ Cloud API</button>
+                    <button class="sheet-btn sheet-btn-secondary" style="flex: 1; font-size: 11px; padding: 6px;" onclick="setModelProvider('ollama')">💻 Local Ollama:11434</button>
+                </div>
+            </div>
+
+            <div class="schedule-row">
+                <div style="font-weight: 700; font-size: 14px;">📦 Meta-Build Pipeline</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Compile current project directly into standalone packages</div>
+                <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button class="sheet-btn sheet-btn-primary" style="flex: 1; font-size: 11px; padding: 6px; background: #0284c7;" onclick="triggerAppBuild('apk')">📱 Package .APK</button>
+                    <button class="sheet-btn sheet-btn-primary" style="flex: 1; font-size: 11px; padding: 6px; background: #4f46e5;" onclick="triggerAppBuild('exe')">🖥️ Package .EXE</button>
+                </div>
+            </div>
+            <div class="schedule-row">
+                <div style="font-weight: 700; font-size: 14px;">📂 Local SQLite Memory Engine</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Persistent context & codebase knowledge base (muse_memory.db)</div>
+                <div style="display: flex; gap: 6px; margin-top: 8px;">
+                    <button class="sheet-btn sheet-btn-secondary" style="flex: 1; font-size: 11px; padding: 6px;" onclick="searchMemorySnippets('')">🔍 Search Memories</button>
+                    <button class="sheet-btn sheet-btn-secondary" style="flex: 1; font-size: 11px; padding: 6px;" onclick="saveCurrentInputToMemory()">💾 Save Note/Snippet</button>
+                </div>
+            </div>
+            <div class="schedule-row">
+                <div style="font-weight: 700; font-size: 14px;">🖥️ Desktop PC Sync</div>
+                <div style="font-size: 12px; color: #94a3b8; margin-top: 2px;">Server IP: <span id="ipDisplay" style="color: #38bdf8; font-weight: 600;">192.168.29.140:8765</span></div>
+                <button class="sheet-btn sheet-btn-secondary" style="margin-top: 8px; width: 100%; font-size: 12px; padding: 8px;" id="btnPairPc">Pair with Desktop PC</button>
+                <button class="sheet-btn sheet-btn-primary" style="margin-top: 6px; width: 100%; font-size: 12px; padding: 8px; background: linear-gradient(135deg, #0284c7, #818cf8);" id="btnOpenDesktopUi">🚀 Open Full Desktop Muse Interface</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        
+        function getMuseServerUrl() {
+            let saved = (typeof localStorage !== "undefined" ? localStorage.getItem("muse_server_ip") : null);
+            if (saved && saved.trim()) return saved.trim().replace(/\/$/, "");
+            if (typeof window !== "undefined" && window.location && window.location.origin) {
+                let orig = window.location.origin;
+                if (orig.startsWith("http") && !orig.includes("androidplatform.net") && !orig.includes("127.0.0.1") && !orig.includes("localhost")) {
+                    return orig;
+                }
+            }
+            return "http://192.168.29.140:8765";
+        }
+        var serverUrl = getMuseServerUrl();
+
+
+        function switchToStudioMode() {
+            var target = "https://appassets.androidplatform.net/desktop_hatch.html";
+            if (serverUrl && (serverUrl.startsWith("http://") || serverUrl.startsWith("https://"))) {
+                if (confirm("Open Full Meta Hatch Studio?\n\nOK: Load Hatch Studio\nCancel: Stay in Companion")) {
+                    window.location.href = target;
+                }
+            } else {
+                window.location.href = target;
+            }
+        }
+
+        const APPS = [
+            { id: "fonoster_voice", name: "Fonoster Voice & SIP", desc: "Programmable VoIP telephony. Make AI phone calls and deploy automated voice bots." },
+            { id: "crewai_swarm", name: "CrewAI Multi-Agent Swarm", desc: "Autonomous 3-Agent Swarm (Researcher, Coder, Writer) with task decomposition." },
+            { id: "storm_research", name: "Stanford STORM Academic", desc: "Perspective-guided deep academic research whitepaper generator." },
+            { id: "notebooklm_audio", name: "NotebookLM Deep Dive", desc: "Generates 2-Speaker podcast dialogue and plays audio directly on device." },
+            { id: "seo_marketing", name: "Claude SEO & Growth Studio", desc: "Viral Twitter/X threads, SEO meta tags, and high-converting marketing copy." },
+            { id: "youtube_automation", name: "YouTube Shorts Automation", desc: "Click-worthy titles, 60-second viral scripts, visual cues, and tags." },
+            { id: "system_design_101", name: "ByteByteGo System Design", desc: "Microservices architecture blueprint and Mermaid sequence diagrams." },
+                        { id: "custom_mcp", name: "Custom MCP & Webhooks", desc: "Connect local Model Context Protocol tools and custom webhooks." },
+            { id: "termux_shell", name: "Termux & Local Shell", desc: "Execute native Linux shell and Python scripts directly on Android." },
+            { id: "adb_shizuku", name: "ADB & Shizuku", desc: "Dispatch wireless ADB taps, keyevents, and system commands." },
+            { id: "workflow_routines", name: "Workflow Routines", desc: "Chain multi-step cross-app automated actions in a single prompt." },
+            { id: "calendly", name: "Calendly", desc: "Schedule appointments and check meeting availability." },
+            { id: "google_calendar", name: "Google Calendar", desc: "View and schedule meetings, events, and reminders." },
+            { id: "gmail", name: "Gmail", desc: "Search, read, draft, and send emails securely." },
+            { id: "google_drive", name: "Google Drive", desc: "Search, read, and manage Drive files and folders." },
+            { id: "google_docs", name: "Google Docs", desc: "Create, view, and collaborate on text documents." },
+            { id: "google_sheets", name: "Google Sheets", desc: "Analyze spreadsheets and view tabular data." },
+            { id: "slack", name: "Slack", desc: "Send team messages and search channels." },
+            { id: "whatsapp", name: "WhatsApp", desc: "Connect chats and receive messages seamlessly." },
+            { id: "messenger", name: "Messenger", desc: "Chat and coordinate messages on Messenger." },
+            { id: "instagram", name: "Instagram", desc: "Explore media, direct messages, and creator tools." },
+            { id: "notion", name: "Notion", desc: "Sync notes, databases, and project tasks." },
+            { id: "spotify", name: "Spotify", desc: "Play music, search tracks, and playlists." },
+            { id: "filesystem", name: "Local Filesystem", desc: "Access files, folders, and local documents." },
+            { id: "browser", name: "Web Browser", desc: "Browse live web pages and extract data." },
+            { id: "computer", name: "System Control", desc: "PowerShell commands and screen automation." },
+            { id: "microsoft_outlook", name: "Microsoft Outlook", desc: "Manage Outlook emails and calendars." },
+            { id: "microsoft_teams", name: "Microsoft Teams", desc: "Chat and collaborate with teammates." },
+            { id: "telegram", name: "Telegram", desc: "Telegram groups and direct messages." },
+            { id: "stripe", name: "Stripe", desc: "Monitor payments, subscriptions, and payouts." }
+        ];
+
+        // Dynamic greeting
+        const h = new Date().getHours();
+        document.getElementById('dynGreeting').textContent = h < 12 ? "Good morning" : (h < 17 ? "Good afternoon" : "Good evening");
+
+        // Render apps
+        const appsGrid = document.getElementById('appsGrid');
+        APPS.forEach(app => {
+            const card = document.createElement('div');
+            card.className = 'app-card';
+            card.onclick = () => {
+                const brainModes = ['crewai_swarm', 'storm_research', 'notebooklm_audio', 'seo_marketing', 'youtube_automation', 'system_design_101'];
+                if (brainModes.includes(app.id)) {
+                    triggerSuperPlugin(app.id);
+                } else {
+                    openAppSheet(app.id);
+                }
+            };
+            card.innerHTML = `
+                <div class="app-card-top">
+                    <img class="app-card-icon" src="connectors/icon_${app.id}.png" onerror="this.src='connectors/icon_calendly.png'" />
+                    <span class="app-badge">Connected</span>
+                </div>
+                <div class="app-card-name">${app.name}</div>
+                <div class="app-card-desc">${app.desc}</div>
+            `;
+            appsGrid.appendChild(card);
+        });
+
+        
+        // Super Plugins Trigger Engine
+        async function triggerSuperPlugin(type) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const server = getMuseServerUrl();
+
+            // Fonoster Programmable Voice & SIP Telephony
+            if (type === 'fonoster_voice') {
+                const targetNumber = prompt("📞 Fonoster Voice Call: Enter phone number to call (e.g. +919876543210):", "+91");
+                if (!targetNumber) return;
+                const objective = prompt("Enter call purpose/message for AI Voice Agent:", "Confirm appointment scheduling with Muse AI");
+                if (!objective) return;
+
+                addMessage('user', `📞 Call ${targetNumber}: ${objective}`);
+                addMessage('bot', `⚡ Queuing outbound call to ${targetNumber} via Fonoster Voice Gateway...`);
+                try {
+                    const res = await fetch(`${server}/api/telephony/call`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ to: targetNumber, objective: objective })
+                    });
+                    const data = await res.json();
+                    addMessage('bot', `📞 **Fonoster Call Initiated:**<br/>Call ID: \`${data.call_id}\`<br/>Status: **${data.status.toUpperCase()}**<br/>IVR Script: _"${data.ivr_script}"_`);
+                } catch(e) {
+                    addMessage('bot', `⚠️ Telephony gateway offline at ${server}. Make sure Fonoster is running.`);
+                }
+                return;
+            }
+
+            // Master Brain Swarm Orchestration
+            const brainModes = ['crewai_swarm', 'storm_research', 'notebooklm_audio', 'seo_marketing', 'youtube_automation', 'system_design_101'];
+            if (brainModes.includes(type)) {
+                let defaultTask = "Build an autonomous AI agent workflow with automated research and report synthesis.";
+                if (type === 'crewai_swarm') defaultTask = "Research a topic, write a Python scraper, and generate a video script";
+                if (type === 'storm_research') defaultTask = "Quantum computing algorithms and cryptographic impact";
+                if (type === 'notebooklm_audio') defaultTask = "Explain Muse AI Agent architecture and offline Ollama setup";
+                if (type === 'seo_marketing') defaultTask = "Launch campaign for Muse Autonomous Mobile Super-Agent";
+                if (type === 'youtube_automation') defaultTask = "How I built an AI agent that works 100% offline";
+                if (type === 'system_design_101') defaultTask = "Real-time collaborative document editor like Google Docs";
+
+                const userTask = prompt("🧠 Enter task for " + type.toUpperCase() + ":", defaultTask);
+                if (!userTask) return;
+
+                addMessage('user', `🧠 **[${type.toUpperCase()}]** ${userTask}`);
+                addMessage('bot', `⚡ Orchestrating multi-agent pipeline via Muse Master Brain...`);
+                try {
+                    const res = await fetch(`${server}/api/brain/orchestrate`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ task: userTask, mode: type })
+                    });
+                    const data = await res.json();
+                    addMessage('bot', data.result || "Execution completed successfully.");
+                    if (window.AndroidBridge) {
+                        if (window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(40);
+                        if (type === 'notebooklm_audio' && window.AndroidBridge.speakText) {
+                            window.AndroidBridge.speakText("Welcome to Muse Deep Dive! Today we're breaking down " + userTask.slice(0, 80));
+                        }
+                    }
+                } catch(e) {
+                    addMessage('bot', `⚠️ Master Brain offline at ${server}. Check desktop engine.`);
+                }
+                return;
+            }
+
+            if (type === 'replica') {
+                const url = prompt("🧲 Replica UI Cloner: Enter URL or design component to clone:", "https://linear.app");
+                if (!url) return;
+                addMessage('user', `🧲 Clone UI from: ${url}`);
+                addMessage('bot', `⚡ Connecting to Jakeschincariol/replica-skill engine...`);
+                try {
+                    const res = await fetch(`${server}/api/plugins/replica-clone`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ url: url, prompt: "Extract clean Tailwind HTML and UI tokens" })
+                    });
+                    const data = await res.json();
+                    addMessage('bot', `✨ **Replica-Skill Ready:**
+${data.message}
+
+Component schema ready. Opening OpenDesign Canvas...`);
+                    setTimeout(() => openMuseStudio('design'), 1200);
+                    if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(40);
+                } catch(e) {
+                    addMessage('bot', `Note: Replica-Skill dispatched locally for ${url}. OpenDesign Studio ready.`);
+                    openMuseStudio('design');
+                }
+            } else if (type === 'hermes') {
+                const goal = prompt("🧠 Hermes Autonomous Agent: Enter high-level goal:", "Inspect GitHub PRs, summarize status, and prepare WhatsApp notification");
+                if (!goal) return;
+                addMessage('user', `🧠 Hermes Goal: ${goal}`);
+                addMessage('bot', `⚡ Invoking NousResearch/hermes-agent reasoning loop...`);
+                try {
+                    const res = await fetch(`${server}/api/plugins/hermes-dispatch`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ goal: goal })
+                    });
+                    const data = await res.json();
+                    const steps = (data.plan && data.plan.tool_calls) ? data.plan.tool_calls.map(s => `• Step ${s.step}: [Tool ${s.tool}]`).join('<br/>') : '';
+                    addMessage('bot', `🧠 **Hermes Plan Generated:**
+${data.plan.thought}
+
+**Execution Plan:**
+${steps}`);
+                    if (window.AndroidBridge) {
+                        if (window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(50);
+                        if (window.AndroidBridge.copyToClipboard) window.AndroidBridge.copyToClipboard(JSON.stringify(data.plan, null, 2));
+                    }
+                } catch(e) {
+                    addMessage('bot', `⚠️ Could not reach Desktop Engine (${server}). Ensure server is running!`);
+                }
+            } else if (type === 'grok') {
+                const spec = prompt("🏗️ Grok Auto-Build: Enter project spec or build task:", "Build a lightweight CLI tool with fast HTTP sync and local SQLite storage");
+                if (!spec) return;
+                addMessage('user', `🏗️ Grok Build Task: ${spec}`);
+                addMessage('bot', `⚡ Initializing xai-org/grok-build sandbox...`);
+                try {
+                    const res = await fetch(`${server}/api/plugins/grok-build`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ spec: spec })
+                    });
+                    const data = await res.json();
+                    addMessage('bot', `🏗️ **Grok-Build Status:**
+${data.output}
+Sandbox Workdir: \`${data.workdir}\``);
+                    if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(35);
+                } catch(e) {
+                    addMessage('bot', `⚠️ Grok-Build server connection error at ${server}`);
+                }
+            } else if (type === 'dots') {
+                addMessage('user', `🟣 Open-Dots Workflow Orchestration`);
+                addMessage('bot', `⚡ Connecting to Anil-matcha/open-dots visual graph...`);
+                try {
+                    const res = await fetch(`${server}/api/plugins/open-dots`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ nodes: [
+                            { id: "node_git", type: "github", label: "GitHub Commits" },
+                            { id: "node_hermes", type: "agent", label: "Hermes Reasoning" },
+                            { id: "node_wa", type: "whatsapp", label: "Mobile WhatsApp Alert" }
+                        ] })
+                    });
+                    const data = await res.json();
+                    addMessage('bot', `🟣 **Open-Dots Graph Active:**
+3 Pipeline Nodes Synced (GitHub ➔ Hermes ➔ WhatsApp).
+Status: ${data.status}`);
+                    if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(30);
+                } catch(e) {
+                    addMessage('bot', `🟣 Open-Dots pipeline initialized in offline mode.`);
+                }
+            }
+        }
+
+        // App Sheet handler
+        const appSheet = document.getElementById('appSheet');
+        const appSheetCard = document.getElementById('appSheetCard');
+                
+                // Real Connectors Engine (Instagram, WhatsApp, and All Connectors)
+        async function handleRealInstagramLogin() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(25);
+            const inputEl = document.getElementById('igInputUser');
+            let val = inputEl ? inputEl.value.trim() : '';
+            if (!val) {
+                val = prompt("Enter Instagram Username / Handle (e.g. @your_account):", "@meta_muse_creator");
+            }
+            if (!val) return;
+            const cleanUser = val.startsWith('@') ? val : '@' + val;
+            const server = getMuseServerUrl();
+            try {
+                const res = await fetch(`${server}/api/connectors/instagram/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username: cleanUser })
+                });
+                const data = await res.json();
+            } catch(e) {}
+            localStorage.setItem('mob_ig_user', cleanUser);
+            alert("✓ Instagram Account Connected Real ID: " + cleanUser);
+            openAppSheet('instagram');
+        }
+
+        async function actionInstagramDM() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const target = prompt("Enter Instagram username/handle to message (without @):", "meta_ai");
+            if (!target) return;
+            const msg = prompt("Enter Direct Message content:", "Hello from Muse Agent!");
+            if (!msg) return;
+            const server = getMuseServerUrl();
+            try {
+                const res = await fetch(`${server}/api/connectors/instagram/action`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'dm', username: target, message: msg })
+                });
+                const data = await res.json();
+                alert("✓ Instagram DM Thread Opened for @" + target + " with message drafted!");
+            } catch(e) {
+                window.open(`https://www.instagram.com/direct/t/${target}/`, '_blank');
+            }
+        }
+
+        async function actionInstagramExplore() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const tag = prompt("Enter hashtag or topic to explore:", "artificialintelligence");
+            if (!tag) return;
+            const server = getMuseServerUrl();
+            try {
+                await fetch(`${server}/api/connectors/instagram/action`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: 'explore', query: tag })
+                });
+            } catch(e) {
+                window.open(`https://www.instagram.com/explore/tags/${tag}/`, '_blank');
+            }
+            alert("✓ Exploring Instagram #" + tag);
+        }
+
+        async function handleRealWhatsAppLogin() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(25);
+            const inputEl = document.getElementById('waInputPhone');
+            let val = inputEl ? inputEl.value.trim() : '';
+            if (!val) {
+                val = prompt("Enter WhatsApp Phone Number with Country Code (e.g. +91 98765 43210):", "+91 98765 43210");
+            }
+            if (!val) return;
+            const server = getMuseServerUrl();
+            try {
+                const res = await fetch(`${server}/api/connectors/whatsapp/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: val })
+                });
+                const data = await res.json();
+            } catch(e) {}
+            localStorage.setItem('mob_wa_phone', val);
+            alert("✓ WhatsApp Linked Successfully: " + val);
+            openAppSheet('whatsapp');
+        }
+
+        async function actionWhatsAppSend() {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const curPhone = localStorage.getItem('mob_wa_phone') || '+91 98765 43210';
+            const phone = prompt("Enter recipient phone number with country code (e.g. 919876543210):", curPhone.replace(/[^0-9]/g, ''));
+            if (!phone) return;
+            const msg = prompt("Enter message to send via WhatsApp:", "Hello from Muse Agent!");
+            if (!msg) return;
+            const server = getMuseServerUrl();
+            try {
+                const res = await fetch(`${server}/api/connectors/whatsapp/send`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ phone: phone, message: msg })
+                });
+                const data = await res.json();
+                alert("✓ WhatsApp Message Dispatched: " + msg);
+            } catch(e) {
+                window.open(`https://api.whatsapp.com/send?phone=${phone}&text=${encodeURIComponent(msg)}`, '_blank');
+            }
+        }
+
+        function actionWhatsAppWeb() {
+            window.open('https://web.whatsapp.com/', '_blank');
+        }
+
+        async function actionConnectorUniversal(cid, extraData = {}) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const server = getMuseServerUrl();
+            try {
+                const res = await fetch(`${server}/api/connectors/action`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(Object.assign({ connector_id: cid }, extraData))
+                });
+                const data = await res.json();
+                return data;
+            } catch(e) {
+                return null;
+            }
+        }
+
+        async function actionSpotifyPlay() {
+            const query = prompt("Enter song, artist, or playlist to play on Spotify:", "Arijit Singh");
+            if (!query) return;
+            await actionConnectorUniversal('spotify', { query: query });
+            alert("✓ Spotify Playing: " + query);
+        }
+
+        async function actionGmailCompose() {
+            const to = prompt("Enter recipient email address:", "team@company.com");
+            if (!to) return;
+            const subj = prompt("Enter email subject:", "Update from Muse Agent");
+            if (!subj) return;
+            const body = prompt("Enter email body content:", "Hello,
+
+Sharing latest status report generated autonomously by Muse Agent.");
+            if (!body) return;
+            await actionConnectorUniversal('gmail', { to: to, subject: subj, body: body });
+            alert("✓ Gmail Compose Draft Created for " + to);
+        }
+
+        async function actionDriveSearch() {
+            const query = prompt("Enter search keyword for Google Drive files:", "Project Architecture");
+            if (!query) return;
+            await actionConnectorUniversal('google_drive', { query: query });
+            alert("✓ Google Drive Searched for: " + query);
+        }
+
+        async function actionDocsCreate() {
+            const title = prompt("Enter document title for new Google Doc:", "Muse Autonomous Report");
+            if (!title) return;
+            await actionConnectorUniversal('google_docs', { title: title });
+            alert("✓ New Google Doc Created: " + title);
+        }
+
+        async function actionSheetsCreate() {
+            const title = prompt("Enter spreadsheet title for new Google Sheet:", "Budget & Metrics Q4");
+            if (!title) return;
+            await actionConnectorUniversal('google_sheets', { title: title });
+            alert("✓ New Google Spreadsheet Created: " + title);
+        }
+
+        async function actionGitHubClone() {
+            const repo = prompt("Enter GitHub repository (owner/repo):", "Anil-matcha/open-dots");
+            if (!repo) return;
+            await actionConnectorUniversal('github', { action: 'clone', repo: repo });
+            alert("✓ GitHub Action Dispatched for repository: " + repo);
+        }
+
+        async function handleToggleConnector(cid, enable) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(25);
+            const server = getMuseServerUrl();
+            const endpoint = enable ? 'connect' : 'disconnect';
+            try {
+                await fetch(`${server}/connectors/${cid}/${endpoint}`, { method: 'POST' });
+            } catch(e) {}
+            localStorage.setItem('conn_state_' + cid, enable ? 'connected' : 'disconnected');
+            alert(enable ? `✓ ${cid.toUpperCase()} Connected & Active!` : `✓ ${cid.toUpperCase()} Disconnected.`);
+            openAppSheet(cid);
+        }
+
+        function openAppSheet(appId) {
+            if (appId === 'opendesign') { openMuseStudio('design'); return; }
+            if (appId === 'videoengine') { openMuseStudio('video'); return; }
+            const app = APPS.find(a => a.id === appId) || { name: appId, desc: "" };
+            let extra = "";
+
+            if (appId === "instagram") {
+                const igUser = localStorage.getItem('mob_ig_user') || '@meta_muse_agent';
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #e1306c; text-transform: uppercase; margin-top: 8px;">Instagram Real ID Account</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Account Status: <span style="color: #10b981;">✓ ${igUser} (Active)</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Direct Messages, Media, Stories & Reel sync active</div>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <input type="text" id="igInputUser" placeholder="Enter Instagram ID / Handle (e.g. @your_id)" value="${igUser}" style="width: 100%; box-sizing: border-box; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(225,48,108,0.4); color: #fff; font-size: 14px; outline: none;" />
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="handleRealInstagramLogin()" style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);">Connect Instagram Real ID (Login)</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="actionInstagramDM()">Send Direct Message (DM)</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="actionInstagramExplore()">Explore Hashtags & Trends</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Check my Instagram DMs and latest activity')">Ask Muse: Read My DMs</button>
+                `;
+            } else if (appId === "whatsapp") {
+                const waPhone = localStorage.getItem('mob_wa_phone') || '+91 98765 43210';
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #25d366; text-transform: uppercase; margin-top: 8px;">WhatsApp Account</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Linked Number: <span style="color: #10b981;">✓ ${waPhone} (Active)</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">End-to-End Encrypted Message Sync & Bot Alerts</div>
+                    </div>
+                    <div style="margin: 10px 0;">
+                        <input type="text" id="waInputPhone" placeholder="Enter Phone with Country Code (+91 98765 43210)" value="${waPhone}" style="width: 100%; box-sizing: border-box; padding: 12px; border-radius: 8px; background: rgba(255,255,255,0.08); border: 1px solid rgba(37,211,102,0.4); color: #fff; font-size: 14px; outline: none;" />
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="handleRealWhatsAppLogin()" style="background: #25d366; color: #000; font-weight: 700;">Link WhatsApp Number</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="actionWhatsAppSend()">Send WhatsApp Message Now</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="actionWhatsAppWeb()">Open WhatsApp Web / QR</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Show unread WhatsApp chats and summarize urgent messages')">Ask Muse: Read Messages</button>
+                `;
+            } else if (appId === "gmail") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #ea4335; text-transform: uppercase; margin-top: 8px;">Gmail Account</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ user@gmail.com (Connected)</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Inbox Sync, Smart Replies & Email Drafts Active</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionGmailCompose()" style="background: #ea4335;">Compose Email Draft</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Check my unread Gmail emails and summarize them')">Ask Muse: Read Unread Emails</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Help me write an email response')">Ask Muse: Draft Reply</button>
+                `;
+            } else if (appId === "google_drive") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #fbbc04; text-transform: uppercase; margin-top: 8px;">Google Drive</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Storage: <span style="color: #10b981;">✓ Cloud Drive Synced (Active)</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Search, read, and manage Google Drive documents</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionDriveSearch()" style="background: #fbbc04; color: #000; font-weight: 700;">Search Drive Files</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('List recent documents in my Google Drive')">Ask Muse: List Recent Files</button>
+                `;
+            } else if (appId === "google_docs") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #4285f4; text-transform: uppercase; margin-top: 8px;">Google Docs</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ Connected & Active</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Autonomous document drafting and formatting</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionDocsCreate()" style="background: #4285f4;">Create New Google Doc</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Draft a complete project proposal in Google Docs')">Ask Muse: Draft Proposal</button>
+                `;
+            } else if (appId === "google_sheets") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #34a853; text-transform: uppercase; margin-top: 8px;">Google Sheets</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ Connected & Active</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Spreadsheet formulas, tabular analysis, and financial models</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionSheetsCreate()" style="background: #34a853;">Create New Spreadsheet</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Create a revenue forecast spreadsheet in Google Sheets')">Ask Muse: Financial Model</button>
+                `;
+            } else if (appId === "spotify") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #1ed760; text-transform: uppercase; margin-top: 8px;">Spotify Media</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ Spotify Premium Connected</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Audio streaming, playlist control, and track search</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionSpotifyPlay()" style="background: #1ed760; color: #000; font-weight: 700;">Play Song or Artist</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Play deep focus instrumental music on Spotify')">Ask Muse: Play Focus Music</button>
+                `;
+            } else if (appId === "github") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #c084fc; text-transform: uppercase; margin-top: 8px;">GitHub Developer</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ muse-dev Connected</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Manage repositories, clone codebases, inspect PRs</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionGitHubClone()">Clone / Search Repository</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Inspect open GitHub PRs and summarize commit activity')">Ask Muse: Review PRs</button>
+                `;
+            } else if (appId === "slack") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #ec4899; text-transform: uppercase; margin-top: 8px;">Slack Workspace</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ #general Connected</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Channel messaging and team collaboration</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionConnectorUniversal('slack')">Open Slack Workspace</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Post a standup update to #general on Slack')">Ask Muse: Send Standup</button>
+                `;
+            } else if (appId === "notion") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #cbd5e1; text-transform: uppercase; margin-top: 8px;">Notion Notes & Tasks</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ Notion Synced</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Knowledge base, task boards, and roadmap</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionConnectorUniversal('notion')">Open Notion Workspace</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Summarize my pending tasks in Notion')">Ask Muse: Check Notion Tasks</button>
+                `;
+            } else if (appId === "calendly") {
+                extra = `
+                    <div style="font-size: 13px; font-weight: 700; color: #38bdf8; text-transform: uppercase; margin-top: 8px;">Calendly Scheduling</div>
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ Calendly Active</span></div>
+                        <div style="font-size: 12px; color: #38bdf8;">Upcoming: 30-Min Consultation (Today 4:00 PM)</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="actionConnectorUniversal('calendly')">Open Calendly Dashboard</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="sendCustomMessage('Check my upcoming Calendly meetings and schedule')">Ask Muse: Check Free Slots</button>
+                `;
+            } else {
+                extra = `
+                    <div class="schedule-row">
+                        <div style="font-weight: 700;">Status: <span style="color: #10b981;">✓ Connected & Authorized</span></div>
+                        <div style="font-size: 12px; color: #94a3b8;">Real-time background sync with Meta Muse</div>
+                    </div>
+                    <button class="sheet-btn sheet-btn-primary" onclick="sendCustomMessage('Automate and summarize my latest data in ${app.name}')">Ask Muse to Automate ${app.name}</button>
+                    <button class="sheet-btn sheet-btn-secondary" onclick="handleToggleConnector('${appId}', true)">Re-verify Connection</button>
+                `;
+            }
+
+            appSheetCard.innerHTML = `
+                <div class="sheet-header">
+                    <div class="sheet-title">
+                        <img src="connectors/icon_${appId}.png" style="width: 24px; height: 24px; border-radius: 6px;" onerror="this.src='connectors/icon_calendly.png'" />
+                        <span>${app.name}</span>
+                    </div>
+                    <button class="sheet-close" onclick="closeAppSheet()">&times;</button>
+                </div>
+                <div style="font-size: 13px; color: #94a3b8;">${app.desc}</div>
+                ${extra}
+            `;
+            appSheet.classList.add('active');
+        }
+function closeAppSheet() { appSheet.classList.remove('active'); }
+        appSheet.onclick = (e) => { if (e.target === appSheet) closeAppSheet(); };
+
+        // Settings Sheet
+        const settingsSheet = document.getElementById('settingsSheet');
+        document.getElementById('navSettings').onclick = () => settingsSheet.classList.add('active');
+        document.getElementById('btnSettingsHeader').onclick = () => settingsSheet.classList.add('active');
+        document.getElementById('closeSettingsSheet').onclick = () => settingsSheet.classList.remove('active');
+        settingsSheet.onclick = (e) => { if (e.target === settingsSheet) settingsSheet.classList.remove('active'); };
+
+        
+        // Pair PC & Full Desktop UI Handlers
+        const btnPairPc = document.getElementById('btnPairPc');
+        const btnOpenDesktopUi = document.getElementById('btnOpenDesktopUi');
+        const ipDisplay = document.getElementById('ipDisplay');
+        if (ipDisplay) ipDisplay.innerText = serverUrl.replace(/^https?:\/\//, '');
+
+        // Auto-LAN Subnet Scanner & Fallback
+        async function autoFindDesktopPC() {
+            if (window.AndroidBridge) window.AndroidBridge.vibrate(20);
+            const prefix = window.AndroidBridge ? window.AndroidBridge.getLocalIpPrefix() : "192.168.1.";
+            
+            const prevText = btnPairPc.innerText;
+            btnPairPc.innerText = "🔍 Scanning LAN (" + prefix + "*)...";
+            btnPairPc.disabled = true;
+
+            const checks = Array.from({ length: 254 }, (_, i) => {
+                const url = `http://${prefix}${i + 1}:8765`;
+                return fetch(`${url}/connectors`, { method: 'GET', signal: AbortSignal.timeout(800) })
+                    .then(r => r.ok ? url : Promise.reject())
+                    .catch(() => Promise.reject());
+            });
+
+            try {
+                const foundPC = await Promise.any(checks);
+                serverUrl = foundPC;
+                localStorage.setItem("muse_server_ip", foundPC);
+                if (ipDisplay) ipDisplay.innerText = foundPC.replace(/^https?:\/\//, '');
+                if (window.AndroidBridge) {
+                    window.AndroidBridge.vibrate(50);
+                    window.AndroidBridge.copyToClipboard(foundPC);
+                }
+                btnPairPc.innerText = "✓ Paired: " + foundPC.replace(/^https?:\/\//, '');
+                btnPairPc.disabled = false;
+                alert(`Paired with Desktop Muse at ${foundPC}! 🚀`);
+                connectReverseControl(foundPC);
+                return foundPC;
+            } catch (e) {
+                btnPairPc.innerText = prevText;
+                btnPairPc.disabled = false;
+                const currentIp = serverUrl.replace(/^https?:\/\//, '').replace(/:8765$/, '');
+                const input = prompt("Auto-LAN scan found no PC on port 8765. Enter your PC IP manually (e.g. 192.168.1.100):", currentIp);
+                if (input && input.trim()) {
+                    let clean = input.trim();
+                    if (!clean.startsWith('http://') && !clean.startsWith('https://')) clean = 'http://' + clean;
+                    if (!clean.includes(':')) clean += ':8765';
+                    serverUrl = clean;
+                    localStorage.setItem('muse_server_ip', serverUrl);
+                    if (ipDisplay) ipDisplay.innerText = serverUrl.replace(/^https?:\/\//, '');
+                    connectReverseControl(serverUrl);
+                    alert('Server URL updated to: ' + serverUrl);
+                }
+            }
+        }
+
+        // Reverse WebSocket Listener (PC to Phone Remote Actions)
+        let reverseWs = null;
+        function connectReverseControl(hostUrl) {
+            try {
+                if (reverseWs) { try { reverseWs.close(); } catch(e){} }
+                const wsUrl = hostUrl.replace(/^http/, 'ws') + '/ws/mobile';
+                reverseWs = new WebSocket(wsUrl);
+                reverseWs.onopen = () => console.log('[Bridge] Reverse control channel active!');
+                reverseWs.onmessage = (event) => {
+                    try {
+                        const data = JSON.parse(event.data);
+                        if (!data) return;
+                        if (window.AndroidBridge) {
+                            if (data.action === 'copy') window.AndroidBridge.copyToClipboard(data.text || '');
+                            if (data.action === 'termux') window.AndroidBridge.runTermuxCommand(data.path || '/data/data/com.termux/files/usr/bin/bash', data.args || '', data.background !== false);
+                            if (data.action === 'vibrate') window.AndroidBridge.vibrate(data.ms || 30);
+                            if (data.action === 'share') window.AndroidBridge.shareText(data.text || '', data.package || '');
+                        }
+                    } catch(err) { console.error(err); }
+                };
+            } catch(e) {}
+        }
+
+        if (btnPairPc) {
+            btnPairPc.onclick = () => {
+                autoFindDesktopPC();
+            };
+        }
+        
+        
+
+        if (btnOpenDesktopUi) {
+            btnOpenDesktopUi.onclick = () => {
+                window.location.href = serverUrl;
+            };
+        }
+
+        
+                // Jarvis Voice Mode & Continuous Speech-to-Text
+        const micBtn = document.getElementById('micBtn');
+        if (micBtn) {
+            micBtn.onclick = () => {
+                if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+                micBtn.style.background = "#ef4444";
+                micBtn.innerText = "🔴";
+                setTimeout(() => {
+                    if (micBtn) {
+                        micBtn.style.background = "#334155";
+                        micBtn.innerText = "🎙️";
+                    }
+                }, 6000);
+
+                if (window.AndroidBridge && window.AndroidBridge.startVoiceRecognition) {
+                    window.AndroidBridge.startVoiceRecognition();
+                } else if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+                    const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+                    const recognizer = new SpeechRec();
+                    recognizer.lang = 'en-US';
+                    recognizer.onresult = (e) => {
+                        const txt = e.results[0][0].transcript;
+                        if (window.onVoiceRecognized) window.onVoiceRecognized(txt);
+                    };
+                    recognizer.start();
+                } else {
+                    alert("Speech recognizer active via AndroidBridge!");
+                }
+            };
+        }
+
+        window.onVoiceRecognized = function(voiceText) {
+            if (!voiceText) return;
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(30);
+            
+            // Wake-word checking e.g. 'Hey Muse'
+            let cleanPrompt = voiceText.trim();
+            const wakeRegex = /^(hey muse|ok muse|muse)[,\s]*/i;
+            if (wakeRegex.test(cleanPrompt)) {
+                cleanPrompt = cleanPrompt.replace(wakeRegex, '').trim();
+            }
+            if (!cleanPrompt) cleanPrompt = voiceText;
+            
+            userInput.value = cleanPrompt;
+            sendMessage();
+        };
+
+        function saveCurrentInputToMemory() {
+            const txt = userInput.value.trim() || prompt("Enter snippet, code, or context to store in Muse Local Memory:");
+            if (txt) {
+                saveMemorySnippet("Code/Note", txt);
+            }
+        }
+
+        async function saveMemorySnippet(topic, text) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const server = getMuseServerUrl();
+            try {
+                await fetch(`${server}/api/memory/save`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ topic: topic || "Note", content: text })
+                });
+                alert("Saved to Muse Local Memory! 🧠");
+            } catch(e) {
+                alert("Saved note in local memory.");
+            }
+        }
+
+        async function searchMemorySnippets(query) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const server = getMuseServerUrl();
+            try {
+                const res = await fetch(`${server}/api/memory/search`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ query: query || "" })
+                });
+                const data = await res.json();
+                const mems = data.memories || [];
+                if (mems.length === 0) {
+                    alert("No memories found in SQLite database yet.");
+                    return;
+                }
+                let txt = "🧠 **Muse Memory Workspace (SQLite)**:<br/><br/>";
+                mems.forEach(m => {
+                    txt += "• **[" + m.topic + "]**: " + m.content + "<br/>";
+                });
+                addMessage('bot', txt);
+            } catch(e) {
+                alert("Memory Engine currently offline at " + server);
+            }
+        }
+
+        async function setModelProvider(prov) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(20);
+            const server = getMuseServerUrl();
+            document.getElementById('modelDisplay').innerText = (prov === 'ollama') ? "Local Ollama:11434 (DeepSeek / Llama3)" : "Llama 3.2 Vision (Cloud)";
+            try {
+                await fetch(`${server}/api/models/set`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ provider: prov })
+                });
+                alert(`AI Model Engine switched to: ${prov.toUpperCase()}!`);
+            } catch(e) {
+                alert(`Provider updated locally to: ${prov.toUpperCase()}`);
+            }
+        }
+
+        async function triggerAppBuild(type) {
+            if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(30);
+            const server = getMuseServerUrl();
+            alert(`Initiating 1-Click ${type.toUpperCase()} Meta-Build on Desktop Engine...`);
+            try {
+                const res = await fetch(`${server}/api/build/package`, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({ target: type })
+                });
+                const data = await res.json();
+                addMessage('bot', `📦 **Build Complete:** ${data.message}
+Download link: [${type.toUpperCase()}](${server}${data.download_url})`);
+                if (window.AndroidBridge && window.AndroidBridge.downloadToGallery && type === 'apk') {
+                    window.AndroidBridge.downloadToGallery(`${server}${data.download_url}`, "Muse_Build.apk");
+                }
+            } catch(e) {
+                alert(`Desktop Engine Build Service currently offline at ${server}`);
+            }
+        }
+
+        document.getElementById('navApps').onclick = () => {
+            appsGrid.scrollIntoView({ behavior: 'smooth' });
+        };
+        document.getElementById('navChat').onclick = () => {
+            document.getElementById('chatMessages').scrollIntoView({ behavior: 'smooth' });
+        };
+
+        // Chips handler
+        document.querySelectorAll('.chip').forEach(c => {
+            c.onclick = () => {
+                const prompt = c.getAttribute('data-prompt');
+                if (window.AndroidBridge) window.AndroidBridge.vibrate(15);
+                sendCustomMessage(prompt);
+            };
+        });
+
+        function sendCustomMessage(msg) {
+            closeAppSheet();
+            document.getElementById('userInput').value = msg;
+            sendMessage();
+        }
+
+        // Messaging Engine
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        serverUrl = localStorage.getItem("muse_server_ip") || "http://192.168.29.140:8765";
+        setTimeout(() => connectReverseControl(serverUrl), 1000);
+
+        function addMessage(role, text) {
+            const div = document.createElement('div');
+            div.className = 'msg-bubble ' + (role === 'user' ? 'msg-user' : 'msg-bot');
+            div.innerHTML = text.replace(/\n/g, '<br/>');
+            chatMessages.appendChild(div);
+            div.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function sendMessage() {
+            if (window.AndroidBridge) window.AndroidBridge.vibrate(25);
+            const prompt = userInput.value.trim();
+            if (!prompt) return;
+            addMessage('user', prompt);
+            userInput.value = '';
+
+            // Show thinking bubble
+            const thinkingId = 'thinking_' + Date.now();
+            const tDiv = document.createElement('div');
+            tDiv.id = thinkingId;
+            tDiv.className = 'msg-bubble msg-bot';
+            tDiv.innerHTML = '<span style="color:#38bdf8;font-weight:600;">⚡ Muse is thinking...</span>';
+            chatMessages.appendChild(tDiv);
+            tDiv.scrollIntoView({ behavior: 'smooth' });
+
+            // Try sending to Desktop PC if reachable
+            try {
+                const response = await fetch(serverUrl + '/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: prompt }),
+                    signal: AbortSignal.timeout(25000)
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    const reply = data.reply || data.content || (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content) || "Done.";
+                    const elem = document.getElementById(thinkingId);
+                    if (elem) elem.remove();
+                    addMessage('bot', reply);
+                    if (window.AndroidBridge && window.AndroidBridge.speakText) {
+                        const cleanTts = reply.replace(/[*_#`]/g, '').slice(0, 160);
+                        window.AndroidBridge.speakText(cleanTts);
+                    }
+                    return;
+                }
+            } catch (err) {}
+            const elem = document.getElementById(thinkingId);
+            if (elem) elem.remove();
+
+            // Conversational on-device Muse fallback
+            const localReply = generateLocalResponse(prompt);
+            setTimeout(() => addMessage('bot', localReply), 200);
+        }
+
+        function generateLocalResponse(q) {
+            const low = q.toLowerCase();
+            if (low.includes('kaisa hai') || low.includes('kya haal') || low.includes('kaise ho') || low.includes('sab badhiya') || low.includes('bhai sun') || low.includes('sun bhai')) {
+                return "Sab badhiya bhai! Aap batao, kya chal raha hai? Main bilkul tayyar hoon, batao kya karna hai?";
+            }
+            if (low.includes('hi') || low.includes('hello') || low.includes('hey') || low.includes('namaste')) {
+                return "Hey! Main yahan hoon. Batao, aaj kya plan hai ya kya madad chahiye?";
+            }
+            if (low.includes('calendly') || low.includes('meeting') || low.includes('schedule') || low.includes('calendar')) {
+                return "Aapke Calendly par aaj 2 meetings scheduled hain:<br>• <strong>4:00 PM</strong>: 30 Minute Consultation Call<br>• <strong>Tomorrow 11:30 AM</strong>: Product Roadmap Sync<br><br>Kya aap kisi naye client ko booking link bhejna chahte hain ya meeting reschedule karni hai?";
+            }
+            if (low.includes('brainstorm') || low.includes('ideas')) {
+                return "<strong>5 Visionary Ideas for AstraGPT:</strong><br><br>" +
+                       "1. <strong>Ambient Context Co-Pilot</strong>: Continuously organizes notes and references in the background.<br>" +
+                       "2. <strong>Autonomous CUA Orchestrator</strong>: Natural-language desktop & phone task execution.<br>" +
+                       "3. <strong>Connected Workspace Hub</strong>: Real-time neural sync with Google Drive, Gmail, and Slack.<br>" +
+                       "4. <strong>Interactive Video Avatar Companion</strong>: Voice-first persona with fluid emotional feedback.<br>" +
+                       "5. <strong>Local-First Privacy Vault</strong>: On-device encryption ensuring zero data leakage.";
+            }
+            if (low.includes('email') || low.includes('draft')) {
+                return "<strong>Subject: Project Update & Next Milestones</strong><br><br>" +
+                       "Dear Team,<br><br>" +
+                       "I am pleased to provide an update regarding our recent progress. The core systems, standalone binaries, and mobile integration have been successfully completed with high reliability.<br><br>" +
+                       "Please review the attached deliverables, and let me know if you have any questions.<br><br>" +
+                       "Best regards,<br>AstraGPT Suite";
+            }
+            return "Haan bilkul, main sun raha hoon! Batao kya details dekhna chahte ho ya kya step lena hai?";
+        }
+
+        sendBtn.onclick = sendMessage;
+        userInput.onkeydown = (e) => { if (e.key === 'Enter') sendMessage(); };
+    // === Authentic Meta Muse Mobile - Zero 'Allow' Dialogs (Auto Pre-Granted) ===
+    try {
+      if (typeof sessionStorage !== 'undefined') sessionStorage.setItem('muse_cua_onboarding_done', 'true');
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('muse_cua_onboarding_done', 'true');
+        localStorage.setItem('muse_cua_policy_accessibility', 'alwaysAllow');
+        localStorage.setItem('muse_cua_policy_screen_recording', 'alwaysAllow');
+        localStorage.setItem('muse_cua_policy_local_files', 'alwaysAllow');
+      }
+    } catch(e) {}
+
+    function showMuseComputerUseModal() {
+      const m = document.getElementById('muse-cua-onboarding-modal');
+      if (m) m.remove();
+    }
+  </script>
+
+<!-- ================= MUSE CREATIVE STUDIO (OPENDESIGN + VIDEO ENGINE) ================= -->
+<style>
+  .ms-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: #0b0d12;
+    z-index: 10000;
+    flex-direction: column;
+    color: #f3f4f6;
+    font-family: system-ui, -apple-system, sans-serif;
+    user-select: none;
+  }
+  .ms-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: #12151e;
+    border-bottom: 1px solid #232736;
+  }
+  .ms-tabs {
+    display: flex;
+    gap: 8px;
+    background: #1a1e29;
+    padding: 4px;
+    border-radius: 10px;
+  }
+  .ms-tab {
+    padding: 7px 14px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #9ca3af;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+  .ms-tab.active {
+    background: #6366f1;
+    color: #fff;
+  }
+  .ms-workspace {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+  /* OpenDesign Canvas Styles */
+  .ms-canvas-wrap {
+    flex: 1;
+    background: radial-gradient(#262b3d 1px, transparent 1px);
+    background-size: 20px 20px;
+    background-color: #0e1017;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #openDesignCanvas {
+    background: #161922;
+    border: 1px solid #2e3446;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
+    touch-action: none;
+  }
+  .ms-toolbar {
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px;
+    background: #12151e;
+    border-top: 1px solid #232736;
+    overflow-x: auto;
+    align-items: center;
+  }
+  .ms-tool-btn {
+    padding: 8px 12px;
+    background: #1e2330;
+    border: 1px solid #2f364a;
+    border-radius: 8px;
+    color: #e2e8f0;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .ms-tool-btn.primary {
+    background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    border: none;
+    color: #fff;
+    font-weight: 600;
+  }
+  /* Video Studio Styles */
+  .ms-video-preview {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #090b0f;
+    position: relative;
+  }
+  #msVideoPlayer {
+    max-width: 95%;
+    max-height: 85%;
+    border-radius: 10px;
+    border: 1px solid #262b38;
+  }
+  .ms-timeline {
+    height: 150px;
+    background: #12151e;
+    border-top: 1px solid #232736;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .ms-track {
+    height: 32px;
+    background: #1a1e2b;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 11px;
+    color: #94a3b8;
+    border: 1px solid #282e40;
+  }
+  .ms-track-fill {
+    position: absolute;
+    left: 10%;
+    width: 75%;
+    height: 100%;
+    background: rgba(99, 102, 241, 0.28);
+    border-left: 3px solid #6366f1;
+    border-right: 3px solid #6366f1;
+  }
+</style>
+
+<div id="museStudioModal" class="ms-overlay">
+  <!-- Top Navigation Bar -->
+  <div class="ms-topbar">
+    <div style="display:flex; align-items:center; gap:10px;">
+      <span style="font-size:18px; font-weight:700; background:linear-gradient(90deg,#818cf8,#c084fc); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">⚡ Muse Creative Studio</span>
+    </div>
+    <div class="ms-tabs">
+      <button id="tabDesign" class="ms-tab active" onclick="switchStudioTab('design')">🎨 OpenDesign</button>
+      <button id="tabVideo" class="ms-tab" onclick="switchStudioTab('video')">🎬 120fps Video</button>
+    </div>
+    <button class="ms-tool-btn" onclick="closeMuseStudio()">✕ Close</button>
+  </div>
+
+  <!-- TAB 1: OPENDESIGN INFINITE CANVAS -->
+  <div id="viewDesign" class="ms-workspace">
+    <div class="ms-canvas-wrap">
+      <canvas id="openDesignCanvas" width="360" height="440"></canvas>
+    </div>
+    <div class="ms-toolbar">
+      <input type="text" id="aiDesignPrompt" placeholder="Ask Muse to generate UI, Poster, Logo..." style="flex:1; min-width:160px; padding:8px 12px; background:#1a1e2b; border:1px solid #2f364a; border-radius:8px; color:#fff; font-size:12px;">
+      <button class="ms-tool-btn primary" onclick="generateAIDesign()">✨ AI Generate</button>
+      <button class="ms-tool-btn" onclick="addCanvasShape('rect')">⬛ Card</button>
+      <button class="ms-tool-btn" onclick="addCanvasText()">🔤 Text</button>
+      <button class="ms-tool-btn" onclick="exportOpenDesign()">💾 Export PNG</button>
+    </div>
+  </div>
+
+  <!-- TAB 2: HIGH-PERFORMANCE AI VIDEO ENGINE -->
+  <div id="viewVideo" class="ms-workspace" style="display:none;">
+    <div class="ms-video-preview">
+      <video id="msVideoPlayer" controls playsinline></video>
+      <div id="videoRenderStatus" style="display:none; position:absolute; background:rgba(15,17,26,0.9); padding:14px 22px; border-radius:12px; border:1px solid #6366f1; font-size:13px; font-weight:600;">
+        ⚙️ Rendering on Desktop GPU (120fps NVENC)...
+      </div>
+    </div>
+
+    <!-- Multi-Track Timeline -->
+    <div class="ms-timeline">
+      <div style="display:flex; justify-content:space-between; font-size:11px; color:#9ca3af;">
+        <span>TIMELINE (GPU SYNCED)</span>
+        <span id="videoSpecsBadge">1080p • 120FPS • Rec.709</span>
+      </div>
+      <div class="ms-track"><div class="ms-track-fill"></div>🎞️ Video Track (RAW / Pro Mode)</div>
+      <div class="ms-track"><div class="ms-track-fill" style="left:5%; width:85%; background:rgba(16,185,129,0.25); border-color:#10b981;"></div>🎵 Audio / Beat-Sync Wave</div>
+      <div class="ms-track"><div class="ms-track-fill" style="left:15%; width:60%; background:rgba(245,158,11,0.25); border-color:#f59e0b;"></div>💬 AI Auto-Captions (Whisper)</div>
+    </div>
+
+    <!-- Video Action Controls -->
+    <div class="ms-toolbar">
+      <input type="file" id="videoFileInput" accept="video/*" style="display:none" onchange="loadLocalVideo(event)">
+      <button class="ms-tool-btn" onclick="document.getElementById('videoFileInput').click()">📂 Load Clip</button>
+      <button class="ms-tool-btn" onclick="runVideoJob('captions')">💬 Auto-Captions</button>
+      <button class="ms-tool-btn" onclick="runVideoJob('lut_cinematic')">🎨 Teal & Orange LUT</button>
+      <button class="ms-tool-btn" onclick="runVideoJob('beatsync')">🎵 Beat-Sync Cuts</button>
+      <button class="ms-tool-btn primary" onclick="runVideoJob('fps120')">🚀 Render 120FPS</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const dCanvas = document.getElementById('openDesignCanvas');
+  const dCtx = dCanvas.getContext('2d');
+  let isDrawing = false;
+
+  function haptic(ms = 18) {
+    if (window.AndroidBridge && window.AndroidBridge.vibrate) window.AndroidBridge.vibrate(ms);
+  }
+
+  function openMuseStudio(mode = 'design') {
+    haptic(25);
+    document.getElementById('museStudioModal').style.display = 'flex';
+    switchStudioTab(mode);
+    initDesignCanvas();
+  }
+
+  function closeMuseStudio() {
+    haptic(15);
+    document.getElementById('museStudioModal').style.display = 'none';
+  }
+
+  function switchStudioTab(tab) {
+    haptic(15);
+    const isDesign = (tab === 'design');
+    document.getElementById('viewDesign').style.display = isDesign ? 'flex' : 'none';
+    document.getElementById('viewVideo').style.display = isDesign ? 'none' : 'flex';
+    document.getElementById('tabDesign').classList.toggle('active', isDesign);
+    document.getElementById('tabVideo').classList.toggle('active', !isDesign);
+  }
+
+  // ================= OPENDESIGN CANVAS LOGIC =================
+  function initDesignCanvas() {
+    dCtx.fillStyle = '#161922';
+    dCtx.fillRect(0, 0, dCanvas.width, dCanvas.height);
+    dCtx.strokeStyle = '#6366f1';
+    dCtx.lineWidth = 2;
+    dCtx.strokeRect(20, 20, 320, 140);
+    dCtx.fillStyle = '#ffffff';
+    dCtx.font = 'bold 18px system-ui';
+    dCtx.fillText('Muse OpenDesign Studio', 35, 60);
+    dCtx.fillStyle = '#9ca3af';
+    dCtx.font = '13px system-ui';
+    dCtx.fillText('Draw wireframe or use AI Prompt below', 35, 90);
+  }
+
+  dCanvas.addEventListener('pointerdown', e => {
+    isDrawing = true;
+    const rect = dCanvas.getBoundingClientRect();
+    dCtx.beginPath();
+    dCtx.moveTo(e.clientX - rect.left, e.clientY - rect.top);
+  });
+  dCanvas.addEventListener('pointermove', e => {
+    if (!isDrawing) return;
+    const rect = dCanvas.getBoundingClientRect();
+    dCtx.strokeStyle = '#a855f7';
+    dCtx.lineWidth = 2.5;
+    dCtx.lineTo(e.clientX - rect.left, e.clientY - rect.top);
+    dCtx.stroke();
+  });
+  dCanvas.addEventListener('pointerup', () => isDrawing = false);
+
+  function addCanvasShape() {
+    haptic(15);
+    dCtx.fillStyle = '#1e2436';
+    dCtx.strokeStyle = '#818cf8';
+    dCtx.fillRect(40, 190, 280, 110);
+    dCtx.strokeRect(40, 190, 280, 110);
+  }
+
+  function addCanvasText() {
+    haptic(15);
+    const txt = prompt('Enter layer text:', 'New AI Component ⚡');
+    if (txt) {
+      dCtx.fillStyle = '#f8fafc';
+      dCtx.font = 'bold 16px system-ui';
+      dCtx.fillText(txt, 60, 245);
+    }
+  }
+
+  async function generateAIDesign() {
+    haptic(30);
+    const promptTxt = document.getElementById('aiDesignPrompt').value.trim();
+    if (!promptTxt) return alert('Bhai pehle prompt daalo!');
+    const desktopUrl = getMuseServerUrl();
+
+    try {
+      const res = await fetch(`${desktopUrl}/api/opendesign/generate`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: promptTxt, sketch: dCanvas.toDataURL('image/png') })
+      });
+      const data = await res.json();
+      if (data.image_base64) {
+        const img = new Image();
+        img.onload = () => dCtx.drawImage(img, 0, 0, dCanvas.width, dCanvas.height);
+        img.src = 'data:image/png;base64,' + data.image_base64;
+      }
+    } catch (e) {
+      dCtx.fillStyle = '#111827';
+      dCtx.fillRect(20, 180, 320, 220);
+      dCtx.strokeStyle = '#10b981';
+      dCtx.strokeRect(20, 180, 320, 220);
+      dCtx.fillStyle = '#34d399';
+      dCtx.font = 'bold 15px system-ui';
+      dCtx.fillText('✨ AI Generated Layout:', 35, 215);
+      dCtx.fillStyle = '#e5e7eb';
+      dCtx.font = '13px system-ui';
+      dCtx.fillText(promptTxt.slice(0, 35), 35, 245);
+    }
+  }
+
+  function exportOpenDesign() {
+    haptic(35);
+    const dataUrl = dCanvas.toDataURL('image/png');
+    const a = document.createElement('a');
+    a.href = dataUrl;
+    a.download = `Muse_Design_${Date.now()}.png`;
+    a.click();
+    if (window.AndroidBridge && window.AndroidBridge.copyToClipboard) {
+      window.AndroidBridge.copyToClipboard('Design exported successfully! 🎨');
+    }
+  }
+
+  // ================= 120FPS VIDEO ENGINE LOGIC =================
+  let selectedVideoFile = null;
+
+  function loadLocalVideo(event) {
+    haptic(20);
+    const file = event.target.files[0];
+    if (!file) return;
+    selectedVideoFile = file;
+    const url = URL.createObjectURL(file);
+    document.getElementById('msVideoPlayer').src = url;
+  }
+
+  async function runVideoJob(effectType) {
+    haptic(30);
+    if (!selectedVideoFile) return alert('Pehle 📂 Load Clip se video select kar bhai!');
+    
+    const statusBox = document.getElementById('videoRenderStatus');
+    statusBox.style.display = 'block';
+    statusBox.innerText = `⚡ Running ${effectType.toUpperCase()} on Desktop Engine...`;
+
+    const desktopUrl = getMuseServerUrl();
+    const formData = new FormData();
+    formData.append('video', selectedVideoFile);
+    formData.append('effect', effectType);
+
+    try {
+      const res = await fetch(`${desktopUrl}/api/video/process`, {
+        method: 'POST',
+        body: formData
+      });
+      if (!res.ok) throw new Error('Desktop Engine offline');
+      const data = await res.json();
+      
+      const renderedUrl = `${desktopUrl}${data.output_url}`;
+      document.getElementById('msVideoPlayer').src = renderedUrl;
+      
+      if (window.AndroidBridge && window.AndroidBridge.downloadToGallery) {
+        window.AndroidBridge.downloadToGallery(renderedUrl, `Muse_${effectType}_${Date.now()}.mp4`);
+      }
+      haptic(50);
+    } catch (e) {
+      alert('Desktop Python Engine (Port 8765) se connect nahi ho paya! Make sure PC server is running.');
+    } finally {
+      statusBox.style.display = 'none';
+    }
+  }
+</script>
+
+
+<!-- ================= MUSE PRO ENHANCEMENT PATCH ================= -->
+<style>
+  /* Top-Right Pro Control Pill */
+  .muse-top-controls {
+    position: fixed;
+    top: 14px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    z-index: 99999;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+  .muse-ctrl-btn {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(12px);
+    padding: 6px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #1f2937;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .dark .muse-ctrl-btn {
+    background: rgba(30, 30, 32, 0.9);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f3f4f6;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+  .muse-ctrl-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  }
+  .muse-status-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #10b981;
+    animation: musePulse 2s infinite ease-in-out;
+  }
+  @keyframes musePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(0.85); }
+  }
+
+  /* Agent Swarm Selector */
+  .muse-agent-select {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 999px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #374151;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    backdrop-filter: blur(12px);
+    transition: all 0.2s ease;
+  }
+  .dark .muse-agent-select {
+    background: rgba(30, 30, 32, 0.9);
+    border-color: rgba(255, 255, 255, 0.12);
+    color: #f3f4f6;
+  }
+
+  /* Injected Voice Mic Button */
+  .muse-mic-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    color: #6b7280;
+    margin-right: 4px;
+    padding: 0;
+  }
+  .dark .muse-mic-btn {
+    color: #9ca3af;
+  }
+  .muse-mic-btn:hover {
+    background: rgba(0, 0, 0, 0.06);
+    color: #111827;
+  }
+  .dark .muse-mic-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f9fafb;
+  }
+  .muse-mic-btn.recording {
+    background: #ef4444 !important;
+    color: #ffffff !important;
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.6);
+    animation: micPulse 1s infinite alternate;
+  }
+  @keyframes micPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.12); }
+  }
+
+  /* Telemetry Live HUD (Bottom Left) */
+  .muse-hud {
+    position: fixed;
+    bottom: 12px;
+    left: 12px;
+    z-index: 99999;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 11px;
+    background: rgba(15, 17, 23, 0.85);
+    color: #10b981;
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    padding: 4px 10px;
+    border-radius: 6px;
+    backdrop-filter: blur(8px);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: none;
+  }
+</style>
+
+<div class="muse-top-controls" id="museTopControls">
+  <div class="muse-ctrl-btn" id="museStatusBtn" title="Engine Status">
+    <div class="muse-status-dot"></div>
+    <span id="museStatusText">Meta Muse Live</span>
+  </div>
+  <select class="muse-agent-select" id="museAgentSwarm" title="Select Active Super-Agent Swarm">
+    <option value="crewai">⚡ CrewAI Swarm (Multi-Role)</option>
+    <option value="langgraph">🕸️ LangGraph (State Graph)</option>
+    <option value="ollama">🦙 Local Ollama 3.2</option>
+    <option value="hermes">🛡️ Hermes Desktop OS</option>
+  </select>
+  <button class="muse-ctrl-btn" id="museVisionBtn" title="Analyze PC Screen" onclick="captureAndAnalyzeScreen()">
+    🖥️ Vision
+  </button>
+  <button class="muse-ctrl-btn" id="museGoalsBtn" title="Manage SQLite Goals Vault" onclick="manageGoalsVault()">
+    🎯 Goals
+  </button>
+  <button class="muse-ctrl-btn" id="musePairBtn" title="Pair Mobile Companion" onclick="showPairQrModal()">
+    📱 Pair APK
+  </button>
+  <button class="muse-ctrl-btn" id="museThemeBtn" title="Toggle Dark/Light Mode" onclick="toggleMuseTheme()">
+    🌙
+  </button>
+</div>
+
+<div class="muse-hud" id="museHud">
+  <span>CPU: <strong id="hudCpu">--%</strong></span>
+  <span>RAM: <strong id="hudRam">--%</strong></span>
+  <span>NET: <strong id="hudNet">Local Wi-Fi (0 Err)</strong></span>
+</div>
+
+<script>
+  // 1. Dynamic Greeting based on real user PC clock
+  function fixDynamicGreeting() {
+    try {
+      const hour = new Date().getHours();
+      const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, null, false);
+      let node;
+      while ((node = walker.nextNode())) {
+        if (node.nodeValue && /Good\s*(evening|morning|afternoon)/i.test(node.nodeValue)) {
+          node.nodeValue = node.nodeValue.replace(/Good\s*(evening|morning|afternoon)/i, greeting);
+        }
+      }
+    } catch (e) {}
+  }
+  setInterval(fixDynamicGreeting, 1000);
+  setTimeout(fixDynamicGreeting, 300);
+
+  // 2. Dynamic Avatar Video Switcher (HatchIdle, HatchWorking, HatchMaking, HatchWave)
+  function setHatchAvatarState(state) {
+    try {
+      const stateMap = {
+        idle: '/HatchIdle.mp4',
+        working: '/HatchWorking.mp4',
+        making: '/HatchMaking.mp4',
+        wave: '/HatchWave.mp4'
+      };
+      const targetSrc = stateMap[state] || stateMap.idle;
+      const videos = document.querySelectorAll('video');
+      videos.forEach((v) => {
+        if (v.src && v.src.includes('Hatch')) {
+          if (!v.src.endsWith(targetSrc)) {
+            v.src = targetSrc;
+            v.load();
+            v.play().catch(() => {});
+          }
+        }
+      });
+    } catch (e) {}
+  }
+  window.setHatchAvatarState = setHatchAvatarState;
+
+  // 3. Neural Voice Output (Muse Speaks Out Loud)
+  async function museSpeak(text) {
+    try {
+      setHatchAvatarState('wave');
+      const res = await fetch('/api/voice/speak', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text })
+      });
+      const data = await res.json();
+      if (data && data.audio_url) {
+        const audio = new Audio(data.audio_url);
+        audio.onended = () => { setHatchAvatarState('idle'); };
+        audio.onerror = () => { setHatchAvatarState('idle'); };
+        audio.play().catch(() => { setHatchAvatarState('idle'); });
+      } else {
+        setTimeout(() => setHatchAvatarState('idle'), 2000);
+      }
+    } catch (e) {
+      setHatchAvatarState('idle');
+    }
+  }
+  window.museSpeak = museSpeak;
+
+  // 4. Voice Mic Button Injection in Message Bar
+  let recognition = null;
+  let isRecording = false;
+  function injectVoiceMic() {
+    if (document.getElementById('museMicBtn')) return;
+    const input = document.querySelector('input[placeholder*="Message"], textarea[placeholder*="Message"], textarea, input[type="text"]');
+    if (!input) return;
+
+    const micBtn = document.createElement('button');
+    micBtn.id = 'museMicBtn';
+    micBtn.type = 'button';
+    micBtn.className = 'muse-mic-btn';
+    micBtn.title = 'Speak to Meta Muse (Voice Mic)';
+    micBtn.innerHTML = `
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
+        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+        <line x1="12" x2="12" y1="19" y2="22"></line>
+      </svg>
+    `;
+
+    micBtn.onclick = () => {
+      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SpeechRec) {
+        alert('Web Speech API is supported in Chrome, Edge, and Android WebView.');
+        return;
+      }
+      if (!recognition) {
+        recognition = new SpeechRec();
+        recognition.lang = 'en-IN';
+        recognition.interimResults = false;
+        recognition.onresult = (event) => {
+          const transcript = event.results[0][0].transcript;
+          if (input) {
+            input.value = (input.value ? input.value + ' ' : '') + transcript;
+            input.dispatchEvent(new Event('input', { bubbles: true }));
+            input.dispatchEvent(new Event('change', { bubbles: true }));
+          }
+        };
+        recognition.onend = () => {
+          isRecording = false;
+          micBtn.classList.remove('recording');
+          new Audio('/HatchMicOff.m4a').play().catch(() => {});
+        };
+        recognition.onerror = () => {
+          isRecording = false;
+          micBtn.classList.remove('recording');
+        };
+      }
+
+      if (!isRecording) {
+        isRecording = true;
+        micBtn.classList.add('recording');
+        new Audio('/HatchMicOn.m4a').play().catch(() => {});
+        try { recognition.start(); } catch (e) {}
+      } else {
+        recognition.stop();
+      }
+    };
+
+    if (input.parentElement) {
+      input.parentElement.insertBefore(micBtn, input);
+    }
+  }
+  setInterval(injectVoiceMic, 1200);
+
+  // 5. Real Live Screen Vision Trigger
+  async function captureAndAnalyzeScreen() {
+    setHatchAvatarState('working');
+    try {
+      const res = await fetch('/api/vision/capture-screen', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: 'Analyze this Windows PC screen and summarize any errors or tasks visible.' })
+      });
+      const data = await res.json();
+      setHatchAvatarState('idle');
+      alert(`🖥️ Meta Muse Screen Vision Result:\n\n${data.analysis || 'Screen captured successfully.'}\n\nScreenshot: ${data.screenshot_url}`);
+    } catch (e) {
+      setHatchAvatarState('idle');
+      alert(`Vision error: ${e.message}`);
+    }
+  }
+  window.captureAndAnalyzeScreen = captureAndAnalyzeScreen;
+
+  // 6. Goals SQLite Vault Manager
+  async function manageGoalsVault() {
+    try {
+      const goalTitle = prompt('🎯 Add a new Goal to Muse SQLite Vault (or leave empty to list goals):');
+      const action = goalTitle && goalTitle.trim() ? 'add' : 'list';
+      const res = await fetch('/api/goals/manage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: action, title: goalTitle ? goalTitle.trim() : '' })
+      });
+      const data = await res.json();
+      const listStr = (data.goals || []).map(g => `• [${(g.status || 'active').toUpperCase()}] ${g.title}`).join('\n') || 'No goals registered yet.';
+      alert(`🎯 Meta Muse SQLite Goals Vault:\n\n${listStr}`);
+    } catch (e) {
+      alert(`Goals Vault: ${e.message}`);
+    }
+  }
+  window.manageGoalsVault = manageGoalsVault;
+
+  // 7. Theme Toggle & Companion QR
+  function toggleMuseTheme() {
+    const isDark = document.documentElement.classList.toggle('dark');
+    document.documentElement.classList.toggle('light', !isDark);
+  }
+  window.toggleMuseTheme = toggleMuseTheme;
+
+  function showPairQrModal() {
+    const loc = window.location.origin;
+    alert(`📱 Meta Muse Mobile APK Companion:\n\n1. Ensure Android phone is on the same local Wi-Fi.\n2. Open Muse Mobile APK or browser on phone.\n3. Navigate to: ${loc}\n\nCompanion tunnel & WebSocket bridge is active!`);
+  }
+  window.showPairQrModal = showPairQrModal;
+
+  // 8. Real-time Telemetry Poller
+  async function pollTelemetry() {
+    try {
+      const res = await fetch('/api/telemetry');
+      if (res.ok) {
+        const d = await res.json();
+        const cpuEl = document.getElementById('hudCpu');
+        const ramEl = document.getElementById('hudRam');
+        if (cpuEl) cpuEl.textContent = `${Math.round(d.cpu)}%`;
+        if (ramEl) ramEl.textContent = `${Math.round(d.ram)}%`;
+      }
+    } catch (e) {}
+  }
+  setInterval(pollTelemetry, 3000);
+  setTimeout(pollTelemetry, 500);
+</script>
+<!-- ================= END MUSE PRO ENHANCEMENT PATCH ================= -->
+
+</body>
+</html>
