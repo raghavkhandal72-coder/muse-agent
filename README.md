@@ -1,14 +1,14 @@
-# Muse AI Agent (muse-agent)
+<p align="center">
+  <a href="https://github.com/raghavkhandal72-coder/muse-agent">
+    <img src="logo.png" width="120" height="120" alt="Muse AI Agent Logo" />
+  </a>
+</p>
+
+<h1 align="center">Muse AI Agent (muse-agent)</h1>
 
 <p align="center">
-  <h2 align="center">🤖 The Autonomous Hybrid Desktop & Mobile Agent Runtime</h2>
-  <p align="center">
-    <b>Computer-Use Agent (CUA)</b> &bull; 
-    <b>Multi-Agent Swarm Orchestrator</b> &bull; 
-    <b>17+ Production Connectors</b> &bull; 
-    <b>Native Android Companion APK</b> &bull; 
-    <b>Local-First Encrypted Memory</b>
-  </p>
+  <b>The Autonomous Hybrid Desktop & Mobile Agent Runtime</b><br>
+  <i>Built with Computer-Use (CUA), Multi-Agent Swarm Orchestrator, 17+ Connectors & Native Android Companion</i>
 </p>
 
 <p align="center">
@@ -30,6 +30,10 @@
   <a href="#-android-companion-apk--termux-bridge">📱 Mobile Companion</a> &bull;
   <a href="#-17-production-connectors">🔌 Connectors</a> &bull;
   <a href="#-contributing">🤝 Contributing</a>
+</p>
+
+<p align="center">
+  <img src="assets/muse_interface.png" width="920" alt="Muse AI Agent Desktop Live Interface" />
 </p>
 
 ---
