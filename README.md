@@ -25,6 +25,16 @@
 [![Claude Code](https://img.shields.io/badge/Claude%20Code-Compatible-orange?style=flat-square&logo=anthropic)](CLAUDE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-f4c430?style=flat-square)](LICENSE)
 
+<p align="center">
+  <a href="CLAUDE.md"><img src="https://img.shields.io/badge/Claude%20Code-Supported-orange?style=flat-square&logo=anthropic" alt="Claude Code" /></a>
+  <a href=".cursorrules"><img src="https://img.shields.io/badge/Cursor-Supported-black?style=flat-square" alt="Cursor" /></a>
+  <a href=".windsurfrules"><img src="https://img.shields.io/badge/Windsurf-Supported-00c8b3?style=flat-square" alt="Windsurf" /></a>
+  <a href=".clinerules"><img src="https://img.shields.io/badge/Cline%20%2F%20Roo-Supported-blue?style=flat-square" alt="Cline" /></a>
+  <a href=".github/copilot-instructions.md"><img src="https://img.shields.io/badge/GitHub%20Copilot-Supported-blueviolet?style=flat-square&logo=githubcopilot" alt="Copilot" /></a>
+  <a href="GEMINI.md"><img src="https://img.shields.io/badge/Gemini%20%2F%20Antigravity-Supported-8e75c2?style=flat-square&logo=google" alt="Gemini" /></a>
+  <a href="AGENTS.md"><img src="https://img.shields.io/badge/Universal%20Agents-Ready-10b981?style=flat-square" alt="Universal Agents" /></a>
+</p>
+
 <br />
 
 **[⚡ Quickstart](#-quick-start) · [✨ Features](#-what-muse-can-do) · [🔍 REA Skill](#-rea-reverse-engineering) · [🏗️ Architecture](#-system-architecture) · [🤖 Swarms](#-multi-agent-swarm-orchestrator) · [📱 Mobile APK](#-android-companion-apk) · [🔌 Connectors](#-17-production-connectors)**
